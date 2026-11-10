@@ -1,0 +1,29 @@
+name: Security Gates
+on:
+  pull_request:
+  schedule:
+    - cron: '23 7 * * 1'
+permissions:
+  contents: read
+  security-events: write
+jobs:
+  dependency-and-secret-hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --ignore-scripts --no-audit
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+      - name: Repository secret-pattern scan
+        run: npm run security:scan
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+      - uses: github/codeql-action/analyze@v3

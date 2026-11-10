@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+const modules=JSON.parse(fs.readFileSync('src/content/course.json','utf8'));
+const routes=JSON.parse(fs.readFileSync('src/content/ecosystem/paths.json','utf8'));
+const games=JSON.parse(fs.readFileSync('src/content/games/catalog.json','utf8'));
+const seniorChallenges=JSON.parse(fs.readFileSync('src/content/senior/challenges.json','utf8'));
+const counts=Object.fromEntries(['basic','intermediate','advanced','senior'].map(l=>[l,modules.filter(m=>m.level===l).length]));
+const ids=modules.map(m=>m.id);
+const fail=(m)=>{console.error('CONTENT FAIL:',m);process.exitCode=1};
+if(modules.length!==54||JSON.stringify(counts)!==JSON.stringify({basic:12,intermediate:12,advanced:12,senior:18}))fail('54 modules and 12/12/12/18 split');
+if(new Set(ids).size!==ids.length)fail('duplicate IDs');
+if(modules.some(m=>!m.title||m.lessons.length!==4||m.lessons.some(l=>!l.id||!l.explanation||!l.practice)))fail('lesson shape');
+if(routes.length!==8)fail('8 routes');
+if(seniorChallenges.length!==18||new Set(seniorChallenges.map(c=>c.moduleId)).size!==18)fail('18 senior challenges');
+if(games.length!==14)fail('14 games');
+if(!process.exitCode)console.log('CONTENT PASS',JSON.stringify({modules:modules.length,lessons:modules.reduce((n,m)=>n+m.lessons.length,0),routes:routes.length,games:games.length,seniorScenarios:seniorChallenges.length,counts}));

@@ -1,0 +1,106 @@
+[
+  {
+    "id": "F00",
+    "name": "Std, Cargo y crates",
+    "description": "Librerías, paquetes y publicación",
+    "units": [
+      "Introducción a Std, Cargo y crates",
+      "Flujo básico de Std, Cargo y crates",
+      "Testing de Std, Cargo y crates",
+      "Errores y seguridad de Std, Cargo y crates",
+      "Proyecto de Std, Cargo y crates"
+    ],
+    "status": "outline"
+  },
+  {
+    "id": "F01",
+    "name": "Tokio",
+    "description": "Concurrencia y tareas asíncronas",
+    "units": [
+      "Introducción a Tokio",
+      "Flujo básico de Tokio",
+      "Testing de Tokio",
+      "Errores y seguridad de Tokio",
+      "Proyecto de Tokio"
+    ],
+    "status": "outline"
+  },
+  {
+    "id": "F02",
+    "name": "Axum",
+    "description": "API REST moderna",
+    "units": [
+      "Introducción a Axum",
+      "Flujo básico de Axum",
+      "Testing de Axum",
+      "Errores y seguridad de Axum",
+      "Proyecto de Axum"
+    ],
+    "status": "outline"
+  },
+  {
+    "id": "F03",
+    "name": "Actix Web",
+    "description": "Backend HTTP y middleware",
+    "units": [
+      "Introducción a Actix Web",
+      "Flujo básico de Actix Web",
+      "Testing de Actix Web",
+      "Errores y seguridad de Actix Web",
+      "Proyecto de Actix Web"
+    ],
+    "status": "outline"
+  },
+  {
+    "id": "F04",
+    "name": "SQLx + Diesel",
+    "description": "Persistencia y transacciones",
+    "units": [
+      "Introducción a SQLx + Diesel",
+      "Flujo básico de SQLx + Diesel",
+      "Testing de SQLx + Diesel",
+      "Errores y seguridad de SQLx + Diesel",
+      "Proyecto de SQLx + Diesel"
+    ],
+    "status": "outline"
+  },
+  {
+    "id": "F05",
+    "name": "Tonic + Prost",
+    "description": "Servicios gRPC",
+    "units": [
+      "Introducción a Tonic + Prost",
+      "Flujo básico de Tonic + Prost",
+      "Testing de Tonic + Prost",
+      "Errores y seguridad de Tonic + Prost",
+      "Proyecto de Tonic + Prost"
+    ],
+    "status": "outline"
+  },
+  {
+    "id": "F06",
+    "name": "WebAssembly",
+    "description": "wasm-bindgen y browser host",
+    "units": [
+      "Introducción a WebAssembly",
+      "Flujo básico de WebAssembly",
+      "Testing de WebAssembly",
+      "Errores y seguridad de WebAssembly",
+      "Proyecto de WebAssembly"
+    ],
+    "status": "outline"
+  },
+  {
+    "id": "F07",
+    "name": "Clap + Tracing + Testing",
+    "description": "CLI observable y pruebas",
+    "units": [
+      "Introducción a Clap + Tracing + Testing",
+      "Flujo básico de Clap + Tracing + Testing",
+      "Testing de Clap + Tracing + Testing",
+      "Errores y seguridad de Clap + Tracing + Testing",
+      "Proyecto de Clap + Tracing + Testing"
+    ],
+    "status": "outline"
+  }
+]

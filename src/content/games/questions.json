@@ -1,0 +1,54 @@
+[
+  {
+    "id": "Q01",
+    "kind": "quiz",
+    "question": "¿Qué ocurre con un String cuando su valor se mueve a otra variable?",
+    "options": [
+      "Ambas variables conservan la propiedad",
+      "La variable original deja de ser válida",
+      "El heap se duplica automáticamente",
+      "Rust lo convierte en &str"
+    ],
+    "answer": 1,
+    "explanation": "String no implementa Copy: la asignación mueve la propiedad, sin clonar el buffer."
+  },
+  {
+    "id": "Q02",
+    "kind": "quiz",
+    "question": "¿Qué permite un préstamo &mut T?",
+    "options": [
+      "Escribir desde dos referencias a la vez",
+      "Modificar exclusivamente durante el préstamo",
+      "Liberar el objeto manualmente",
+      "Convertir el valor en estático"
+    ],
+    "answer": 1,
+    "explanation": "Un préstamo mutable ofrece acceso exclusivo bajo las reglas de aliasing de Rust."
+  },
+  {
+    "id": "Q03",
+    "kind": "quiz",
+    "question": "¿Qué herramienta ejecuta las pruebas de un proyecto Rust?",
+    "options": [
+      "cargo test",
+      "rustfmt test",
+      "cargo publish",
+      "wasm-bindgen test"
+    ],
+    "answer": 0,
+    "explanation": "cargo test compila y ejecuta los tests configurados en el crate."
+  },
+  {
+    "id": "Q04",
+    "kind": "quiz",
+    "question": "¿Qué devuelve normalmente HashMap::get?",
+    "options": [
+      "Un String",
+      "Una referencia Option<&V>",
+      "Un valor V copiado siempre",
+      "Result<V, Error>"
+    ],
+    "answer": 1,
+    "explanation": "get devuelve Option<&V> para representar ausencia sin panics ni clones."
+  }
+]

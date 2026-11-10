@@ -1,0 +1,8 @@
+[package]
+name = "s07-tokio-cancellation"
+version = "0.2.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "sync", "time"] }

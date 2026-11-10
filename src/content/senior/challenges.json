@@ -1,0 +1,398 @@
+[
+  {
+    "id": "S01-C01",
+    "moduleId": "S01",
+    "title": "Copy vs Clone bajo carga",
+    "scenario": "Un parser crea cientos de String clonados al extraer prefijos de rutas.",
+    "mission": "Refactorizar la API para prestar vistas sin retener datos de vida insuficiente.",
+    "constraints": [
+      "Evitar clones por defecto; la firma pública debe tener lifetimes legibles.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Aserciones sobre salida idéntica y mediciones antes/después."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S02-C01",
+    "moduleId": "S02",
+    "title": "Workspace con límites rotos",
+    "scenario": "Los módulos HTTP, dominio y almacenamiento importan unos de otros.",
+    "mission": "Separar dependencias usando contratos explícitos y un workspace justificado.",
+    "constraints": [
+      "No convertir cada archivo en crate; evitar ciclos.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "cargo metadata y grafo de dependencias revisado."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S03-C01",
+    "moduleId": "S03",
+    "title": "API pública inestable",
+    "scenario": "Una librería expone tipos de implementación y panics para errores recuperables.",
+    "mission": "Diseñar traits, enums y Result con compatibilidad y documentación.",
+    "constraints": [
+      "Mantener contrato observable sin filtrar tipos privados.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Tests de compatibilidad API y documentación de errores."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S04-C01",
+    "moduleId": "S04",
+    "title": "Invariante unsafe omitida",
+    "scenario": "Una abstracción de buffer usa raw pointers sin documentar aliasing.",
+    "mission": "Especificar safety contract y sustituir unsafe innecesario.",
+    "constraints": [
+      "No demostrar soundness solo con tests; revisar condiciones de validez.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Miri cuando aplique y revisión de invariantes."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S05-C01",
+    "moduleId": "S05",
+    "title": "Frontera FFI frágil",
+    "scenario": "C entrega un puntero prestado y Rust asume propiedad completa.",
+    "mission": "Definir propiedad, layout, nullability y un wrapper RAII seguro.",
+    "constraints": [
+      "No liberar buffers ajenos ni crear referencias inválidas.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Test de frontera nativa y revisión ABI."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S06-C01",
+    "moduleId": "S06",
+    "title": "Deadlock intermitente",
+    "scenario": "Dos tareas bloquean un Mutex y un RwLock en orden inverso.",
+    "mission": "Definir y aplicar orden total de locks y reducir duración de sección crítica.",
+    "constraints": [
+      "Evitar retener locks sobre I/O.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Tests concurrentes repetidos y grafo de locks."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S07-C01",
+    "moduleId": "S07",
+    "title": "Tareas huérfanas en shutdown",
+    "scenario": "Un servicio Tokio crea tasks sin conservar JoinHandle.",
+    "mission": "Implementar task ownership, cancelación cooperativa y shutdown acotado.",
+    "constraints": [
+      "No detener sin drenar trabajos aceptados según contrato.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "cargo test, escenarios de cancelación y traces de cierre."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S08-C01",
+    "moduleId": "S08",
+    "title": "P99 creciente sin explicación",
+    "scenario": "Una actualización incrementa allocations y tail latency.",
+    "mission": "Comparar perfiles y corregir cuello real.",
+    "constraints": [
+      "No optimizar a partir de una muestra anecdótica.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Criterion/benchmarks comparables y resultados reproducibles."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S09-C01",
+    "moduleId": "S09",
+    "title": "Entrega duplicada de eventos",
+    "scenario": "Reintentos de workers generan notificaciones repetidas.",
+    "mission": "Introducir claves de idempotencia y deduplicación con persistencia.",
+    "constraints": [
+      "No asumir exactly-once en transporte.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Prueba con replay y reordenamientos."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S10-C01",
+    "moduleId": "S10",
+    "title": "Ventas con lost updates",
+    "scenario": "Dos transacciones descuentan el mismo inventario.",
+    "mission": "Elegir aislamiento o concurrencia optimista que mantenga invariantes.",
+    "constraints": [
+      "No esconder fallos de transacción con retries infinitos.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Pruebas de carrera y reglas de consistencia."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S11-C01",
+    "moduleId": "S11",
+    "title": "Cascada de saturación",
+    "scenario": "Una dependencia lenta agota el pool de conexiones y propaga fallos.",
+    "mission": "Aplicar timeouts, límites de concurrencia y backpressure.",
+    "constraints": [
+      "Preservar cancelación y mensajes operativos útiles.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Pruebas con latencia adversa y métricas."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S12-C01",
+    "moduleId": "S12",
+    "title": "API con IDOR",
+    "scenario": "Un handler valida autenticación pero no autorización por recurso.",
+    "mission": "Revisar ownership de recursos, roles y validación de entradas.",
+    "constraints": [
+      "No exponer datos en logs, no asumir que IDs opacos autorizan.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Tests de acceso denegado y matriz de permisos."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S13-C01",
+    "moduleId": "S13",
+    "title": "Suite de tests frágil",
+    "scenario": "Tests dependen del tiempo real y del orden de ejecución.",
+    "mission": "Introducir time abstraction, property-based testing y fixtures aislados.",
+    "constraints": [
+      "Los asserts deben fallar al reintroducir el defecto.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Prueba adversaria de mutación de entradas."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S14-C01",
+    "moduleId": "S14",
+    "title": "Alerta p99 y timeout de base de datos",
+    "scenario": "Un pico de latencia coincide con agotamiento de conexiones.",
+    "mission": "Investigar métricas y plantear mitigación verificable.",
+    "constraints": [
+      "Distinguir correlación de causalidad; no prometer fix sin prueba.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Línea temporal y comparación de SLI después de mitigación."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S15-C01",
+    "moduleId": "S15",
+    "title": "Release sin rollback",
+    "scenario": "Un despliegue cambia schema antes que el servicio y rompe lectores.",
+    "mission": "Diseñar migración compatible y estrategia de reversión.",
+    "constraints": [
+      "Definir quality gates sin credenciales hardcoded.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Plan de despliegue y simulación de rollback."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S16-C01",
+    "moduleId": "S16",
+    "title": "Monolito legacy acoplado",
+    "scenario": "Un módulo antiguo mezcla API, SQL y lógica de negocio.",
+    "mission": "Extraer frontera pequeña con pruebas de caracterización.",
+    "constraints": [
+      "Evitar big-bang rewrite.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "PR incremental, tests antes/después y plan de migración."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S17-C01",
+    "moduleId": "S17",
+    "title": "Code review con trade-offs",
+    "scenario": "Un PR introduce complejidad para resolver una ruta no medida.",
+    "mission": "Justificar impacto, alternativas, métricas y riesgos.",
+    "constraints": [
+      "Comentarios respetuosos con fundamento reproducible.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "ADR con decisiones y plan de reversión."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  },
+  {
+    "id": "S18-C01",
+    "moduleId": "S18",
+    "title": "RustForge Platform",
+    "scenario": "Se pide una plataforma de trabajos con fallos, redundancia y auditoría.",
+    "mission": "Diseñar y documentar contratos, concurrencia, persistencia y operación.",
+    "constraints": [
+      "Presupuesto y límites realistas; evitar complejidad injustificada.",
+      "Toda afirmación de corrección debe incluir evidencia o describirse como hipótesis."
+    ],
+    "evidence": [
+      "Diagrama, ADRs, test plan, SLO y prototipo Cargo."
+    ],
+    "hints": [
+      "Enumera qué hechos están observados y cuáles son suposiciones.",
+      "Identifica el contrato de éxito y el caso adversario mínimo.",
+      "Define una prueba que fallaría si el problema regresa."
+    ],
+    "evaluation": "human-review-or-local-tests",
+    "status": "guided-scenario",
+    "points": 100
+  }
+]

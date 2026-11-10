@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "name": "Code Quest",
+    "kind": "complete",
+    "availability": "guided"
+  },
+  {
+    "id": 2,
+    "name": "Code Builder",
+    "kind": "order",
+    "availability": "guided"
+  },
+  {
+    "id": 3,
+    "name": "Quiz Battle",
+    "kind": "quiz",
+    "availability": "interactive"
+  },
+  {
+    "id": 4,
+    "name": "Predict Output",
+    "kind": "predict",
+    "availability": "interactive"
+  },
+  {
+    "id": 5,
+    "name": "Bug Hunter",
+    "kind": "debug",
+    "availability": "guided"
+  },
+  {
+    "id": 6,
+    "name": "Ferris Memory",
+    "kind": "match",
+    "availability": "guided"
+  },
+  {
+    "id": 7,
+    "name": "Ownership Puzzle",
+    "kind": "ownership",
+    "availability": "interactive"
+  },
+  {
+    "id": 8,
+    "name": "Borrow Checker Challenge",
+    "kind": "borrow",
+    "availability": "interactive"
+  },
+  {
+    "id": 9,
+    "name": "Lifetime Detective",
+    "kind": "lifetime",
+    "availability": "guided"
+  },
+  {
+    "id": 10,
+    "name": "Trait Builder",
+    "kind": "trait",
+    "availability": "guided"
+  },
+  {
+    "id": 11,
+    "name": "Async Simulator",
+    "kind": "async",
+    "availability": "guided"
+  },
+  {
+    "id": 12,
+    "name": "Performance Arena",
+    "kind": "performance",
+    "availability": "guided"
+  },
+  {
+    "id": 13,
+    "name": "Code Review Battle",
+    "kind": "review",
+    "availability": "guided"
+  },
+  {
+    "id": 14,
+    "name": "Incident Escape Room",
+    "kind": "incident",
+    "availability": "guided"
+  }
+]

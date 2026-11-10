@@ -1,0 +1,2540 @@
+[
+  {
+    "id": "B01",
+    "slug": "introducci-n-a-rust",
+    "title": "Introducción a Rust",
+    "level": "basic",
+    "topics": [
+      "Rustup",
+      "rustc y tu primer programa",
+      "Cargo",
+      "Estructura de un proyecto"
+    ],
+    "lessons": [
+      {
+        "id": "B01-L01",
+        "title": "Rustup",
+        "explanation": "En «Introducción a Rust», estudia rustup y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica rustup con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B01-L02",
+        "title": "rustc y tu primer programa",
+        "explanation": "En «Introducción a Rust», estudia rustc y tu primer programa y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica rustc y tu primer programa con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B01-L03",
+        "title": "Cargo",
+        "explanation": "En «Introducción a Rust», estudia cargo y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica cargo con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B01-L04",
+        "title": "Estructura de un proyecto",
+        "explanation": "En «Introducción a Rust», estudia estructura de un proyecto y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica estructura de un proyecto con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn main() { println!(\"¡Hola, Ferris!\"); }",
+    "finalChallenge": "Resuelve un ejercicio de introducción a rust y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B02",
+    "slug": "variables-y-tipos",
+    "title": "Variables y tipos",
+    "level": "basic",
+    "topics": [
+      "let y mut",
+      "Shadowing",
+      "Números y bool",
+      "Conversiones explícitas"
+    ],
+    "lessons": [
+      {
+        "id": "B02-L01",
+        "title": "let y mut",
+        "explanation": "En «Variables y tipos», estudia let y mut y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica let y mut con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B02-L02",
+        "title": "Shadowing",
+        "explanation": "En «Variables y tipos», estudia shadowing y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica shadowing con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B02-L03",
+        "title": "Números y bool",
+        "explanation": "En «Variables y tipos», estudia números y bool y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica números y bool con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B02-L04",
+        "title": "Conversiones explícitas",
+        "explanation": "En «Variables y tipos», estudia conversiones explícitas y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica conversiones explícitas con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "let mut edad = 20; edad += 1; println!(\"{edad}\");",
+    "finalChallenge": "Resuelve un ejercicio de variables y tipos y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B03",
+    "slug": "control-de-flujo",
+    "title": "Control de flujo",
+    "level": "basic",
+    "topics": [
+      "if como expresión",
+      "loop y break",
+      "while y for",
+      "Patrones en condiciones"
+    ],
+    "lessons": [
+      {
+        "id": "B03-L01",
+        "title": "if como expresión",
+        "explanation": "En «Control de flujo», estudia if como expresión y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica if como expresión con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B03-L02",
+        "title": "loop y break",
+        "explanation": "En «Control de flujo», estudia loop y break y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica loop y break con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B03-L03",
+        "title": "while y for",
+        "explanation": "En «Control de flujo», estudia while y for y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica while y for con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B03-L04",
+        "title": "Patrones en condiciones",
+        "explanation": "En «Control de flujo», estudia patrones en condiciones y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica patrones en condiciones con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "let x = 7; let etiqueta = if x > 5 { \"alto\" } else { \"bajo\" }; println!(\"{etiqueta}\");",
+    "finalChallenge": "Resuelve un ejercicio de control de flujo y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B04",
+    "slug": "funciones",
+    "title": "Funciones",
+    "level": "basic",
+    "topics": [
+      "Parámetros",
+      "Retornos",
+      "Expresiones vs sentencias",
+      "Scope"
+    ],
+    "lessons": [
+      {
+        "id": "B04-L01",
+        "title": "Parámetros",
+        "explanation": "En «Funciones», estudia parámetros y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica parámetros con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B04-L02",
+        "title": "Retornos",
+        "explanation": "En «Funciones», estudia retornos y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica retornos con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B04-L03",
+        "title": "Expresiones vs sentencias",
+        "explanation": "En «Funciones», estudia expresiones vs sentencias y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica expresiones vs sentencias con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B04-L04",
+        "title": "Scope",
+        "explanation": "En «Funciones», estudia scope y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica scope con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn doble(x: i32) -> i32 { x * 2 } fn main() { println!(\"{}\", doble(4)); }",
+    "finalChallenge": "Resuelve un ejercicio de funciones y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B05",
+    "slug": "ownership",
+    "title": "Ownership",
+    "level": "basic",
+    "topics": [
+      "Movimiento de valores",
+      "Copy y Clone",
+      "Drop",
+      "Transferencia a funciones"
+    ],
+    "lessons": [
+      {
+        "id": "B05-L01",
+        "title": "Movimiento de valores",
+        "explanation": "En «Ownership», estudia movimiento de valores y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica movimiento de valores con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B05-L02",
+        "title": "Copy y Clone",
+        "explanation": "En «Ownership», estudia copy y clone y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica copy y clone con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B05-L03",
+        "title": "Drop",
+        "explanation": "En «Ownership», estudia drop y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica drop con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B05-L04",
+        "title": "Transferencia a funciones",
+        "explanation": "En «Ownership», estudia transferencia a funciones y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica transferencia a funciones con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn main() { let a = String::from(\"Ferris\"); let b = a; println!(\"{b}\"); }",
+    "finalChallenge": "Resuelve un ejercicio de ownership y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B06",
+    "slug": "borrowing",
+    "title": "Borrowing",
+    "level": "basic",
+    "topics": [
+      "Referencias inmutables",
+      "Referencias mutables",
+      "Conflictos de préstamo",
+      "Slices"
+    ],
+    "lessons": [
+      {
+        "id": "B06-L01",
+        "title": "Referencias inmutables",
+        "explanation": "En «Borrowing», estudia referencias inmutables y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica referencias inmutables con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B06-L02",
+        "title": "Referencias mutables",
+        "explanation": "En «Borrowing», estudia referencias mutables y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica referencias mutables con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B06-L03",
+        "title": "Conflictos de préstamo",
+        "explanation": "En «Borrowing», estudia conflictos de préstamo y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica conflictos de préstamo con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B06-L04",
+        "title": "Slices",
+        "explanation": "En «Borrowing», estudia slices y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica slices con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn largo(s: &str) -> usize { s.len() } fn main() { let s = String::from(\"Rust\"); println!(\"{}\", largo(&s)); }",
+    "finalChallenge": "Resuelve un ejercicio de borrowing y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B07",
+    "slug": "lifetimes-b-sicos",
+    "title": "Lifetimes básicos",
+    "level": "basic",
+    "topics": [
+      "Alcance de referencias",
+      "Dangling references",
+      "Elisión",
+      "Lectura de errores"
+    ],
+    "lessons": [
+      {
+        "id": "B07-L01",
+        "title": "Alcance de referencias",
+        "explanation": "En «Lifetimes básicos», estudia alcance de referencias y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica alcance de referencias con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B07-L02",
+        "title": "Dangling references",
+        "explanation": "En «Lifetimes básicos», estudia dangling references y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica dangling references con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B07-L03",
+        "title": "Elisión",
+        "explanation": "En «Lifetimes básicos», estudia elisión y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica elisión con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B07-L04",
+        "title": "Lectura de errores",
+        "explanation": "En «Lifetimes básicos», estudia lectura de errores y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica lectura de errores con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn primero(s: &str) -> &str { s.split_whitespace().next().unwrap_or(\"\") }",
+    "finalChallenge": "Resuelve un ejercicio de lifetimes básicos y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B08",
+    "slug": "colecciones",
+    "title": "Colecciones",
+    "level": "basic",
+    "topics": [
+      "Arrays y slices",
+      "Vec",
+      "String",
+      "HashMap"
+    ],
+    "lessons": [
+      {
+        "id": "B08-L01",
+        "title": "Arrays y slices",
+        "explanation": "En «Colecciones», estudia arrays y slices y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica arrays y slices con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B08-L02",
+        "title": "Vec",
+        "explanation": "En «Colecciones», estudia vec y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica vec con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B08-L03",
+        "title": "String",
+        "explanation": "En «Colecciones», estudia string y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica string con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B08-L04",
+        "title": "HashMap",
+        "explanation": "En «Colecciones», estudia hashmap y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica hashmap con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn main() { let mut xs = vec![1,2]; xs.push(3); println!(\"{:?}\", xs); }",
+    "finalChallenge": "Resuelve un ejercicio de colecciones y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B09",
+    "slug": "structs-y-m-todos",
+    "title": "Structs y métodos",
+    "level": "basic",
+    "topics": [
+      "Declaración de struct",
+      "Campos",
+      "impl",
+      "Métodos con &self"
+    ],
+    "lessons": [
+      {
+        "id": "B09-L01",
+        "title": "Declaración de struct",
+        "explanation": "En «Structs y métodos», estudia declaración de struct y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica declaración de struct con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B09-L02",
+        "title": "Campos",
+        "explanation": "En «Structs y métodos», estudia campos y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica campos con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B09-L03",
+        "title": "impl",
+        "explanation": "En «Structs y métodos», estudia impl y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica impl con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B09-L04",
+        "title": "Métodos con &self",
+        "explanation": "En «Structs y métodos», estudia métodos con &self y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica métodos con &self con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "struct Punto { x: i32 } impl Punto { fn doble(&self)->i32 { self.x*2 } }",
+    "finalChallenge": "Resuelve un ejercicio de structs y métodos y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B10",
+    "slug": "enums-y-patrones",
+    "title": "Enums y patrones",
+    "level": "basic",
+    "topics": [
+      "Enums con datos",
+      "match",
+      "Option",
+      "if let"
+    ],
+    "lessons": [
+      {
+        "id": "B10-L01",
+        "title": "Enums con datos",
+        "explanation": "En «Enums y patrones», estudia enums con datos y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica enums con datos con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B10-L02",
+        "title": "match",
+        "explanation": "En «Enums y patrones», estudia match y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica match con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B10-L03",
+        "title": "Option",
+        "explanation": "En «Enums y patrones», estudia option y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica option con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B10-L04",
+        "title": "if let",
+        "explanation": "En «Enums y patrones», estudia if let y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica if let con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn main() { let x = Some(3); match x { Some(v) => println!(\"{v}\"), None => println!(\"sin valor\") } }",
+    "finalChallenge": "Resuelve un ejercicio de enums y patrones y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B11",
+    "slug": "manejo-de-errores",
+    "title": "Manejo de errores",
+    "level": "basic",
+    "topics": [
+      "Result",
+      "Operador ?",
+      "Errores recuperables",
+      "panic!"
+    ],
+    "lessons": [
+      {
+        "id": "B11-L01",
+        "title": "Result",
+        "explanation": "En «Manejo de errores», estudia result y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica result con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B11-L02",
+        "title": "Operador ?",
+        "explanation": "En «Manejo de errores», estudia operador ? y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica operador ? con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B11-L03",
+        "title": "Errores recuperables",
+        "explanation": "En «Manejo de errores», estudia errores recuperables y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica errores recuperables con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B11-L04",
+        "title": "panic!",
+        "explanation": "En «Manejo de errores», estudia panic! y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica panic! con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn parsear(s: &str) -> Result<i32,std::num::ParseIntError> { s.parse() }",
+    "finalChallenge": "Resuelve un ejercicio de manejo de errores y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "B12",
+    "slug": "proyecto-ferris-tasks",
+    "title": "Proyecto Ferris Tasks",
+    "level": "basic",
+    "topics": [
+      "Modelo de tareas",
+      "CLI",
+      "Archivo local",
+      "Pruebas de aceptación"
+    ],
+    "lessons": [
+      {
+        "id": "B12-L01",
+        "title": "Modelo de tareas",
+        "explanation": "En «Proyecto Ferris Tasks», estudia modelo de tareas y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica modelo de tareas con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B12-L02",
+        "title": "CLI",
+        "explanation": "En «Proyecto Ferris Tasks», estudia cli y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica cli con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B12-L03",
+        "title": "Archivo local",
+        "explanation": "En «Proyecto Ferris Tasks», estudia archivo local y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica archivo local con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "B12-L04",
+        "title": "Pruebas de aceptación",
+        "explanation": "En «Proyecto Ferris Tasks», estudia pruebas de aceptación y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica pruebas de aceptación con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "struct Tarea { titulo: String, lista: bool }",
+    "finalChallenge": "Resuelve un ejercicio de proyecto ferris tasks y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I01",
+    "slug": "cargo-y-m-dulos",
+    "title": "Cargo y módulos",
+    "level": "intermediate",
+    "topics": [
+      "Módulos y pub",
+      "Crates",
+      "Dependencias",
+      "Workspaces intro"
+    ],
+    "lessons": [
+      {
+        "id": "I01-L01",
+        "title": "Módulos y pub",
+        "explanation": "En «Cargo y módulos», estudia módulos y pub y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica módulos y pub con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I01-L02",
+        "title": "Crates",
+        "explanation": "En «Cargo y módulos», estudia crates y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica crates con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I01-L03",
+        "title": "Dependencias",
+        "explanation": "En «Cargo y módulos», estudia dependencias y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica dependencias con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I01-L04",
+        "title": "Workspaces intro",
+        "explanation": "En «Cargo y módulos», estudia workspaces intro y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica workspaces intro con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "mod saludos { pub fn hola() { println!(\"hola\"); } }",
+    "finalChallenge": "Resuelve un ejercicio de cargo y módulos y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I02",
+    "slug": "generics",
+    "title": "Generics",
+    "level": "intermediate",
+    "topics": [
+      "Funciones genéricas",
+      "Tipos genéricos",
+      "Bounds",
+      "Monomorfización"
+    ],
+    "lessons": [
+      {
+        "id": "I02-L01",
+        "title": "Funciones genéricas",
+        "explanation": "En «Generics», estudia funciones genéricas y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica funciones genéricas con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I02-L02",
+        "title": "Tipos genéricos",
+        "explanation": "En «Generics», estudia tipos genéricos y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica tipos genéricos con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I02-L03",
+        "title": "Bounds",
+        "explanation": "En «Generics», estudia bounds y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica bounds con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I02-L04",
+        "title": "Monomorfización",
+        "explanation": "En «Generics», estudia monomorfización y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica monomorfización con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn primero<T>(items: &[T]) -> Option<&T> { items.first() }",
+    "finalChallenge": "Resuelve un ejercicio de generics y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I03",
+    "slug": "traits",
+    "title": "Traits",
+    "level": "intermediate",
+    "topics": [
+      "Definir traits",
+      "Implementar",
+      "Default methods",
+      "Trait bounds"
+    ],
+    "lessons": [
+      {
+        "id": "I03-L01",
+        "title": "Definir traits",
+        "explanation": "En «Traits», estudia definir traits y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica definir traits con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I03-L02",
+        "title": "Implementar",
+        "explanation": "En «Traits», estudia implementar y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica implementar con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I03-L03",
+        "title": "Default methods",
+        "explanation": "En «Traits», estudia default methods y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica default methods con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I03-L04",
+        "title": "Trait bounds",
+        "explanation": "En «Traits», estudia trait bounds y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica trait bounds con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "trait Nombre { fn nombre(&self) -> &str; }",
+    "finalChallenge": "Resuelve un ejercicio de traits y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I04",
+    "slug": "lifetimes-aplicados",
+    "title": "Lifetimes aplicados",
+    "level": "intermediate",
+    "topics": [
+      "Anotaciones explícitas",
+      "Referencias retornadas",
+      "Structs prestados",
+      "Límites"
+    ],
+    "lessons": [
+      {
+        "id": "I04-L01",
+        "title": "Anotaciones explícitas",
+        "explanation": "En «Lifetimes aplicados», estudia anotaciones explícitas y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica anotaciones explícitas con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I04-L02",
+        "title": "Referencias retornadas",
+        "explanation": "En «Lifetimes aplicados», estudia referencias retornadas y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica referencias retornadas con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I04-L03",
+        "title": "Structs prestados",
+        "explanation": "En «Lifetimes aplicados», estudia structs prestados y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica structs prestados con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I04-L04",
+        "title": "Límites",
+        "explanation": "En «Lifetimes aplicados», estudia límites y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica límites con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn mayor<'a>(a: &'a str, b: &'a str) -> &'a str { if a.len()>b.len(){a}else{b} }",
+    "finalChallenge": "Resuelve un ejercicio de lifetimes aplicados y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I05",
+    "slug": "iteradores-y-closures",
+    "title": "Iteradores y closures",
+    "level": "intermediate",
+    "topics": [
+      "map y filter",
+      "collect",
+      "Closures y capturas",
+      "Ownership en iteradores"
+    ],
+    "lessons": [
+      {
+        "id": "I05-L01",
+        "title": "map y filter",
+        "explanation": "En «Iteradores y closures», estudia map y filter y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica map y filter con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I05-L02",
+        "title": "collect",
+        "explanation": "En «Iteradores y closures», estudia collect y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica collect con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I05-L03",
+        "title": "Closures y capturas",
+        "explanation": "En «Iteradores y closures», estudia closures y capturas y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica closures y capturas con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I05-L04",
+        "title": "Ownership en iteradores",
+        "explanation": "En «Iteradores y closures», estudia ownership en iteradores y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica ownership en iteradores con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn main(){ let v = vec![1,2,3]; let r: Vec<_> = v.into_iter().map(|x| x*2).collect(); println!(\"{:?}\",r); }",
+    "finalChallenge": "Resuelve un ejercicio de iteradores y closures y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I06",
+    "slug": "smart-pointers",
+    "title": "Smart pointers",
+    "level": "intermediate",
+    "topics": [
+      "Box",
+      "Rc",
+      "RefCell",
+      "Selección de tipos"
+    ],
+    "lessons": [
+      {
+        "id": "I06-L01",
+        "title": "Box",
+        "explanation": "En «Smart pointers», estudia box y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica box con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I06-L02",
+        "title": "Rc",
+        "explanation": "En «Smart pointers», estudia rc y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica rc con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I06-L03",
+        "title": "RefCell",
+        "explanation": "En «Smart pointers», estudia refcell y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica refcell con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I06-L04",
+        "title": "Selección de tipos",
+        "explanation": "En «Smart pointers», estudia selección de tipos y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica selección de tipos con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn main() { let x = Box::new(42); println!(\"{x}\"); }",
+    "finalChallenge": "Resuelve un ejercicio de smart pointers y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I07",
+    "slug": "testing-y-rustdoc",
+    "title": "Testing y rustdoc",
+    "level": "intermediate",
+    "topics": [
+      "Tests unitarios",
+      "Tests de integración",
+      "Doc tests",
+      "Aserciones"
+    ],
+    "lessons": [
+      {
+        "id": "I07-L01",
+        "title": "Tests unitarios",
+        "explanation": "En «Testing y rustdoc», estudia tests unitarios y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica tests unitarios con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I07-L02",
+        "title": "Tests de integración",
+        "explanation": "En «Testing y rustdoc», estudia tests de integración y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica tests de integración con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I07-L03",
+        "title": "Doc tests",
+        "explanation": "En «Testing y rustdoc», estudia doc tests y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica doc tests con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I07-L04",
+        "title": "Aserciones",
+        "explanation": "En «Testing y rustdoc», estudia aserciones y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica aserciones con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "#[cfg(test)] mod tests { #[test] fn suma(){ assert_eq!(2+2,4); } }",
+    "finalChallenge": "Resuelve un ejercicio de testing y rustdoc y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I08",
+    "slug": "serde-y-json",
+    "title": "Serde y JSON",
+    "level": "intermediate",
+    "topics": [
+      "Serialización",
+      "Deserialización",
+      "Validación",
+      "Compatibilidad"
+    ],
+    "lessons": [
+      {
+        "id": "I08-L01",
+        "title": "Serialización",
+        "explanation": "En «Serde y JSON», estudia serialización y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica serialización con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I08-L02",
+        "title": "Deserialización",
+        "explanation": "En «Serde y JSON», estudia deserialización y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica deserialización con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I08-L03",
+        "title": "Validación",
+        "explanation": "En «Serde y JSON», estudia validación y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica validación con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I08-L04",
+        "title": "Compatibilidad",
+        "explanation": "En «Serde y JSON», estudia compatibilidad y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica compatibilidad con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Laboratorio Cargo: serde_json y tipos de datos",
+    "finalChallenge": "Resuelve un ejercicio de serde y json y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I09",
+    "slug": "errores-profesionales",
+    "title": "Errores profesionales",
+    "level": "intermediate",
+    "topics": [
+      "Tipos de errores",
+      "thiserror",
+      "anyhow",
+      "Contexto"
+    ],
+    "lessons": [
+      {
+        "id": "I09-L01",
+        "title": "Tipos de errores",
+        "explanation": "En «Errores profesionales», estudia tipos de errores y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica tipos de errores con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I09-L02",
+        "title": "thiserror",
+        "explanation": "En «Errores profesionales», estudia thiserror y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica thiserror con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I09-L03",
+        "title": "anyhow",
+        "explanation": "En «Errores profesionales», estudia anyhow y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica anyhow con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I09-L04",
+        "title": "Contexto",
+        "explanation": "En «Errores profesionales», estudia contexto y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica contexto con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn dividir(a:i32,b:i32)->Result<i32,&'static str>{ if b==0{Err(\"cero\")}else{Ok(a/b)} }",
+    "finalChallenge": "Resuelve un ejercicio de errores profesionales y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I10",
+    "slug": "i-o-y-cli",
+    "title": "I/O y CLI",
+    "level": "intermediate",
+    "topics": [
+      "Read y Write",
+      "BufReader",
+      "Clap",
+      "Diseño UX CLI"
+    ],
+    "lessons": [
+      {
+        "id": "I10-L01",
+        "title": "Read y Write",
+        "explanation": "En «I/O y CLI», estudia read y write y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica read y write con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I10-L02",
+        "title": "BufReader",
+        "explanation": "En «I/O y CLI», estudia bufreader y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica bufreader con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I10-L03",
+        "title": "Clap",
+        "explanation": "En «I/O y CLI», estudia clap y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica clap con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I10-L04",
+        "title": "Diseño UX CLI",
+        "explanation": "En «I/O y CLI», estudia diseño ux cli y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica diseño ux cli con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn main() -> std::io::Result<()> { let s = std::fs::read_to_string(\"README.md\")?; println!(\"{}\", s.len()); Ok(()) }",
+    "finalChallenge": "Resuelve un ejercicio de i/o y cli y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I11",
+    "slug": "http-y-persistencia",
+    "title": "HTTP y persistencia",
+    "level": "intermediate",
+    "topics": [
+      "Cliente HTTP",
+      "SQL",
+      "Transacciones",
+      "Modelos"
+    ],
+    "lessons": [
+      {
+        "id": "I11-L01",
+        "title": "Cliente HTTP",
+        "explanation": "En «HTTP y persistencia», estudia cliente http y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica cliente http con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I11-L02",
+        "title": "SQL",
+        "explanation": "En «HTTP y persistencia», estudia sql y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica sql con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I11-L03",
+        "title": "Transacciones",
+        "explanation": "En «HTTP y persistencia», estudia transacciones y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica transacciones con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I11-L04",
+        "title": "Modelos",
+        "explanation": "En «HTTP y persistencia», estudia modelos y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica modelos con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Laboratorio real con SQLx o librerías HTTP",
+    "finalChallenge": "Resuelve un ejercicio de http y persistencia y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "I12",
+    "slug": "proyecto-ferris-inventory",
+    "title": "Proyecto Ferris Inventory",
+    "level": "intermediate",
+    "topics": [
+      "Modelo de dominio",
+      "Persistencia",
+      "Pruebas",
+      "Empaquetado"
+    ],
+    "lessons": [
+      {
+        "id": "I12-L01",
+        "title": "Modelo de dominio",
+        "explanation": "En «Proyecto Ferris Inventory», estudia modelo de dominio y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica modelo de dominio con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I12-L02",
+        "title": "Persistencia",
+        "explanation": "En «Proyecto Ferris Inventory», estudia persistencia y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica persistencia con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I12-L03",
+        "title": "Pruebas",
+        "explanation": "En «Proyecto Ferris Inventory», estudia pruebas y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica pruebas con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "I12-L04",
+        "title": "Empaquetado",
+        "explanation": "En «Proyecto Ferris Inventory», estudia empaquetado y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica empaquetado con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "struct Inventario { productos: Vec<String> }",
+    "finalChallenge": "Resuelve un ejercicio de proyecto ferris inventory y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "playground-optional"
+  },
+  {
+    "id": "A01",
+    "slug": "threads-y-send-sync",
+    "title": "Threads y Send/Sync",
+    "level": "advanced",
+    "topics": [
+      "std::thread",
+      "Move closures",
+      "Send",
+      "Sync"
+    ],
+    "lessons": [
+      {
+        "id": "A01-L01",
+        "title": "std::thread",
+        "explanation": "En «Threads y Send/Sync», estudia std::thread y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica std::thread con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A01-L02",
+        "title": "Move closures",
+        "explanation": "En «Threads y Send/Sync», estudia move closures y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica move closures con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A01-L03",
+        "title": "Send",
+        "explanation": "En «Threads y Send/Sync», estudia send y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica send con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A01-L04",
+        "title": "Sync",
+        "explanation": "En «Threads y Send/Sync», estudia sync y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica sync con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "fn main() { let h = std::thread::spawn(|| 21*2); println!(\"{:?}\",h.join()); }",
+    "finalChallenge": "Resuelve un ejercicio de threads y send/sync y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A02",
+    "slug": "mutex-y-sincronizaci-n",
+    "title": "Mutex y sincronización",
+    "level": "advanced",
+    "topics": [
+      "Arc",
+      "Mutex",
+      "RwLock",
+      "Atomics"
+    ],
+    "lessons": [
+      {
+        "id": "A02-L01",
+        "title": "Arc",
+        "explanation": "En «Mutex y sincronización», estudia arc y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica arc con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A02-L02",
+        "title": "Mutex",
+        "explanation": "En «Mutex y sincronización», estudia mutex y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica mutex con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A02-L03",
+        "title": "RwLock",
+        "explanation": "En «Mutex y sincronización», estudia rwlock y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica rwlock con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A02-L04",
+        "title": "Atomics",
+        "explanation": "En «Mutex y sincronización», estudia atomics y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica atomics con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Laboratorio Cargo: Arc<Mutex<T>> y control de contención",
+    "finalChallenge": "Resuelve un ejercicio de mutex y sincronización y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A03",
+    "slug": "channels",
+    "title": "Channels",
+    "level": "advanced",
+    "topics": [
+      "mpsc",
+      "Workers",
+      "Cierre de canal",
+      "Backpressure"
+    ],
+    "lessons": [
+      {
+        "id": "A03-L01",
+        "title": "mpsc",
+        "explanation": "En «Channels», estudia mpsc y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica mpsc con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A03-L02",
+        "title": "Workers",
+        "explanation": "En «Channels», estudia workers y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica workers con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A03-L03",
+        "title": "Cierre de canal",
+        "explanation": "En «Channels», estudia cierre de canal y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica cierre de canal con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A03-L04",
+        "title": "Backpressure",
+        "explanation": "En «Channels», estudia backpressure y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica backpressure con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Laboratorio: std::sync::mpsc",
+    "finalChallenge": "Resuelve un ejercicio de channels y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A04",
+    "slug": "async-y-future",
+    "title": "Async y Future",
+    "level": "advanced",
+    "topics": [
+      "async/await",
+      "Future",
+      "Pin intro",
+      "Executor"
+    ],
+    "lessons": [
+      {
+        "id": "A04-L01",
+        "title": "async/await",
+        "explanation": "En «Async y Future», estudia async/await y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica async/await con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A04-L02",
+        "title": "Future",
+        "explanation": "En «Async y Future», estudia future y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica future con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A04-L03",
+        "title": "Pin intro",
+        "explanation": "En «Async y Future», estudia pin intro y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica pin intro con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A04-L04",
+        "title": "Executor",
+        "explanation": "En «Async y Future», estudia executor y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica executor con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Laboratorio requiere runtime async",
+    "finalChallenge": "Resuelve un ejercicio de async y future y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A05",
+    "slug": "tokio",
+    "title": "Tokio",
+    "level": "advanced",
+    "topics": [
+      "Task spawning",
+      "JoinHandle",
+      "Cancellation",
+      "Shutdown"
+    ],
+    "lessons": [
+      {
+        "id": "A05-L01",
+        "title": "Task spawning",
+        "explanation": "En «Tokio», estudia task spawning y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica task spawning con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A05-L02",
+        "title": "JoinHandle",
+        "explanation": "En «Tokio», estudia joinhandle y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica joinhandle con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A05-L03",
+        "title": "Cancellation",
+        "explanation": "En «Tokio», estudia cancellation y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica cancellation con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A05-L04",
+        "title": "Shutdown",
+        "explanation": "En «Tokio», estudia shutdown y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica shutdown con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Laboratorio con tokio::select!",
+    "finalChallenge": "Resuelve un ejercicio de tokio y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A06",
+    "slug": "apis-con-axum",
+    "title": "APIs con Axum",
+    "level": "advanced",
+    "topics": [
+      "Router",
+      "Handlers",
+      "Middleware",
+      "Testing HTTP"
+    ],
+    "lessons": [
+      {
+        "id": "A06-L01",
+        "title": "Router",
+        "explanation": "En «APIs con Axum», estudia router y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica router con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A06-L02",
+        "title": "Handlers",
+        "explanation": "En «APIs con Axum», estudia handlers y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica handlers con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A06-L03",
+        "title": "Middleware",
+        "explanation": "En «APIs con Axum», estudia middleware y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica middleware con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A06-L04",
+        "title": "Testing HTTP",
+        "explanation": "En «APIs con Axum», estudia testing http y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica testing http con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Laboratorio Cargo con axum",
+    "finalChallenge": "Resuelve un ejercicio de apis con axum y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A07",
+    "slug": "arquitectura-modular",
+    "title": "Arquitectura modular",
+    "level": "advanced",
+    "topics": [
+      "Límites",
+      "Dependencias",
+      "Errores",
+      "ADRs"
+    ],
+    "lessons": [
+      {
+        "id": "A07-L01",
+        "title": "Límites",
+        "explanation": "En «Arquitectura modular», estudia límites y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica límites con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A07-L02",
+        "title": "Dependencias",
+        "explanation": "En «Arquitectura modular», estudia dependencias y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica dependencias con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A07-L03",
+        "title": "Errores",
+        "explanation": "En «Arquitectura modular», estudia errores y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica errores con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A07-L04",
+        "title": "ADRs",
+        "explanation": "En «Arquitectura modular», estudia adrs y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica adrs con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Diseña un workspace solo cuando existan límites reales",
+    "finalChallenge": "Resuelve un ejercicio de arquitectura modular y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A08",
+    "slug": "profiling-y-benchmarks",
+    "title": "Profiling y benchmarks",
+    "level": "advanced",
+    "topics": [
+      "Criterion",
+      "Flamegraphs",
+      "Allocations",
+      "Medición reproducible"
+    ],
+    "lessons": [
+      {
+        "id": "A08-L01",
+        "title": "Criterion",
+        "explanation": "En «Profiling y benchmarks», estudia criterion y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica criterion con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A08-L02",
+        "title": "Flamegraphs",
+        "explanation": "En «Profiling y benchmarks», estudia flamegraphs y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica flamegraphs con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A08-L03",
+        "title": "Allocations",
+        "explanation": "En «Profiling y benchmarks», estudia allocations y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica allocations con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A08-L04",
+        "title": "Medición reproducible",
+        "explanation": "En «Profiling y benchmarks», estudia medición reproducible y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica medición reproducible con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Ejecutar benchmarks localmente",
+    "finalChallenge": "Resuelve un ejercicio de profiling y benchmarks y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A09",
+    "slug": "macros",
+    "title": "Macros",
+    "level": "advanced",
+    "topics": [
+      "macro_rules!",
+      "Metavariables",
+      "Higiene",
+      "Proc macros intro"
+    ],
+    "lessons": [
+      {
+        "id": "A09-L01",
+        "title": "macro_rules!",
+        "explanation": "En «Macros», estudia macro_rules! y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica macro_rules! con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A09-L02",
+        "title": "Metavariables",
+        "explanation": "En «Macros», estudia metavariables y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica metavariables con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A09-L03",
+        "title": "Higiene",
+        "explanation": "En «Macros», estudia higiene y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica higiene con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A09-L04",
+        "title": "Proc macros intro",
+        "explanation": "En «Macros», estudia proc macros intro y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica proc macros intro con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "macro_rules! doble { ($x:expr) => { $x * 2 }; }",
+    "finalChallenge": "Resuelve un ejercicio de macros y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A10",
+    "slug": "rust-y-webassembly",
+    "title": "Rust y WebAssembly",
+    "level": "advanced",
+    "topics": [
+      "Targets WASM",
+      "wasm-bindgen",
+      "Host capabilities",
+      "Tamaño de bundle"
+    ],
+    "lessons": [
+      {
+        "id": "A10-L01",
+        "title": "Targets WASM",
+        "explanation": "En «Rust y WebAssembly», estudia targets wasm y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica targets wasm con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A10-L02",
+        "title": "wasm-bindgen",
+        "explanation": "En «Rust y WebAssembly», estudia wasm-bindgen y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica wasm-bindgen con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A10-L03",
+        "title": "Host capabilities",
+        "explanation": "En «Rust y WebAssembly», estudia host capabilities y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica host capabilities con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A10-L04",
+        "title": "Tamaño de bundle",
+        "explanation": "En «Rust y WebAssembly», estudia tamaño de bundle y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica tamaño de bundle con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Compilar con wasm-pack en entorno local",
+    "finalChallenge": "Resuelve un ejercicio de rust y webassembly y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A11",
+    "slug": "unsafe-y-ffi",
+    "title": "Unsafe y FFI",
+    "level": "advanced",
+    "topics": [
+      "Raw pointers",
+      "Safety contracts",
+      "extern C",
+      "Auditoría de invariantes"
+    ],
+    "lessons": [
+      {
+        "id": "A11-L01",
+        "title": "Raw pointers",
+        "explanation": "En «Unsafe y FFI», estudia raw pointers y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica raw pointers con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A11-L02",
+        "title": "Safety contracts",
+        "explanation": "En «Unsafe y FFI», estudia safety contracts y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica safety contracts con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A11-L03",
+        "title": "extern C",
+        "explanation": "En «Unsafe y FFI», estudia extern c y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica extern c con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A11-L04",
+        "title": "Auditoría de invariantes",
+        "explanation": "En «Unsafe y FFI», estudia auditoría de invariantes y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica auditoría de invariantes con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Unsafe requiere invariantes documentadas y tests nativos",
+    "finalChallenge": "Resuelve un ejercicio de unsafe y ffi y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "A12",
+    "slug": "proyecto-rustflow",
+    "title": "Proyecto RustFlow",
+    "level": "advanced",
+    "topics": [
+      "Pool acotado",
+      "Cancelación",
+      "Telemetría",
+      "Tests de carga"
+    ],
+    "lessons": [
+      {
+        "id": "A12-L01",
+        "title": "Pool acotado",
+        "explanation": "En «Proyecto RustFlow», estudia pool acotado y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica pool acotado con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A12-L02",
+        "title": "Cancelación",
+        "explanation": "En «Proyecto RustFlow», estudia cancelación y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica cancelación con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A12-L03",
+        "title": "Telemetría",
+        "explanation": "En «Proyecto RustFlow», estudia telemetría y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica telemetría con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "A12-L04",
+        "title": "Tests de carga",
+        "explanation": "En «Proyecto RustFlow», estudia tests de carga y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica tests de carga con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Proyecto integrador Cargo: worker concurrente",
+    "finalChallenge": "Resuelve un ejercicio de proyecto rustflow y justifica los resultados.",
+    "xp": 30,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S01",
+    "slug": "rust-idiom-tico-y-ownership-avanzado",
+    "title": "Rust idiomático y ownership avanzado",
+    "level": "senior",
+    "topics": [
+      "Eliminación de clones",
+      "Borrowed APIs",
+      "Cow",
+      "Refactor guiado"
+    ],
+    "lessons": [
+      {
+        "id": "S01-L01",
+        "title": "Eliminación de clones",
+        "explanation": "En «Rust idiomático y ownership avanzado», estudia eliminación de clones y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica eliminación de clones con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S01-L02",
+        "title": "Borrowed APIs",
+        "explanation": "En «Rust idiomático y ownership avanzado», estudia borrowed apis y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica borrowed apis con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S01-L03",
+        "title": "Cow",
+        "explanation": "En «Rust idiomático y ownership avanzado», estudia cow y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica cow con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S01-L04",
+        "title": "Refactor guiado",
+        "explanation": "En «Rust idiomático y ownership avanzado», estudia refactor guiado y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica refactor guiado con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Review: medir antes de optimizar clones",
+    "finalChallenge": "Resuelve un ejercicio de rust idiomático y ownership avanzado y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S02",
+    "slug": "arquitectura-de-crates",
+    "title": "Arquitectura de crates",
+    "level": "senior",
+    "topics": [
+      "Límites de crates",
+      "Workspaces",
+      "API pública",
+      "ADR"
+    ],
+    "lessons": [
+      {
+        "id": "S02-L01",
+        "title": "Límites de crates",
+        "explanation": "En «Arquitectura de crates», estudia límites de crates y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica límites de crates con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S02-L02",
+        "title": "Workspaces",
+        "explanation": "En «Arquitectura de crates», estudia workspaces y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica workspaces con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S02-L03",
+        "title": "API pública",
+        "explanation": "En «Arquitectura de crates», estudia api pública y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica api pública con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S02-L04",
+        "title": "ADR",
+        "explanation": "En «Arquitectura de crates», estudia adr y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica adr con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: romper dependencias circulares",
+    "finalChallenge": "Resuelve un ejercicio de arquitectura de crates y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S03",
+    "slug": "dise-o-de-apis-y-abstracciones",
+    "title": "Diseño de APIs y abstracciones",
+    "level": "senior",
+    "topics": [
+      "Traits vs enums",
+      "Compatibilidad",
+      "Errores estables",
+      "Contratos"
+    ],
+    "lessons": [
+      {
+        "id": "S03-L01",
+        "title": "Traits vs enums",
+        "explanation": "En «Diseño de APIs y abstracciones», estudia traits vs enums y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica traits vs enums con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S03-L02",
+        "title": "Compatibilidad",
+        "explanation": "En «Diseño de APIs y abstracciones», estudia compatibilidad y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica compatibilidad con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S03-L03",
+        "title": "Errores estables",
+        "explanation": "En «Diseño de APIs y abstracciones», estudia errores estables y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica errores estables con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S03-L04",
+        "title": "Contratos",
+        "explanation": "En «Diseño de APIs y abstracciones», estudia contratos y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica contratos con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: API pública mantenible",
+    "finalChallenge": "Resuelve un ejercicio de diseño de apis y abstracciones y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S04",
+    "slug": "unsafe-rust-y-soundness",
+    "title": "Unsafe Rust y soundness",
+    "level": "senior",
+    "topics": [
+      "Invariantes",
+      "Aliasing",
+      "Miri",
+      "Safety comments"
+    ],
+    "lessons": [
+      {
+        "id": "S04-L01",
+        "title": "Invariantes",
+        "explanation": "En «Unsafe Rust y soundness», estudia invariantes y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica invariantes con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S04-L02",
+        "title": "Aliasing",
+        "explanation": "En «Unsafe Rust y soundness», estudia aliasing y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica aliasing con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S04-L03",
+        "title": "Miri",
+        "explanation": "En «Unsafe Rust y soundness», estudia miri y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica miri con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S04-L04",
+        "title": "Safety comments",
+        "explanation": "En «Unsafe Rust y soundness», estudia safety comments y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica safety comments con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Laboratorio de auditoría unsafe",
+    "finalChallenge": "Resuelve un ejercicio de unsafe rust y soundness y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S05",
+    "slug": "ffi-y-fronteras-de-memoria",
+    "title": "FFI y fronteras de memoria",
+    "level": "senior",
+    "topics": [
+      "ABI C",
+      "Punteros",
+      "Lifetime ownership",
+      "Wrappers seguros"
+    ],
+    "lessons": [
+      {
+        "id": "S05-L01",
+        "title": "ABI C",
+        "explanation": "En «FFI y fronteras de memoria», estudia abi c y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica abi c con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S05-L02",
+        "title": "Punteros",
+        "explanation": "En «FFI y fronteras de memoria», estudia punteros y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica punteros con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S05-L03",
+        "title": "Lifetime ownership",
+        "explanation": "En «FFI y fronteras de memoria», estudia lifetime ownership y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica lifetime ownership con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S05-L04",
+        "title": "Wrappers seguros",
+        "explanation": "En «FFI y fronteras de memoria», estudia wrappers seguros y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica wrappers seguros con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Laboratorio FFI con pruebas nativas",
+    "finalChallenge": "Resuelve un ejercicio de ffi y fronteras de memoria y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S06",
+    "slug": "concurrencia-de-producci-n",
+    "title": "Concurrencia de producción",
+    "level": "senior",
+    "topics": [
+      "Deadlocks",
+      "Lock order",
+      "Atomics",
+      "Observabilidad"
+    ],
+    "lessons": [
+      {
+        "id": "S06-L01",
+        "title": "Deadlocks",
+        "explanation": "En «Concurrencia de producción», estudia deadlocks y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica deadlocks con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S06-L02",
+        "title": "Lock order",
+        "explanation": "En «Concurrencia de producción», estudia lock order y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica lock order con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S06-L03",
+        "title": "Atomics",
+        "explanation": "En «Concurrencia de producción», estudia atomics y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica atomics con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S06-L04",
+        "title": "Observabilidad",
+        "explanation": "En «Concurrencia de producción», estudia observabilidad y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica observabilidad con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: detectar contención y starvation",
+    "finalChallenge": "Resuelve un ejercicio de concurrencia de producción y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S07",
+    "slug": "async-y-tokio-avanzado",
+    "title": "Async y Tokio avanzado",
+    "level": "senior",
+    "topics": [
+      "Task ownership",
+      "Cancelación",
+      "Backpressure",
+      "Shutdown"
+    ],
+    "lessons": [
+      {
+        "id": "S07-L01",
+        "title": "Task ownership",
+        "explanation": "En «Async y Tokio avanzado», estudia task ownership y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica task ownership con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S07-L02",
+        "title": "Cancelación",
+        "explanation": "En «Async y Tokio avanzado», estudia cancelación y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica cancelación con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S07-L03",
+        "title": "Backpressure",
+        "explanation": "En «Async y Tokio avanzado», estudia backpressure y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica backpressure con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S07-L04",
+        "title": "Shutdown",
+        "explanation": "En «Async y Tokio avanzado», estudia shutdown y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica shutdown con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: reparar tasks huérfanas",
+    "finalChallenge": "Resuelve un ejercicio de async y tokio avanzado y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S08",
+    "slug": "performance-engineering",
+    "title": "Performance Engineering",
+    "level": "senior",
+    "topics": [
+      "Profiling",
+      "Benchmarks",
+      "Allocations",
+      "Regresiones"
+    ],
+    "lessons": [
+      {
+        "id": "S08-L01",
+        "title": "Profiling",
+        "explanation": "En «Performance Engineering», estudia profiling y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica profiling con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S08-L02",
+        "title": "Benchmarks",
+        "explanation": "En «Performance Engineering», estudia benchmarks y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica benchmarks con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S08-L03",
+        "title": "Allocations",
+        "explanation": "En «Performance Engineering», estudia allocations y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica allocations con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S08-L04",
+        "title": "Regresiones",
+        "explanation": "En «Performance Engineering», estudia regresiones y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica regresiones con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: medir y optimizar p99",
+    "finalChallenge": "Resuelve un ejercicio de performance engineering y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S09",
+    "slug": "sistemas-distribuidos",
+    "title": "Sistemas distribuidos",
+    "level": "senior",
+    "topics": [
+      "Idempotencia",
+      "Reintentos",
+      "Timeouts",
+      "Outbox"
+    ],
+    "lessons": [
+      {
+        "id": "S09-L01",
+        "title": "Idempotencia",
+        "explanation": "En «Sistemas distribuidos», estudia idempotencia y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica idempotencia con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S09-L02",
+        "title": "Reintentos",
+        "explanation": "En «Sistemas distribuidos», estudia reintentos y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica reintentos con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S09-L03",
+        "title": "Timeouts",
+        "explanation": "En «Sistemas distribuidos», estudia timeouts y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica timeouts con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S09-L04",
+        "title": "Outbox",
+        "explanation": "En «Sistemas distribuidos», estudia outbox y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica outbox con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: mensajes duplicados",
+    "finalChallenge": "Resuelve un ejercicio de sistemas distribuidos y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S10",
+    "slug": "datos-y-consistencia",
+    "title": "Datos y consistencia",
+    "level": "senior",
+    "topics": [
+      "Aislamiento",
+      "Transacciones",
+      "Migraciones",
+      "Integridad"
+    ],
+    "lessons": [
+      {
+        "id": "S10-L01",
+        "title": "Aislamiento",
+        "explanation": "En «Datos y consistencia», estudia aislamiento y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica aislamiento con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S10-L02",
+        "title": "Transacciones",
+        "explanation": "En «Datos y consistencia», estudia transacciones y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica transacciones con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S10-L03",
+        "title": "Migraciones",
+        "explanation": "En «Datos y consistencia», estudia migraciones y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica migraciones con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S10-L04",
+        "title": "Integridad",
+        "explanation": "En «Datos y consistencia», estudia integridad y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica integridad con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: lost updates",
+    "finalChallenge": "Resuelve un ejercicio de datos y consistencia y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S11",
+    "slug": "resiliencia",
+    "title": "Resiliencia",
+    "level": "senior",
+    "topics": [
+      "Bulkheads",
+      "Circuit breakers",
+      "Límites",
+      "Graceful degradation"
+    ],
+    "lessons": [
+      {
+        "id": "S11-L01",
+        "title": "Bulkheads",
+        "explanation": "En «Resiliencia», estudia bulkheads y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica bulkheads con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S11-L02",
+        "title": "Circuit breakers",
+        "explanation": "En «Resiliencia», estudia circuit breakers y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica circuit breakers con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S11-L03",
+        "title": "Límites",
+        "explanation": "En «Resiliencia», estudia límites y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica límites con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S11-L04",
+        "title": "Graceful degradation",
+        "explanation": "En «Resiliencia», estudia graceful degradation y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica graceful degradation con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: evitar cascada de fallos",
+    "finalChallenge": "Resuelve un ejercicio de resiliencia y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S12",
+    "slug": "seguridad-aplicada",
+    "title": "Seguridad aplicada",
+    "level": "senior",
+    "topics": [
+      "Autorización",
+      "Validación",
+      "Dependencias",
+      "Supply chain"
+    ],
+    "lessons": [
+      {
+        "id": "S12-L01",
+        "title": "Autorización",
+        "explanation": "En «Seguridad aplicada», estudia autorización y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica autorización con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S12-L02",
+        "title": "Validación",
+        "explanation": "En «Seguridad aplicada», estudia validación y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica validación con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S12-L03",
+        "title": "Dependencias",
+        "explanation": "En «Seguridad aplicada», estudia dependencias y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica dependencias con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S12-L04",
+        "title": "Supply chain",
+        "explanation": "En «Seguridad aplicada», estudia supply chain y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica supply chain con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: auditoría de API",
+    "finalChallenge": "Resuelve un ejercicio de seguridad aplicada y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S13",
+    "slug": "testing-avanzado",
+    "title": "Testing avanzado",
+    "level": "senior",
+    "topics": [
+      "Property-based",
+      "Fuzzing",
+      "Miri",
+      "Concurrencia"
+    ],
+    "lessons": [
+      {
+        "id": "S13-L01",
+        "title": "Property-based",
+        "explanation": "En «Testing avanzado», estudia property-based y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica property-based con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S13-L02",
+        "title": "Fuzzing",
+        "explanation": "En «Testing avanzado», estudia fuzzing y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica fuzzing con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S13-L03",
+        "title": "Miri",
+        "explanation": "En «Testing avanzado», estudia miri y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica miri con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S13-L04",
+        "title": "Concurrencia",
+        "explanation": "En «Testing avanzado», estudia concurrencia y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica concurrencia con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: pruebas que reproduzcan un bug",
+    "finalChallenge": "Resuelve un ejercicio de testing avanzado y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S14",
+    "slug": "observabilidad",
+    "title": "Observabilidad",
+    "level": "senior",
+    "topics": [
+      "Tracing",
+      "Métricas",
+      "SLO",
+      "Incidentes"
+    ],
+    "lessons": [
+      {
+        "id": "S14-L01",
+        "title": "Tracing",
+        "explanation": "En «Observabilidad», estudia tracing y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica tracing con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S14-L02",
+        "title": "Métricas",
+        "explanation": "En «Observabilidad», estudia métricas y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica métricas con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S14-L03",
+        "title": "SLO",
+        "explanation": "En «Observabilidad», estudia slo y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica slo con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S14-L04",
+        "title": "Incidentes",
+        "explanation": "En «Observabilidad», estudia incidentes y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica incidentes con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: investigar p99",
+    "finalChallenge": "Resuelve un ejercicio de observabilidad y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S15",
+    "slug": "ci-cd-y-operaci-n",
+    "title": "CI/CD y operación",
+    "level": "senior",
+    "topics": [
+      "Releases",
+      "Rollbacks",
+      "SBOM",
+      "GitHub Actions"
+    ],
+    "lessons": [
+      {
+        "id": "S15-L01",
+        "title": "Releases",
+        "explanation": "En «CI/CD y operación», estudia releases y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica releases con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S15-L02",
+        "title": "Rollbacks",
+        "explanation": "En «CI/CD y operación», estudia rollbacks y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica rollbacks con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S15-L03",
+        "title": "SBOM",
+        "explanation": "En «CI/CD y operación», estudia sbom y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica sbom con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S15-L04",
+        "title": "GitHub Actions",
+        "explanation": "En «CI/CD y operación», estudia github actions y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica github actions con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: entrega fiable",
+    "finalChallenge": "Resuelve un ejercicio de ci/cd y operación y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S16",
+    "slug": "mantenimiento-y-migraciones",
+    "title": "Mantenimiento y migraciones",
+    "level": "senior",
+    "topics": [
+      "Legacy code",
+      "Strangler",
+      "Versionado",
+      "Compatibilidad"
+    ],
+    "lessons": [
+      {
+        "id": "S16-L01",
+        "title": "Legacy code",
+        "explanation": "En «Mantenimiento y migraciones», estudia legacy code y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica legacy code con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S16-L02",
+        "title": "Strangler",
+        "explanation": "En «Mantenimiento y migraciones», estudia strangler y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica strangler con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S16-L03",
+        "title": "Versionado",
+        "explanation": "En «Mantenimiento y migraciones», estudia versionado y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica versionado con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S16-L04",
+        "title": "Compatibilidad",
+        "explanation": "En «Mantenimiento y migraciones», estudia compatibilidad y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica compatibilidad con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: migración incremental",
+    "finalChallenge": "Resuelve un ejercicio de mantenimiento y migraciones y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S17",
+    "slug": "liderazgo-t-cnico",
+    "title": "Liderazgo técnico",
+    "level": "senior",
+    "topics": [
+      "Code review",
+      "ADR",
+      "Tradeoffs",
+      "Mentoría"
+    ],
+    "lessons": [
+      {
+        "id": "S17-L01",
+        "title": "Code review",
+        "explanation": "En «Liderazgo técnico», estudia code review y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica code review con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S17-L02",
+        "title": "ADR",
+        "explanation": "En «Liderazgo técnico», estudia adr y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica adr con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S17-L03",
+        "title": "Tradeoffs",
+        "explanation": "En «Liderazgo técnico», estudia tradeoffs y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica tradeoffs con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S17-L04",
+        "title": "Mentoría",
+        "explanation": "En «Liderazgo técnico», estudia mentoría y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica mentoría con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Challenge: defender una decisión",
+    "finalChallenge": "Resuelve un ejercicio de liderazgo técnico y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  },
+  {
+    "id": "S18",
+    "slug": "system-design-final",
+    "title": "System Design final",
+    "level": "senior",
+    "topics": [
+      "Requisitos",
+      "Arquitectura",
+      "Resiliencia",
+      "Operación"
+    ],
+    "lessons": [
+      {
+        "id": "S18-L01",
+        "title": "Requisitos",
+        "explanation": "En «System Design final», estudia requisitos y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica requisitos con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S18-L02",
+        "title": "Arquitectura",
+        "explanation": "En «System Design final», estudia arquitectura y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica arquitectura con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S18-L03",
+        "title": "Resiliencia",
+        "explanation": "En «System Design final», estudia resiliencia y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica resiliencia con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      },
+      {
+        "id": "S18-L04",
+        "title": "Operación",
+        "explanation": "En «System Design final», estudia operación y reconoce sus implicaciones en la seguridad, la legibilidad y el comportamiento del programa. Contrasta el ejemplo con la documentación oficial y comprueba los casos límite.",
+        "practice": "Explica operación con tus palabras y señala una situación en la que utilizarías esta técnica.",
+        "status": "editorial-outline"
+      }
+    ],
+    "code": "// Capstone: RustForge Platform",
+    "finalChallenge": "Resuelve un ejercicio de system design final y justifica los resultados.",
+    "xp": 100,
+    "contentStatus": "outline",
+    "runtime": "local-cargo"
+  }
+]

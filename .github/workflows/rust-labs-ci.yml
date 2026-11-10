@@ -1,0 +1,26 @@
+name: Rust Labs CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  cargo:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        lab: [basic/ferris-tasks, intermediate/ferris-inventory, advanced/rustflow, senior/s01-idiomatic-ownership, senior/s02-crate-architecture, senior/s03-api-contracts, senior/s04-unsafe-invariants, senior/s05-ffi-ownership, senior/s06-lock-order, senior/s07-tokio-cancellation, senior/s08-benchmark-baseline, senior/s09-idempotency, senior/s10-inventory-consistency, senior/s11-backpressure, senior/s12-resource-authorization, senior/s13-property-testing, senior/s14-observability, senior/s15-expand-contract, senior/s16-contract-migration, senior/s17-code-review-gates, senior/s18-system-design]
+    defaults:
+      run:
+        working-directory: rust-labs/${{ matrix.lab }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - run: cargo fmt --all -- --check
+      - run: cargo check --all-targets
+      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo test

@@ -1,0 +1,170 @@
+{
+  "S07": {
+    "id": "S07",
+    "title": "Tasks huérfanas tras apagar Tokio",
+    "signals": [
+      "shutdown_started=true",
+      "active_tasks=234",
+      "queue_depth=800/800"
+    ],
+    "steps": [
+      {
+        "title": "Triage",
+        "event": "El proceso recibe SIGTERM, pero las tasks mantienen conexiones activas.",
+        "options": [
+          "Abortar todas sin esperar",
+          "Registrar task owners y rastrear JoinHandles",
+          "Crear tasks nuevas para drenar"
+        ],
+        "correct": 1,
+        "feedback": [
+          "No garantiza flush ni integridad",
+          "Identifica propietarios y permite coordinar el cierre",
+          "Aumenta la saturación"
+        ]
+      },
+      {
+        "title": "Mitigación",
+        "event": "Las tareas están esperando en una cola que sigue aceptando trabajos.",
+        "options": [
+          "Cerrar admisión, cancelar y drenar con deadline",
+          "Aumentar cola a un millón",
+          "Ignorar los errores de JoinHandle"
+        ],
+        "correct": 0,
+        "feedback": [
+          "Define una frontera de cierre verificable",
+          "Oculta el fallo y aumenta memoria",
+          "Pierde evidencia de fallos"
+        ]
+      },
+      {
+        "title": "Verificación",
+        "event": "El servicio termina, pero hay riesgo de trabajo perdido.",
+        "options": [
+          "Declarar éxito por ver 0 tasks",
+          "Deshabilitar tests lentos",
+          "Probar shutdown, cola llena y trabajos en vuelo"
+        ],
+        "correct": 2,
+        "feedback": [
+          "La cuenta de tasks no demuestra integridad",
+          "Reduce la cobertura crítica",
+          "Cubre condiciones límite y regresión"
+        ]
+      }
+    ]
+  },
+  "S12": {
+    "id": "S12",
+    "title": "Acceso cruzado entre cuentas",
+    "signals": [
+      "GET /orders/842 -> 200",
+      "principal=account-7",
+      "resource.owner=account-8"
+    ],
+    "steps": [
+      {
+        "title": "Confirmación",
+        "event": "Un usuario puede consultar pedidos de otra cuenta cambiando el ID.",
+        "options": [
+          "Ocultar la URL en el frontend",
+          "Reproducir con dos identidades y preservar evidencia sin datos reales",
+          "Desactivar logs de acceso"
+        ],
+        "correct": 1,
+        "feedback": [
+          "No crea autorización",
+          "Reproducción controlada demuestra el alcance",
+          "Oculta señales de auditoría"
+        ]
+      },
+      {
+        "title": "Contención",
+        "event": "La autorización solo valida que el token sea válido.",
+        "options": [
+          "Verificar ownership/autorización por recurso en servidor",
+          "Cambiar GET por POST",
+          "Incrementar la longitud de los IDs"
+        ],
+        "correct": 0,
+        "feedback": [
+          "Protege el recurso independientemente de la interfaz",
+          "El método no soluciona IDOR",
+          "Un ID difícil de adivinar no sustituye permisos"
+        ]
+      },
+      {
+        "title": "Regresión",
+        "event": "El parche se prepara para producción.",
+        "options": [
+          "Probar solo el dueño legítimo",
+          "Obviar cachés",
+          "Probar dueño, no dueño, ausente y caché particionada"
+        ],
+        "correct": 2,
+        "feedback": [
+          "No cubre abuso cruzado",
+          "Una caché incorrecta aún filtra datos",
+          "Incluye casos adversos y acceso indirecto"
+        ]
+      }
+    ]
+  },
+  "S14": {
+    "id": "S14",
+    "title": "p99 y pool SQL saturados",
+    "signals": [
+      "p99=1800ms",
+      "db_pool_waiters=320",
+      "5xx=3.7%"
+    ],
+    "steps": [
+      {
+        "title": "Diagnóstico",
+        "event": "Picos de latencia coinciden con esperas de conexión en SQL.",
+        "options": [
+          "Duplicar pool sin medir",
+          "Correlacionar traces, pool y saturación por request",
+          "Borrar la alerta"
+        ],
+        "correct": 1,
+        "feedback": [
+          "Puede empeorar la presión en DB",
+          "Identifica el cuello de botella con evidencia",
+          "No resuelve el problema"
+        ]
+      },
+      {
+        "title": "Mitigación",
+        "event": "Consultas lentas saturan el pool; aumenta el número de solicitudes.",
+        "options": [
+          "Limitar concurrencia, ajustar timeout y mitigar consulta costosa",
+          "Abrir conexiones sin límite",
+          "Reintentar sin jitter ni límite"
+        ],
+        "correct": 0,
+        "feedback": [
+          "Aísla carga y limita amplificación del incidente",
+          "Agota recursos",
+          "Multiplica carga en el fallo"
+        ]
+      },
+      {
+        "title": "Confirmación",
+        "event": "La latencia comienza a descender.",
+        "options": [
+          "Cerrar sin medir",
+          "Apagar telemetría",
+          "Revisar p95/p99, errores, saturación y rollback"
+        ],
+        "correct": 2,
+        "feedback": [
+          "Falta evidencia de recuperación",
+          "Pierde observabilidad",
+          "Verifica comportamiento y alternativa de reversión"
+        ]
+      }
+    ]
+  }
+}

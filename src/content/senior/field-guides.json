@@ -1,0 +1,164 @@
+[
+  {
+    "id": "S01",
+    "title": "Perfiles y ownership",
+    "baseline": "Medir el hotspot de clones con un dataset fijo y comparar antes/después; no introducir préstamos que sobrevivan a su buffer.",
+    "implementation": "Cambiar la API para aceptar vistas prestadas cuando el contrato permita retención cero; documentar el caso que exige propiedad.",
+    "adversarial": "Corpus vacío, texto multibyte UTF-8, llamadas repetidas y lifetime de retorno.",
+    "verification": "Comparativa de asignaciones y latencias con mismas condiciones; cargo test y benchmark documentado.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S02",
+    "title": "Fronteras de crates",
+    "baseline": "Dibujar el grafo de dependencias y localizar el contrato que cruza dominio e infraestructura.",
+    "implementation": "Mover el contrato a un dueño único; mantener adaptadores detrás de traits y justificar cada crate.",
+    "adversarial": "Consumidor alternativo de dominio sin base de datos; cambios de feature que no recompilen todo el workspace.",
+    "verification": "Grafo sin ciclos, cargo metadata y tests de contrato entre crates.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S03",
+    "title": "API pública resiliente",
+    "baseline": "Capturar el panic sobre entrada inválida y registrar efectos en consumidores actuales.",
+    "implementation": "Introducir Result y un error público concreto; proponer una migración compatible.",
+    "adversarial": "Entradas vacías, UTF-8 inválido donde aplique, errores transitivos y clientes de versión anterior.",
+    "verification": "Golden tests de API, documentación de errores y cargo test sin panics inesperados.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S04",
+    "title": "Unsafe y soundness",
+    "baseline": "Enumerar precondiciones del bloque unsafe: validez, alineación, aliasing, inicialización y vida útil.",
+    "implementation": "Reducir el bloque unsafe, exponer interfaz segura y escribir comentarios de invariantes junto a cada operación crítica.",
+    "adversarial": "Longitud cero, desalineación, punteros null, aliasing y buffer liberado; donde aplique usar Miri.",
+    "verification": "Lista de invariantes revisada, tests adversos y salida Miri solo cuando realmente se ejecute.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S05",
+    "title": "Ownership en FFI",
+    "baseline": "Identificar quién reserva y libera recursos nativos; confirmar ABI y condiciones de null/error.",
+    "implementation": "Crear wrapper RAII sin usar Box::from_raw sobre memoria C no compatible.",
+    "adversarial": "Fallo de inicialización, liberación repetida, error durante Drop y uso en hilos solo si permitido.",
+    "verification": "Contrato de propiedad y ABI documentados, tests de frontera, sanitizers compatibles.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S06",
+    "title": "Orden total de locks",
+    "baseline": "Construir un test que muestre secuencias opuestas de adquisición de recursos.",
+    "implementation": "Establecer orden de locks y reducir alcance de las secciones críticas; no mantener guardas sobre await.",
+    "adversarial": "Interleavings, timeout, overflow, doble operación y contención intensa.",
+    "verification": "Pruebas concurrentes repetidas sin deadlock y balances de dominio preservados.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S07",
+    "title": "Tokio: tareas con propietario",
+    "baseline": "Registrar tareas activas, responsabilidades de JoinHandle y ruta actual de shutdown.",
+    "implementation": "Introducir cancelación cooperativa, admisión acotada y deadline de parada; separar trabajo aceptado de pendiente.",
+    "adversarial": "Cierre durante procesamiento, segundo shutdown, timeouts, productores bloqueados y fallos de worker.",
+    "verification": "cargo test con Tokio, logs del apagado y criterios explícitos de trabajos drenados.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S08",
+    "title": "Performance reproducible",
+    "baseline": "Definir máquina, carga, latencia p95/p99 y métrica de asignaciones como baseline.",
+    "implementation": "Optimizar solo el hotspot demostrado y conservar comparabilidad de datasets.",
+    "adversarial": "Cargas pequeñas y grandes, warmup, contención, regresión de memoria y ruido estadístico.",
+    "verification": "Resultados crudos, comandos de benchmarking, distribución de medidas y plan de rollback.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S09",
+    "title": "Idempotencia y reintentos",
+    "baseline": "Reproducir un replay del mismo event_id y localizar cuándo se confirma el efecto.",
+    "implementation": "Usar clave idempotente y transacción/deduplicación asociada al efecto, evitando marcar antes de commit.",
+    "adversarial": "Duplicados concurrentes, error entre write y ack, reordenamiento y reintentos con timeout.",
+    "verification": "Prueba de un único efecto observable por clave y evidencia de rollback.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S10",
+    "title": "Integridad de inventario",
+    "baseline": "Reproducir dos compradores ante stock=1 con transacciones simultáneas.",
+    "implementation": "Mantener invariante stock>=0 con una actualización condicional o aislamiento apropiado.",
+    "adversarial": "Stock cero, restock, carrera múltiple, pérdida de conexión y rollback.",
+    "verification": "Tests de concurrencia y confirmaciones nunca mayores que unidades disponibles.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S11",
+    "title": "Backpressure end-to-end",
+    "baseline": "Medir tasa de ingreso, capacidad de cola, latencia y workers bloqueados.",
+    "implementation": "Aplicar límites de admisión y política documentada de espera, rechazo o persistencia.",
+    "adversarial": "Saturación constante, consumidor detenido, shutdown con cola llena y productor cancelado.",
+    "verification": "Pruebas de límites finitos, memoria estable y señales de saturación observables.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S12",
+    "title": "Autorización por recurso",
+    "baseline": "Explotar en fixture una lectura cruzada de tenant con identidad diferente.",
+    "implementation": "Autorizar en backend cada lectura/escritura usando sujeto y recurso; no depender del botón de UI.",
+    "adversarial": "No propietario, recurso ausente, caché por tenant, ID enumerado y ausencia de identidad.",
+    "verification": "Tests negativos por identidad y ausencia de filtraciones de campos.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S13",
+    "title": "Property testing y fuzzing",
+    "baseline": "Guardar un input mínimo que provoque panic y escribir propiedad del parser.",
+    "implementation": "Eliminar indexaciones sin comprobar, manejar errores tipados e incorporar corpus de regresión.",
+    "adversarial": "Bytes arbitrarios, tamaño máximo, UTF-8 inválido y roundtrip cuando corresponda.",
+    "verification": "Corpus reproducible, proptest/fuzzing según toolchain y ausencia de panic sobre entradas esperadas.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S14",
+    "title": "Correlación de señales",
+    "baseline": "Correlacionar p99, errores y saturación del pool usando un timeline reproducible.",
+    "implementation": "Proponer mitigación reversible y la señal que demuestra recuperación.",
+    "adversarial": "Ventanas vacías, datos perdidos, escalado que empeora cola y rollback.",
+    "verification": "Métricas pre/post, trace IDs, ventanas comparables y cronología de decisiones.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S15",
+    "title": "Release expand/contract",
+    "baseline": "Identificar qué versiones todavía consumen la columna o evento antiguo.",
+    "implementation": "Planificar migración expansiva, despliegue dual y retirada posterior con gate y rollback.",
+    "adversarial": "Canary fallido, rollback después de schema nuevo y datos parcialmente migrados.",
+    "verification": "Pruebas de versiones coexistentes y plan de reversión ensayado.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S16",
+    "title": "Migración de contratos",
+    "baseline": "Fijar golden response de v1 y listar clientes con versiones activas.",
+    "implementation": "Introducir compatibilidad gradual, versionado y política de deprecación medible.",
+    "adversarial": "Cliente lento en actualizar, error desconocido, nuevo enum y cuerpos parcialmente válidos.",
+    "verification": "Contract tests por versión y métrica de adopción de nueva API.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S17",
+    "title": "Calidad de revisión técnica",
+    "baseline": "Anotar líneas concretas que causan retries infinitos, panic o degradación.",
+    "implementation": "Dejar comentarios accionables con severidad, reproducción y alternativa mínima, sin apelar a autoridad.",
+    "adversarial": "Error transitorio, error permanente, saturación, jitter, timeout y rollback.",
+    "verification": "Review JSON, pruebas propuestas y decisión de aprobación condicionada a evidence.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  },
+  {
+    "id": "S18",
+    "title": "Diseño defensible con SLO",
+    "baseline": "Declarar SLO, pico QPS, memoria por petición, RTO/RPO y garantía de consistencia.",
+    "implementation": "Seleccionar el sistema mínimo posible y documentar ADR con alternativas y evolución.",
+    "adversarial": "Pérdida de zona, dependencia lenta, duplicados, burst y presupuesto excedido.",
+    "verification": "Diagrama, cálculo de capacidad, ADR, plan de pruebas y límites explícitos.",
+    "command": "cargo fmt --all -- --check && cargo check --all-targets && cargo clippy --all-targets -- -D warnings && cargo test"
+  }
+]
