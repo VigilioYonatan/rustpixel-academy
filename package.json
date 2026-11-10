@@ -23,7 +23,7 @@
     "senior:demo-check": "node scripts/test-incident-arena.cjs"
   },
   "dependencies": {
-    "preact": "^10.26.0",
+    "preact": "^11.2.0",
     "@preact/signals": "^2.2.0",
     "@codemirror/lang-rust": "^6.0.2",
     "@codemirror/state": "^6.5.2",
