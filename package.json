@@ -38,7 +38,7 @@
     "vite": "^6.2.0",
     "vitest": "^3.1.0",
     "eslint": "^9.0.0",
-    "@eslint/js": "^9.0.0",
+    "@eslint/js": "^10.0.1",
     "typescript-eslint": "^8.0.0",
     "playwright": "^1.51.0",
     "@playwright/test": "^1.51.0",
