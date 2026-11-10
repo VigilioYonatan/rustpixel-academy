@@ -1,5 +1,7 @@
 import { rust } from '@codemirror/lang-rust';
+import { HighlightStyle, syntaxHighlighting } from '@codemirror/language';
 import { EditorState } from '@codemirror/state';
+import { tags } from '@lezer/highlight';
 import { signal } from '@preact/signals';
 import { basicSetup, EditorView } from 'codemirror';
 import {
@@ -132,6 +134,70 @@ function Bar({ value, max }: { value: number; max: number }) {
   );
 }
 
+const rustForgeHighlight = HighlightStyle.define([
+  { tag: tags.keyword, color: '#f2be58', fontWeight: 'bold' },
+  { tag: tags.definition(tags.variableName), color: '#6fc7bd' },
+  { tag: tags.function(tags.variableName), color: '#6fc7bd' },
+  { tag: tags.variableName, color: '#e2e8f0' },
+  { tag: tags.macroName, color: '#e76f36', fontWeight: 'bold' },
+  { tag: tags.typeName, color: '#68c48c', fontWeight: 'bold' },
+  { tag: tags.string, color: '#f87171' },
+  { tag: tags.number, color: '#a78bfa' },
+  { tag: tags.bool, color: '#f2be58' },
+  { tag: tags.comment, color: '#64748b', fontStyle: 'italic' },
+  { tag: tags.operator, color: '#e76f36' },
+  { tag: tags.punctuation, color: '#94a3b8' },
+  { tag: tags.special(tags.string), color: '#fca5a5' },
+]);
+
+const rustForgeTheme = EditorView.theme(
+  {
+    '&': {
+      backgroundColor: '#0b1423',
+      color: '#e2e8f0',
+      fontFamily:
+        "ui-monospace, 'Cascadia Code', 'Fira Code', Consolas, monospace",
+      fontSize: '13.5px',
+      height: '100%',
+    },
+    '.cm-scroller': {
+      fontFamily: 'inherit',
+      lineHeight: '1.6',
+    },
+    '.cm-content': {
+      caretColor: '#e76f36',
+      padding: '10px 0',
+    },
+    '&.cm-focused .cm-cursor': {
+      borderLeftColor: '#e76f36',
+      borderLeftWidth: '2px',
+    },
+    '&.cm-focused .cm-selectionBackground, ::selection': {
+      backgroundColor: 'rgba(231, 111, 54, 0.28) !important',
+    },
+    '.cm-gutters': {
+      backgroundColor: '#080d17',
+      color: '#64748b',
+      border: 'none',
+      borderRight: '1px solid rgba(255, 255, 255, 0.08)',
+      paddingRight: '6px',
+    },
+    '.cm-activeLineGutter': {
+      backgroundColor: 'rgba(231, 111, 54, 0.18)',
+      color: '#f2be58',
+      fontWeight: 'bold',
+    },
+    '.cm-activeLine': {
+      backgroundColor: 'rgba(255, 255, 255, 0.04)',
+    },
+    '.cm-line': {
+      paddingLeft: '10px',
+      paddingRight: '10px',
+    },
+  },
+  { dark: true },
+);
+
 function CodeEditor({
   moduleId,
   initial,
@@ -151,6 +217,8 @@ function CodeEditor({
         extensions: [
           basicSetup,
           rust(),
+          rustForgeTheme,
+          syntaxHighlighting(rustForgeHighlight),
           EditorView.updateListener.of((u) => {
             if (u.docChanged) {
               const code = u.state.doc.toString().slice(0, 20000);

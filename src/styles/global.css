@@ -758,13 +758,53 @@ pre {
   background: var(--raised);
 }
 .codebox {
-  background: var(--code);
+  background: #0b1423;
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
 }
 .editor-host {
   min-height: 220px;
+  background: #0b1423;
+}
+
+/* CodeMirror Rust Forge Dark Styling */
+.cm-editor {
+  background: #0b1423 !important;
+  color: #e2e8f0 !important;
+  font-family: var(--font-code) !important;
+  font-size: 13.5px !important;
+}
+.cm-scroller {
+  font-family: var(--font-code) !important;
+  line-height: 1.6 !important;
+}
+.cm-gutters {
+  background: #080d17 !important;
+  color: #64748b !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+}
+.cm-activeLineGutter {
+  background: rgba(231, 111, 54, 0.18) !important;
+  color: #f2be58 !important;
+  font-weight: 800 !important;
+}
+.cm-activeLine {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+.cm-line {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+.cm-cursor {
+  border-left-color: var(--forge) !important;
+  border-left-width: 2px !important;
+}
+.cm-selectionBackground {
+  background: rgba(231, 111, 54, 0.28) !important;
 }
 .editor-actions {
   display: flex;
