@@ -49,7 +49,7 @@ El **Modo Senior** es el corazón avanzado de la plataforma. No es un examen de 
 
 1. **18 Desafíos Profesionales (S01–S18):** Escenarios reales inspirados en problemas de producción: contención de bloqueos, fugas de memoria, optimización con slices prestados (`&str`), APIs resilientes y contratos de datos.
 2. **Incident Arena con Telemetría en Vivo:** Simulador de caídas en producción con gráfico *sparkline* en tiempo real, latencias P99 y degradación de SLAs. Debes elegir la estrategia de mitigación correcta (rollback, escalado, aislamiento o drenado con timeout) antes de que el servicio colapse.
-3. **Visor de Diferencias (Senior Diff Viewer):** Compara visualmente el código original defectuoso frente a la refactorización Senior sugerida con resaltado de líneas añadidas y eliminadas.
+3. **Visor de Diferencias (Senior Diff Viewer en los 18 Módulos):** Disponible en la totalidad de los 18 desafíos Senior (S01 a S18), compara visualmente el código original defectuoso frente a la refactorización Senior sugerida con resaltado de líneas añadidas y eliminadas.
 4. **Workspaces de Code Review y Arquitectura ADR:** Herramientas para dejar notas de revisión línea por línea en código fuente o diseñar diagramas de componentes con decisiones de arquitectura justificadas.
 5. **Matriz de 90 Gates de Aceptación:** Auditoría interactiva con 5 criterios de producción por cada módulo para autorizar un release técnico.
 6. **Radar Pentagonal de Competencias:** Gráfico SVG interactivo que evalúa tu perfil en las 5 dimensiones clave: **Corrección, Seguridad, Arquitectura, Operaciones y Rendimiento**.
@@ -62,8 +62,14 @@ Además del Modo Senior, la academia ofrece una experiencia formativa completa:
 
 - **54 Módulos Curriculares:** Organizados en niveles Básico (B01–B12), Intermedio (I01–I12), Avanzado (A01–A12) y Senior (S01–S18).
 - **Editor Rust Forge (CodeMirror 6):** Editor integrado con tema oscuro personalizado de alto contraste, coloreado de sintaxis calibrado para Rust y botón directo para probar tus soluciones en el compilador oficial de Rust Playground.
-- **Minijuegos de Lógica y Memoria:** Actividades interactivas como el *Ownership Puzzle* para dominar visualmente cómo se mueven los datos entre Stack y Heap.
+- **5 Minijuegos y Laboratorios Interactivos:**
+  - **Quiz Battle:** 20 preguntas desafiantes sobre ownership, smart pointers, closures, traits y concurrencia.
+  - **Ownership Puzzle:** 5 fases interactivas con diagramas dinámicos de Stack y Heap (Moves, Copy, Préstamos y Slices).
+  - **Borrow Checker Challenge:** 6 casos de análisis donde diagnosticas si el código compila y reconoces errores reales (`E0499`, `E0502`, `E0597`, `E0382`).
+  - **Concurrency Race:** 5 simulaciones de sistemas concurrentes (deadlocks por inversión de locks, canales MPSC con backpressure, Tokio task cancellation).
+  - **Bug Hunter:** 6 laboratorios de depuración donde seleccionas la refactorización idiomática para eliminar bugs sutiles.
 - **8 Rutas del Ecosistema Rust:** Guías especializadas para Backend Web, Tokio Asíncrono, CLIs, Sistemas Embebidos, Criptografía y Motores de Juegos.
+- **Nuevos Sprites Pixel Art Originales de Ferris:** Arte temático de alta resolución para Ferris Explorador, Estudiante con libro, Ingeniero en laptop Rust, Rey Senior con corona y capa, y Detective de ideas.
 - **Internacionalización en 6 Idiomas:** Toda la interfaz disponible en Español, Inglés, Francés, Alemán, Portugués e Italiano.
 - **100% Local-First y Privado:** Todo tu progreso, notas y respuestas se guardan en tu propio navegador (`localStorage`). No necesitas crear cuenta, no hay cookies de rastreo y no dependes de ningún servidor externo.
 
@@ -75,9 +81,17 @@ Además del Modo Senior, la academia ofrece una experiencia formativa completa:
 | :---: | :---: |
 | ![Editor Rust Forge](screenshots/showcase/04_editor_lesson_b01.png) | ![Senior Dashboard](screenshots/showcase/05_senior_dashboard.png) |
 
-| Incident Arena & Telemetría en Tiempo Real | Matriz de los 90 Criterios de Producción |
+| Borrow Checker Challenge (Interactivo) | Concurrency Race (Simulador) |
 | :---: | :---: |
-| ![Incident Arena](screenshots/showcase/07_incident_arena_standalone.png) | ![90 Gates Matrix](screenshots/showcase/08_acceptance_90_gates_matrix.png) |
+| ![Borrow Checker](screenshots/showcase/13_games_borrow_checker.png) | ![Concurrency Race](screenshots/showcase/14_games_concurrency_race.png) |
+
+| Bug Hunter (Laboratorio de Depuración) | Ownership Puzzle (Stack & Heap) |
+| :---: | :---: |
+| ![Bug Hunter](screenshots/showcase/15_games_bug_hunter.png) | ![Ownership Puzzle](screenshots/showcase/12_games_ownership_puzzle.png) |
+
+| Incident Arena & Telemetría en Tiempo Real | Visor de Diferencias Senior (S02 Diff) |
+| :---: | :---: |
+| ![Incident Arena](screenshots/showcase/07_incident_arena_standalone.png) | ![S02 Diff Viewer](screenshots/showcase/16_senior_s02_diff_viewer.png) |
 
 | Modo Oscuro | Modo Claro |
 | :---: | :---: |

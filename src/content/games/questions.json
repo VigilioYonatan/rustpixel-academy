@@ -2,53 +2,261 @@
   {
     "id": "Q01",
     "kind": "quiz",
-    "question": "¿Qué ocurre con un String cuando su valor se mueve a otra variable?",
+    "question": "¿Qué ocurre con un String cuando su valor se asigna a otra variable (let b = a)?",
     "options": [
-      "Ambas variables conservan la propiedad",
-      "La variable original deja de ser válida",
-      "El heap se duplica automáticamente",
-      "Rust lo convierte en &str"
+      "Ambas variables conservan la propiedad simultánea del buffer",
+      "La variable original 'a' deja de ser válida (se transfiere la propiedad)",
+      "El contenido en Heap se duplica automáticamente en memoria",
+      "Rust lo convierte de forma implícita en un slice &str"
     ],
     "answer": 1,
-    "explanation": "String no implementa Copy: la asignación mueve la propiedad, sin clonar el buffer."
+    "explanation": "String no implementa el trait Copy. La asignación transfiere la propiedad (move) sin duplicar el buffer en Heap, invalidando la variable origen."
   },
   {
     "id": "Q02",
     "kind": "quiz",
-    "question": "¿Qué permite un préstamo &mut T?",
+    "question": "¿Qué regla fundamental rige a un préstamo mutable (&mut T)?",
     "options": [
-      "Escribir desde dos referencias a la vez",
-      "Modificar exclusivamente durante el préstamo",
-      "Liberar el objeto manualmente",
-      "Convertir el valor en estático"
+      "Se pueden crear múltiples referencias mutables si pertenecen al mismo hilo",
+      "Solo puede existir una referencia mutable y ninguna inmutable activa al mismo tiempo",
+      "Permite liberar la memoria del objeto manualmente antes de salir del scope",
+      "Convierte la variable apuntada en una constante de tiempo de compilación"
     ],
     "answer": 1,
-    "explanation": "Un préstamo mutable ofrece acceso exclusivo bajo las reglas de aliasing de Rust."
+    "explanation": "La regla de exclusividad de Rust garantiza que solo haya una referencia mutable (&mut T) a la vez en un ámbito dado, eliminando data races en tiempo de compilación."
   },
   {
     "id": "Q03",
     "kind": "quiz",
-    "question": "¿Qué herramienta ejecuta las pruebas de un proyecto Rust?",
+    "question": "¿Qué comando de Cargo compila y ejecuta la suite de pruebas unitarias y de integración?",
     "options": [
       "cargo test",
       "rustfmt test",
-      "cargo publish",
-      "wasm-bindgen test"
+      "cargo check --tests",
+      "cargo verify"
     ],
     "answer": 0,
-    "explanation": "cargo test compila y ejecuta los tests configurados en el crate."
+    "explanation": "'cargo test' es el comando estándar del toolchain de Rust que compila el código con cfg(test) y ejecuta todos los tests marcados con #[test]."
   },
   {
     "id": "Q04",
     "kind": "quiz",
-    "question": "¿Qué devuelve normalmente HashMap::get?",
+    "question": "¿Qué tipo de retorno produce el método HashMap::get(&key)?",
     "options": [
-      "Un String",
-      "Una referencia Option<&V>",
-      "Un valor V copiado siempre",
-      "Result<V, Error>"
+      "Un clon directo del valor V",
+      "Una referencia opcional Option<&V>",
+      "Un Result<V, KeyError>",
+      "Un puntero crudo *const V"
     ],
     "answer": 1,
-    "explanation": "get devuelve Option<&V> para representar ausencia sin panics ni clones."
+    "explanation": "HashMap::get retorna Option<&V>: Some(&valor) si la clave existe en la tabla hash, o None si no se encuentra presente, sin clonar los datos."
+  },
+  {
+    "id": "Q05",
+    "kind": "quiz",
+    "question": "¿Para qué sirve la anotación de lifetimes explícita como 'a en firmas de funciones?",
+    "options": [
+      "Para alargar la vida del dato en memoria de forma dinámica",
+      "Para indicar al compilador la relación de duración entre referencias de entrada y salida",
+      "Para forzar que la variable se guarde en el Heap en lugar del Stack",
+      "Para habilitar recolección de basura automática"
+    ],
+    "answer": 1,
+    "explanation": "Los lifetimes no alteran cuánto vive un dato; son anotaciones para que el Borrow Checker verifique que ninguna referencia devuelta sobreviva a los datos a los que apunta."
+  },
+  {
+    "id": "Q06",
+    "kind": "quiz",
+    "question": "¿Cuál es la diferencia clave entre los traits Copy y Clone?",
+    "options": [
+      "Copy es una copia binaria implícita bit a bit (en Stack); Clone es explícito y puede ser costoso",
+      "Clone solo funciona para tipos numéricos; Copy funciona para cualquier struct",
+      "Copy siempre asigna nueva memoria en Heap; Clone opera exclusivamente en Stack",
+      "No hay diferencia; son sinónimos en las últimas ediciones de Rust"
+    ],
+    "answer": 0,
+    "explanation": "Copy es un marker trait para tipos cuya duplicación es un memcpy trivial en Stack. Clone define el método .clone() explícito que puede involucrar asignación en Heap."
+  },
+  {
+    "id": "Q07",
+    "kind": "quiz",
+    "question": "¿Qué operador en Rust desenvuelve un Ok(T) o retorna anticipadamente en caso de Err(E)?",
+    "options": [
+      "El operador de signo de interrogación '?'",
+      "El operador unwrap '!'",
+      "El operador de flecha '->'",
+      "La macro try_catch!"
+    ],
+    "answer": 0,
+    "explanation": "El operador '?' simplifica la propagación de errores: extrae el valor interno si es Ok(v) o efectúa un return anticipado con el Err(e) convertido mediante Into."
+  },
+  {
+    "id": "Q08",
+    "kind": "quiz",
+    "question": "¿Qué ocurre si ejecutas v.iter().map(|x| x * 2); sin llamar a .collect() ni for_each()?",
+    "options": [
+      "Se ejecuta en paralelo en segundo plano",
+      "Produce un pánico en tiempo de ejecución",
+      "No se calcula nada porque los iteradores en Rust son perezosos (lazy)",
+      "El compilador transforma el vector v original in-place"
+    ],
+    "answer": 2,
+    "explanation": "Los iteradores en Rust son lazy: los adaptadores como .map() o .filter() no realizan ningún cómputo hasta que un método consumidor (como .collect(), .next() o un bucle for) los activa."
+  },
+  {
+    "id": "Q09",
+    "kind": "quiz",
+    "question": "¿Cuál es el smart pointer adecuado para compartir datos inmutables entre múltiples hilos de ejecución?",
+    "options": [
+      "Rc<T>",
+      "Arc<T>",
+      "Box<T>",
+      "RefCell<T>"
+    ],
+    "answer": 1,
+    "explanation": "Arc<T> (Atomic Reference Counting) utiliza operaciones atómicas para el conteo de referencias, permitiendo compartir datos de forma segura entre diferentes threads (implementa Send + Sync)."
+  },
+  {
+    "id": "Q10",
+    "kind": "quiz",
+    "question": "¿Cómo se logra mutar datos compartidos entre hilos de forma segura en Rust?",
+    "options": [
+      "Combinando Arc con un Mutex o RwLock (ej. Arc<Mutex<T>>)",
+      "Usando Rc<RefCell<T>> directamente entre hilos",
+      "Declarando el puntero como static mut sin sincronización",
+      "Rust no permite mutación concurrente bajo ningún escenario"
+    ],
+    "answer": 0,
+    "explanation": "El patrón canónico para concurrencia segura en memoria compartida es Arc<Mutex<T>> o Arc<RwLock<T>>, donde Arc provee propiedad compartida y Mutex exclusión mutua."
+  },
+  {
+    "id": "Q11",
+    "kind": "quiz",
+    "question": "¿Qué trait implementa un tipo que libera sus recursos automáticamente al salir de su ámbito (RAII)?",
+    "options": [
+      "Deallocate",
+      "Free",
+      "Drop",
+      "Dispose"
+    ],
+    "answer": 2,
+    "explanation": "El trait Drop define el método fn drop(&mut self) que el compilador invoca automáticamente cuando un valor sale de su ámbito, garantizando liberación determinista de recursos."
+  },
+  {
+    "id": "Q12",
+    "kind": "quiz",
+    "question": "¿Qué diferencia hay entre pasar 'self', '&self' y '&mut self' a un método de un struct?",
+    "options": [
+      "'self' toma posesión (consume); '&self' pide préstamo compartido; '&mut self' pide préstamo mutable",
+      "Son tres nombres distintos para la misma referencia inmutable",
+      "'self' es estático; '&self' es dinámico; '&mut self' es global",
+      "'&self' solo funciona con tipos numéricos primitivos"
+    ],
+    "answer": 0,
+    "explanation": "'self' consume la instancia por valor; '&self' permite lectura concurrente sin consumir; '&mut self' permite modificar los campos de la instancia de manera exclusiva."
+  },
+  {
+    "id": "Q13",
+    "kind": "quiz",
+    "question": "¿Qué mecanismo se usa para polimorfismo dinámico con tabla virtual (vtable) en Rust?",
+    "options": [
+      "Herencia de clases con la palabra extends",
+      "Trait objects representados con dyn Trait (ej. Box<dyn Trait> o &dyn Trait)",
+      "Monomorfización genérica con impl Trait exclusivamente",
+      "Punteros void* estilo C"
+    ],
+    "answer": 1,
+    "explanation": "Los trait objects (dyn Trait) utilizan fat pointers con una vtable para despacho dinámico en tiempo de ejecución, a diferencia de los genéricos que usan despacho estático."
+  },
+  {
+    "id": "Q14",
+    "kind": "quiz",
+    "question": "¿Qué garantiza la ausencia de Data Races en el sistema de tipos de Rust?",
+    "options": [
+      "Un garbage collector que pausa los hilos cuando hay escrituras",
+      "Los marker traits Send (transferible entre hilos) y Sync (referenciable entre hilos de forma segura)",
+      "Que no existen referencias mutables en Rust",
+      "Un bucle de eventos forzado de un solo hilo"
+    ],
+    "answer": 1,
+    "explanation": "El sistema Send y Sync valida en tiempo de compilación qué tipos pueden transferirse o compartirse entre hilos, impidiendo dataraces sin costo en tiempo de ejecución."
+  },
+  {
+    "id": "Q15",
+    "kind": "quiz",
+    "question": "¿Qué hace la palabra clave 'move' al definir un closure (ej. move || { ... })?",
+    "options": [
+      "Fuerza al closure a tomar propiedad (ownership) de las variables capturadas de su entorno",
+      "Mueve el closure al Heap obligatoriamente",
+      "Convierte el closure en una función recursiva",
+      "Invalida el valor de retorno del closure"
+    ],
+    "answer": 0,
+    "explanation": "La palabra clave 'move' hace que el closure capture por valor todas las variables externas utilizadas, transfiriendo su ownership al cuerpo del closure."
+  },
+  {
+    "id": "Q16",
+    "kind": "quiz",
+    "question": "¿Cuál es una de las operaciones estrictamente reservadas para bloques 'unsafe' en Rust?",
+    "options": [
+      "Dividir dos enteros por cero",
+      "Desreferenciar un puntero crudo (*const T o *mut T)",
+      "Crear un bucle infinito con loop",
+      "Llamar a un método que retorne Result::Err"
+    ],
+    "answer": 1,
+    "explanation": "Desreferenciar punteros crudos, llamar funciones unsafe, implementar traits unsafe y mutar variables static mut son superpoderes restringidos a bloques unsafe."
+  },
+  {
+    "id": "Q17",
+    "kind": "quiz",
+    "question": "¿Qué es la monomorfización en el compilador de Rust (rustc)?",
+    "options": [
+      "La compresión del binario final eliminando símbolos",
+      "La generación de código máquina especializado para cada tipo concreto que use una función genérica",
+      "El reemplazo de código Rust por ensamblador sin optimizaciones",
+      "La conversión de múltiples crates en una sola librería compartida"
+    ],
+    "answer": 1,
+    "explanation": "La monomorfización es el proceso mediante el cual rustc duplica y compila una versión especializada del código genérico para cada tipo con el que se invoca, garantizando cero costo de abstracción (zero-cost abstraction)."
+  },
+  {
+    "id": "Q18",
+    "kind": "quiz",
+    "question": "¿Qué sucede en Tokio si ejecutas un bucle intensivo en CPU síncrono bloqueante dentro de una tarea async común?",
+    "options": [
+      "Tokio lo traslada automáticamente a un thread pool secundario sin intervenir",
+      "Monopoliza el hilo del runtime, retrasando otras tareas asíncronas cooperativas",
+      "El compilador rechaza el código con error de compilación",
+      "El runtime de Tokio se reinicia de emergencia"
+    ],
+    "answer": 1,
+    "explanation": "Tokio opera con multitarea cooperativa; las tareas CPU-intensivas o bloqueantes de E/S deben ejecutarse en tokio::task::spawn_blocking para no starving a los worker threads."
+  },
+  {
+    "id": "Q19",
+    "kind": "quiz",
+    "question": "¿Por qué un slice &str no tiene ownership de la cadena a la que apunta?",
+    "options": [
+      "Porque es un tipo primitivo numérico",
+      "Porque es una vista prestada compuesta de un puntero y una longitud que apunta a bytes ya existentes",
+      "Porque vive en un registro de la CPU permanentemente",
+      "Porque implementa el trait UnsafeDrop"
+    ],
+    "answer": 1,
+    "explanation": "&str es un fat pointer (&[u8]) que contiene puntero al inicio y longitud. Puede apuntar a datos en el binario (&'static str), en el Heap (slice de String) o en el Stack."
+  },
+  {
+    "id": "Q20",
+    "kind": "quiz",
+    "question": "¿Qué garantiza el patrón 'Newtype' (ej. struct UserId(u64)) en el diseño de sistemas en Rust?",
+    "options": [
+      "Que el dato ocupe el doble de memoria para evitar colisiones",
+      "Seguridad de tipos estricta en compilación para no mezclar IDs distintos sin sobrecarga en runtime",
+      "Conversión automática a JSON sin dependencias",
+      "Persistencia automática en base de datos"
+    ],
+    "answer": 1,
+    "explanation": "El patrón Newtype encapsula un tipo dentro de una tupla-struct de un solo elemento (zero-cost abstraction), impidiendo mezclar erróneamente un UserId con un OrderId en las llamadas a función."
   }
 ]

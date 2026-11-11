@@ -8,7 +8,9 @@ import {
   Award,
   BookOpen,
   Boxes,
+  Bug,
   Check,
+  CheckCircle2,
   ChevronLeft,
   ChevronRight,
   Code,
@@ -30,6 +32,8 @@ import {
   Terminal,
   Trophy,
   Upload,
+  XCircle,
+  Zap,
 } from 'lucide-preact';
 import type { ComponentChildren } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
@@ -644,8 +648,8 @@ function Module({ id }: { id: string }) {
             </div>
             <img
               class="lesson-intro-art ferris-art"
-              src={image('explorer')}
-              alt="Ferris leyendo código"
+              src={image('student')}
+              alt="Ferris estudiante leyendo y analizando el código"
             />
           </div>
 
@@ -815,30 +819,35 @@ function Games() {
 
       <div class="games-grid" style={{ marginTop: 20 }}>
         {[
-          { id: 'quiz', name: 'Quiz Battle', icon: Gamepad2, badge: '5 MIN' },
+          {
+            id: 'quiz',
+            name: 'Quiz Battle',
+            icon: Gamepad2,
+            badge: '20 RETOS',
+          },
           {
             id: 'ownership',
             name: 'Ownership Puzzle',
             icon: Layers,
-            badge: 'VISUAL',
+            badge: '5 FASES',
           },
           {
             id: 'borrow',
             name: 'Borrow Checker',
             icon: ShieldCheck,
-            badge: 'GUIADO',
+            badge: '6 CASOS',
           },
           {
             id: 'concurrency',
             name: 'Concurrency Race',
             icon: Flame,
-            badge: '5 MIN',
+            badge: '5 SIMS',
           },
           {
             id: 'debug',
             name: 'Bug Hunter',
             icon: Terminal,
-            badge: 'LAB',
+            badge: '6 LABS',
           },
         ].map((gm) => {
           const GmIcon = gm.icon;
@@ -861,10 +870,40 @@ function Games() {
 
       <div class="game-arena">
         {activeGame === 'quiz' && (
-          <Panel title={`Pregunta ${index + 1} de ${questions.length}`}>
-            <p style={{ fontSize: 17, fontWeight: 700, margin: '8px 0 16px' }}>
-              {q.question}
-            </p>
+          <Panel
+            title={`Quiz Battle — Pregunta ${index + 1} de ${questions.length}`}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: 12,
+              }}
+            >
+              <span class="tag">
+                Reto {index + 1} / {questions.length}
+              </span>
+              <span class="char-pill valid">+15 XP al acertar</span>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                gap: 16,
+                alignItems: 'center',
+                margin: '8px 0 16px',
+              }}
+            >
+              <p style={{ fontSize: 17, fontWeight: 700, margin: 0, flex: 1 }}>
+                {q.question}
+              </p>
+              <img
+                src={image('idea')}
+                alt="Ferris con bombilla de idea"
+                class="ferris-art"
+                style={{ width: 72, height: 72, flexShrink: 0 }}
+              />
+            </div>
             <div class="choices">
               {q.options.map((o, i) => (
                 <button
@@ -904,6 +943,7 @@ function Games() {
                   if (r.correct) {
                     updateProgress({
                       ...progress.value,
+                      xp: progress.value.xp + 15,
                       answers: {
                         ...progress.value.answers,
                         [q.id]: selected,
@@ -938,85 +978,858 @@ function Games() {
         )}
 
         {activeGame === 'ownership' && <OwnershipPuzzle />}
-
-        {activeGame !== 'quiz' && activeGame !== 'ownership' && (
-          <Panel title="Desafío interactivo en catálogo">
-            <p>
-              Este minijuego está identificado en el catálogo de 14 modalidades
-              educativas. Actualmente puedes practicar con{' '}
-              <strong>Quiz Battle</strong> y <strong>Ownership Puzzle</strong>{' '}
-              mientras se completan las siguientes experiencias interactivas.
-            </p>
-            <button
-              type="button"
-              class="btn btn-primary"
-              onClick={() => setActiveGame('quiz')}
-              style={{ marginTop: 12 }}
-            >
-              Volver a Quiz Battle
-            </button>
-          </Panel>
-        )}
+        {activeGame === 'borrow' && <BorrowCheckerGame />}
+        {activeGame === 'concurrency' && <ConcurrencyRaceGame />}
+        {activeGame === 'debug' && <BugHunterGame />}
       </div>
     </>
   );
 }
 
+const OWNERSHIP_STAGES = [
+  {
+    stage: 1,
+    title: 'Fase 1: Movimiento de Memoria en Heap (Move)',
+    code: `let a = String::from("Ferris");\nlet b = a;\nprintln!("{b}");`,
+    stack: [
+      { var: 'a', status: 'invalid (moved)', val: '— (movida hacia b)' },
+      { var: 'b', status: 'valid (owner)', val: 'ptr -> Heap[0x7f..]' },
+    ],
+    heap: [{ id: '0x7f..', data: '"Ferris"', owner: 'b' }],
+    desc: 'Al asignar let b = a, Rust transfiere la propiedad del búfer en Heap. La variable "a" queda invalidada y el compilador prohíbe su lectura.',
+  },
+  {
+    stage: 2,
+    title: 'Fase 2: Duplicación en Stack (Copy Trait)',
+    code: `let x: i32 = 42;\nlet y = x;\nprintln!("{x} y {y}");`,
+    stack: [
+      { var: 'x', status: 'valid', val: '42 (i32 en stack)' },
+      { var: 'y', status: 'valid', val: '42 (copia en stack)' },
+    ],
+    heap: [],
+    desc: 'Los tipos primitivos como i32 implementan el trait Copy. La asignación duplica el valor en Stack con un memcpy trivial; ambas variables son 100% válidas.',
+  },
+  {
+    stage: 3,
+    title: 'Fase 3: Préstamos Inmutables Concurrentes (&T)',
+    code: `let s = String::from("Rust");\nlet r1 = &s;\nlet r2 = &s;\nprintln!("{r1} y {r2}");`,
+    stack: [
+      { var: 's', status: 'valid (owner)', val: 'ptr -> Heap[0x8a..]' },
+      { var: 'r1', status: 'ref shared', val: '&s (préstamo lectura)' },
+      { var: 'r2', status: 'ref shared', val: '&s (préstamo lectura)' },
+    ],
+    heap: [{ id: '0x8a..', data: '"Rust"', owner: 's' }],
+    desc: 'Se pueden crear múltiples referencias inmutables (&T) simultáneas. El aliasing es seguro porque ningún lector puede modificar el contenido mientras existan préstamos.',
+  },
+  {
+    stage: 4,
+    title: 'Fase 4: Préstamo Mutable Exclusivo (&mut T)',
+    code: `let mut s = String::from("Forge");\nlet m = &mut s;\nm.push_str("!");`,
+    stack: [
+      { var: 's', status: 'borrowed (locked)', val: 'ptr -> Heap[0x9b..]' },
+      { var: 'm', status: 'ref exclusive', val: '&mut s (exclusivo)' },
+    ],
+    heap: [{ id: '0x9b..', data: '"Forge!"', owner: 's (mutado vía m)' }],
+    desc: 'Un préstamo mutable (&mut T) otorga acceso exclusivo. Mientras "m" esté activo, la variable base "s" no puede leerse ni prestarse a nadie más, previniendo data races.',
+  },
+  {
+    stage: 5,
+    title: 'Fase 5: Slices como Vistas no Propietarias (&str)',
+    code: `let s = String::from("PixelArt");\nlet slice = &s[0..5];\nprintln!("{slice}"); // "Pixel"`,
+    stack: [
+      { var: 's', status: 'valid (owner)', val: 'len: 8, cap: 8, ptr -> Heap' },
+      { var: 'slice', status: 'fat pointer', val: 'ptr -> Heap+0, len: 5' },
+    ],
+    heap: [{ id: '0xab..', data: '"PixelArt"', owner: 's' }],
+    desc: 'Un slice &str es un fat pointer (puntero + longitud) que apunta a una porción de bytes preexistentes. Permite inspeccionar texto con costo cero de asignación.',
+  },
+];
+
 function OwnershipPuzzle() {
-  const [step, setStep] = useState(0);
-  const steps = [
-    {
-      text: 'let a = String::from("Ferris");',
-      owner: 'a',
-      desc: 'El valor String en Heap es propiedad de la variable "a" en el Stack.',
-    },
-    {
-      text: 'let b = a;',
-      owner: 'b',
-      desc: 'La propiedad se transfiere (move) de "a" hacia "b". El búfer en Heap no se duplica.',
-    },
-    {
-      text: 'println!("{b}");',
-      owner: 'b',
-      desc: '"b" posee el dato y puede utilizarlo; "a" ha quedado invalidada por el borrow checker.',
-    },
-  ];
+  const [cur, setCur] = useState(0);
+  const st = OWNERSHIP_STAGES[cur];
 
   return (
-    <Panel title="Ownership Puzzle — Transferencias de Propiedad">
-      <div class="codebox">
-        <pre>
-          {steps
-            .slice(0, step + 1)
-            .map((s) => s.text)
-            .join('\n')}
-        </pre>
+    <Panel title={`Ownership Puzzle — ${st.title}`}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 12,
+        }}
+      >
+        <span class="tag">
+          Fase {cur + 1} de {OWNERSHIP_STAGES.length}
+        </span>
+        <div style={{ display: 'flex', gap: 6 }}>
+          {OWNERSHIP_STAGES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              class={`btn btn-sm ${i === cur ? 'btn-primary' : 'btn-outline'}`}
+              style={{ minWidth: 32, padding: '4px 8px' }}
+              onClick={() => setCur(i)}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
       </div>
-      <div style={{ display: 'flex', gap: 10, margin: '14px 0' }}>
-        <span class="tag">Stack: variable {steps[step].owner}</span>
-        <span class="tag info">Heap: "Ferris"</span>
+
+      <div class="codebox" style={{ margin: '10px 0' }}>
+        <pre>{st.code}</pre>
       </div>
-      <p>{steps[step].desc}</p>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: 12,
+          margin: '14px 0',
+        }}
+      >
+        <div
+          class="card"
+          style={{
+            background: 'rgba(8, 13, 23, 0.7)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+          }}
+        >
+          <h4
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              margin: '0 0 10px',
+              fontSize: 13,
+              color: 'var(--teal)',
+            }}
+          >
+            <Cpu size={15} /> Estado en Stack
+          </h4>
+          <ul class="clean-list" style={{ fontSize: 12.5 }}>
+            {st.stack.map((v) => (
+              <li
+                key={v.var}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  padding: '4px 0',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+                }}
+              >
+                <strong>{v.var}:</strong>
+                <span class={v.status.includes('invalid') ? 'muted' : 'tag'}>
+                  {v.val}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div
+          class="card"
+          style={{
+            background: 'rgba(8, 13, 23, 0.7)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+          }}
+        >
+          <h4
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              margin: '0 0 10px',
+              fontSize: 13,
+              color: 'var(--forge)',
+            }}
+          >
+            <Layers size={15} /> Asignaciones en Heap
+          </h4>
+          {st.heap.length === 0 ? (
+            <p class="small muted">
+              Sin asignaciones en Heap (100% memoria en Stack).
+            </p>
+          ) : (
+            <ul class="clean-list" style={{ fontSize: 12.5 }}>
+              {st.heap.map((h) => (
+                <li
+                  key={h.id}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '4px 0',
+                  }}
+                >
+                  <span>
+                    {h.id} {h.data}
+                  </span>
+                  <span class="tag info">dueño: {h.owner}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+
+      <p style={{ fontSize: 14, margin: '12px 0' }}>{st.desc}</p>
+
       <div class="actions" style={{ display: 'flex', gap: 10, marginTop: 18 }}>
         <button
           type="button"
           class="btn btn-outline"
-          onClick={() => setStep((step + 2) % 3)}
+          disabled={cur === 0}
+          onClick={() => setCur(cur - 1)}
         >
-          <ChevronLeft size={16} /> Retroceder
+          <ChevronLeft size={16} /> Fase anterior
         </button>
         <button
           type="button"
           class="btn btn-primary"
-          onClick={() => setStep((step + 1) % 3)}
+          disabled={cur === OWNERSHIP_STAGES.length - 1}
+          onClick={() => {
+            setCur(cur + 1);
+            updateProgress({ ...progress.value, xp: progress.value.xp + 10 });
+          }}
         >
-          Siguiente evento <ChevronRight size={16} />
+          Siguiente fase <ChevronRight size={16} />
         </button>
       </div>
-      <p class="small muted" style={{ marginTop: 12 }}>
-        Visualización semántica didáctica; la verificación estricta de lifetimes
-        y préstamos corresponde al compilador rustc.
+    </Panel>
+  );
+}
+
+const BORROW_CASES = [
+  {
+    id: 'BC01',
+    title: 'Caso 1: Doble préstamo mutable en el mismo ámbito',
+    code: `fn main() {\n    let mut data = vec![1, 2, 3];\n    let r1 = &mut data;\n    let r2 = &mut data; // ¿Compila?\n    r1.push(4);\n    r2.push(5);\n}`,
+    compiles: false,
+    diagCode: 'E0499',
+    diagMessage:
+      'error[E0499]: cannot borrow `data` as mutable more than once at a time',
+    explanation:
+      'Rust prohíbe tener dos referencias mutables (&mut) activas simultáneamente sobre el mismo dato para eliminar condiciones de carrera en compilación.',
+  },
+  {
+    id: 'BC02',
+    title: 'Caso 2: Préstamo mutable con lectura inmutable activa',
+    code: `fn main() {\n    let mut s = String::from("Rust");\n    let r1 = &s;\n    let r2 = &s;\n    let r3 = &mut s;\n    println!("{r1}, {r2}, {r3}");\n}`,
+    compiles: false,
+    diagCode: 'E0502',
+    diagMessage:
+      'error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable',
+    explanation:
+      'No puedes solicitar un préstamo mutable mientras existan referencias inmutables activas: los lectores confían en que el valor no cambiará bajo sus pies.',
+  },
+  {
+    id: 'BC03',
+    title: 'Caso 3: Referencia colgante a memoria local (Dangling Reference)',
+    code: `fn create_ref() -> &String {\n    let s = String::from("Ferris");\n    &s // Intento de devolver referencia a variable local\n}\nfn main() {\n    let r = create_ref();\n    println!("{r}");\n}`,
+    compiles: false,
+    diagCode: 'E0106',
+    diagMessage:
+      'error[E0106]: missing lifetime specifier / returns reference to data owned by the current function',
+    explanation:
+      '`s` se destruye inmediatamente al retornar de `create_ref()`. Retornar una referencia a memoria liberada causaría Use-After-Free; el compilador lo rechaza.',
+  },
+  {
+    id: 'BC04',
+    title: 'Caso 4: Non-Lexical Lifetimes (NLL)',
+    code: `fn main() {\n    let mut s = String::from("Pixel");\n    let r = &s;\n    println!("{r}"); // Último uso del préstamo inmutable 'r'\n    let m = &mut s;   // NLL detecta que 'r' ya no se usa\n    m.push_str(" Forge");\n    println!("{m}");\n}`,
+    compiles: true,
+    diagCode: 'OK',
+    diagMessage: 'Compilado con éxito (Rust Non-Lexical Lifetimes)',
+    explanation:
+      'Con Non-Lexical Lifetimes (NLL), la vida útil de una referencia concluye en su último punto de uso real, permitiendo mutar el valor después sin esperar al final del bloque.',
+  },
+  {
+    id: 'BC05',
+    title: 'Caso 5: Préstamos disjuntos en campos de Struct',
+    code: `struct Player { name: String, score: u32 }\nfn main() {\n    let mut p = Player { name: String::from("Ferris"), score: 10 };\n    let n = &mut p.name;\n    let s = &mut p.score;\n    n.push_str(" Senior");\n    *s += 50;\n}`,
+    compiles: true,
+    diagCode: 'OK',
+    diagMessage: 'Compilado con éxito (Disjoint field borrowing)',
+    explanation:
+      'El Borrow Checker entiende la separación de campos independientes: permite préstamos mutables paralelos a diferentes campos del mismo struct sin conflicto.',
+  },
+  {
+    id: 'BC06',
+    title: 'Caso 6: Uso tras transferencia (Use after move)',
+    code: `fn main() {\n    let a = String::from("Core");\n    let b = a;\n    println!("{b}");\n    println!("{a}"); // Intento de lectura tras move\n}`,
+    compiles: false,
+    diagCode: 'E0382',
+    diagMessage: 'error[E0382]: borrow of moved value: `a`',
+    explanation:
+      'String no implementa Copy. Al asignar `let b = a`, la propiedad se transfiere a `b`, dejando a `a` en estado no inicializado.',
+  },
+];
+
+function BorrowCheckerGame() {
+  const [index, setIndex] = useState(0);
+  const [choice, setChoice] = useState<'compiles' | 'rejects' | null>(null);
+  const [result, setResult] = useState<boolean | null>(null);
+
+  const c = BORROW_CASES[index];
+
+  function evaluate(userChoice: 'compiles' | 'rejects') {
+    setChoice(userChoice);
+    const correct = (userChoice === 'compiles') === c.compiles;
+    setResult(correct);
+    if (correct) {
+      updateProgress({ ...progress.value, xp: progress.value.xp + 15 });
+    }
+  }
+
+  return (
+    <Panel title={`Borrow Checker Challenge — ${c.title}`}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 12,
+        }}
+      >
+        <span class="tag">
+          Reto {index + 1} de {BORROW_CASES.length}
+        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span class="char-pill valid">+15 XP al acertar</span>
+          <img
+            src={image('engineer')}
+            alt="Ferris comprobando el borrow checker"
+            class="ferris-art"
+            style={{ width: 44, height: 44 }}
+          />
+        </div>
+      </div>
+
+      <div class="codebox" style={{ margin: '10px 0' }}>
+        <pre>{c.code}</pre>
+      </div>
+
+      <p style={{ fontWeight: 700, margin: '14px 0 10px' }}>
+        ¿Aprobará el Borrow Checker de rustc este código?
       </p>
+
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+        <button
+          type="button"
+          class={`btn ${choice === 'compiles' ? 'btn-primary' : 'btn-outline'}`}
+          onClick={() => evaluate('compiles')}
+        >
+          <CheckCircle2 size={16} /> ✓ Compila sin errores
+        </button>
+        <button
+          type="button"
+          class={`btn ${choice === 'rejects' ? 'btn-primary' : 'btn-outline'}`}
+          onClick={() => evaluate('rejects')}
+        >
+          <XCircle size={16} /> ✗ Rechazado por el compilador
+        </button>
+      </div>
+
+      {result !== null && (
+        <div
+          class={`feedback ${result ? 'ok' : 'no'}`}
+          style={{ marginTop: 16 }}
+        >
+          <strong>
+            {result ? '✓ ¡Diagnóstico correcto!' : '✗ Diagnóstico incorrecto'}
+          </strong>
+          <div
+            style={{
+              fontFamily: 'var(--font-code)',
+              fontSize: 12,
+              margin: '8px 0',
+              padding: '6px 10px',
+              background: 'rgba(0,0,0,0.25)',
+              borderRadius: 6,
+            }}
+          >
+            {c.diagMessage}
+          </div>
+          <p style={{ margin: '6px 0 0' }}>{c.explanation}</p>
+        </div>
+      )}
+
+      <div class="actions" style={{ display: 'flex', gap: 10, marginTop: 18 }}>
+        <button
+          type="button"
+          class="btn btn-outline"
+          disabled={index === 0}
+          onClick={() => {
+            setIndex(index - 1);
+            setChoice(null);
+            setResult(null);
+          }}
+        >
+          <ChevronLeft size={16} /> Anterior
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onClick={() => {
+            setIndex((index + 1) % BORROW_CASES.length);
+            setChoice(null);
+            setResult(null);
+          }}
+        >
+          Siguiente caso <ChevronRight size={16} />
+        </button>
+      </div>
+    </Panel>
+  );
+}
+
+const BUG_CASES = [
+  {
+    id: 'BH01',
+    title: 'Bug 1: Inmutabilidad por omisión',
+    code: `fn main() {\n    let counter = 10;\n    counter += 1; // Error en compilación\n    println!("{counter}");\n}`,
+    fixes: [
+      { text: 'Declarar `let mut counter = 10;` en la línea 2', correct: true },
+      { text: 'Usar `counter.clone()` en la línea 3', correct: false },
+      { text: 'Envolver la suma en un bloque `unsafe { }`', correct: false },
+    ],
+    explanation:
+      'En Rust todas las variables son inmutables por defecto. Para reasignar o modificar su valor, debes marcarlas explícitamente con `let mut`.',
+  },
+  {
+    id: 'BH02',
+    title: 'Bug 2: Inserción en colección inmutable',
+    code: `fn main() {\n    let list = vec![1, 2, 3];\n    list.push(4); // Error: cannot borrow as mutable\n    println!("{:?}", list);\n}`,
+    fixes: [
+      { text: 'Declarar `let mut list = vec![1, 2, 3];`', correct: true },
+      { text: 'Usar `list.insert_copy(4)`', correct: false },
+      { text: 'Reemplazar por `let list = &list;`', correct: false },
+    ],
+    explanation:
+      'El método `.push(&mut self)` requiere un préstamo mutable exclusivo sobre el vector. Si el vector no es mutable, rustc rechaza la llamada.',
+  },
+  {
+    id: 'BH03',
+    title: 'Bug 3: Shadowing inadvertido dentro de un bucle',
+    code: `fn main() {\n    let mut total = 0;\n    for x in 1..=3 {\n        let total = total + x; // Shadowing: variable local efímera\n    }\n    println!("Total: {total}"); // Imprime 0 en lugar de 6\n}`,
+    fixes: [
+      {
+        text: 'Reemplazar `let total = total + x;` por la acumulación `total += x;`',
+        correct: true,
+      },
+      {
+        text: 'Usar `let mut total = total + x;` dentro del bucle',
+        correct: false,
+      },
+      {
+        text: 'Añadir `total.sync()` al final de cada iteración',
+        correct: false,
+      },
+    ],
+    explanation:
+      'Al declarar `let total = ...` dentro del cuerpo del bucle, se crea una nueva variable que oculta la externa y se destruye al cerrar la llave, dejando el total original en cero.',
+  },
+  {
+    id: 'BH04',
+    title: 'Bug 4: Coincidencia de patrones incompleta en Option',
+    code: `fn print_bonus(tier: Option<u32>) {\n    match tier {\n        Some(val) => println!("Bonus: {val}"),\n        // ¡Falta la rama para None!\n    }\n}`,
+    fixes: [
+      {
+        text: 'Añadir la rama `None => println!("Sin bonus"),` al match',
+        correct: true,
+      },
+      {
+        text: 'Quitar el match y llamar a `tier.unwrap()` directamente',
+        correct: false,
+      },
+      {
+        text: 'Colocar `#[allow(incomplete)]` antes de la función',
+        correct: false,
+      },
+    ],
+    explanation:
+      'Las ramas de un `match` en Rust deben ser 100% exhaustivas para garantizar que no existan estados no controlados en tiempo de ejecución.',
+  },
+  {
+    id: 'BH05',
+    title: 'Bug 5: Result ignorado silenciosamente',
+    code: `use std::fs::File;\nfn write_audit() {\n    File::create("audit.log"); // Advertencia: unused Result that must be used\n}`,
+    fixes: [
+      {
+        text: 'Propagar o verificar el error: `File::create("audit.log")?;` devolviendo Result',
+        correct: true,
+      },
+      {
+        text: 'Usar `drop(File::create("audit.log"))` para silenciar',
+        correct: false,
+      },
+      { text: 'Castear la llamada a `()` con `as ()`', correct: false },
+    ],
+    explanation:
+      'Los tipos marcados con `#[must_use]` (como `Result`) exigen inspección explícita para evitar fallos de E/S o red desatendidos.',
+  },
+  {
+    id: 'BH06',
+    title: 'Bug 6: Retorno de referencia a memoria efímera',
+    code: `fn get_default_message() -> &str {\n    let msg = String::from("OK");\n    msg.as_str() // ¡Error: retorno de referencia a valor local!\n}`,
+    fixes: [
+      {
+        text: 'Retornar `String` por valor (con ownership) en lugar de un slice `&str`',
+        correct: true,
+      },
+      {
+        text: "Castear `msg.as_str()` a `&'static str` con unsafe",
+        correct: false,
+      },
+      {
+        text: 'Asignar `msg` a una constante global dentro de la función',
+        correct: false,
+      },
+    ],
+    explanation:
+      'El String local se desasigna al retornar de la función. Para devolver texto dinámico generado localmente, se debe transferir la propiedad del `String`.',
+  },
+];
+
+function BugHunterGame() {
+  const [index, setIndex] = useState(0);
+  const [selectedFix, setSelectedFix] = useState<number>(-1);
+  const [result, setResult] = useState<boolean | null>(null);
+
+  const b = BUG_CASES[index];
+
+  function checkFix() {
+    if (selectedFix < 0) return;
+    const isCorrect = b.fixes[selectedFix].correct;
+    setResult(isCorrect);
+    if (isCorrect) {
+      updateProgress({ ...progress.value, xp: progress.value.xp + 15 });
+    }
+  }
+
+  return (
+    <Panel title={`Bug Hunter — ${b.title}`}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 12,
+        }}
+      >
+        <span class="tag">
+          Laboratorio {index + 1} de {BUG_CASES.length}
+        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span class="char-pill valid">+15 XP al cazar el bug</span>
+          <img
+            src={image('debugger')}
+            alt="Ferris cazando bugs"
+            class="ferris-art"
+            style={{ width: 44, height: 44 }}
+          />
+        </div>
+      </div>
+
+      <div class="codebox" style={{ margin: '10px 0' }}>
+        <pre>{b.code}</pre>
+      </div>
+
+      <p style={{ fontWeight: 700, margin: '14px 0 10px' }}>
+        ¿Cuál es la refactorización idiomática para subsanar este fallo?
+      </p>
+
+      <div class="choices">
+        {b.fixes.map((f, i) => (
+          <button
+            key={f.text}
+            type="button"
+            class="choice"
+            aria-pressed={selectedFix === i}
+            onClick={() => {
+              setSelectedFix(i);
+              setResult(null);
+            }}
+          >
+            <span
+              style={{
+                marginRight: 10,
+                fontWeight: 800,
+                color: 'var(--forge)',
+              }}
+            >
+              {String.fromCharCode(65 + i)}.
+            </span>{' '}
+            {f.text}
+          </button>
+        ))}
+      </div>
+
+      <div class="actions" style={{ display: 'flex', gap: 10, marginTop: 18 }}>
+        <button
+          type="button"
+          class="btn btn-primary"
+          disabled={selectedFix < 0}
+          onClick={checkFix}
+        >
+          <Bug size={16} /> Comprobar corrección
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline"
+          onClick={() => {
+            setIndex((index + 1) % BUG_CASES.length);
+            setSelectedFix(-1);
+            setResult(null);
+          }}
+        >
+          Siguiente bug <ChevronRight size={16} />
+        </button>
+      </div>
+
+      {result !== null && (
+        <div
+          class={`feedback ${result ? 'ok' : 'no'}`}
+          style={{ marginTop: 16 }}
+        >
+          <strong>
+            {result ? '✓ ¡Bug subsanado con éxito!' : '✗ Corrección no válida'}
+          </strong>
+          <p style={{ margin: '6px 0 0' }}>{b.explanation}</p>
+        </div>
+      )}
+    </Panel>
+  );
+}
+
+const CONCURRENCY_CASES = [
+  {
+    id: 'CR01',
+    title: 'Escenario 1: Deadlock por inversión de bloqueos (Lock Inversion)',
+    code: `// Hilo 1: lock(A) -> lock(B)\nlet _a = lock_a.lock().unwrap();\nlet _b = lock_b.lock().unwrap();\n\n// Hilo 2: lock(B) -> lock(A) ¡Inverso!\nlet _b = lock_b.lock().unwrap();\nlet _a = lock_a.lock().unwrap();`,
+    problem:
+      'Si ambos hilos se ejecutan simultáneamente, Hilo 1 retiene A esperando B, e Hilo 2 retiene B esperando A.',
+    options: [
+      {
+        text: 'Establecer un orden canónico estricto de adquisición (ambos hilos adquieren A antes de B)',
+        correct: true,
+      },
+      {
+        text: 'Aumentar la prioridad del Hilo 2 en el planificador del sistema operativo',
+        correct: false,
+      },
+      {
+        text: 'Envolver ambos mutexes en bloques unsafe para omitir las esperas',
+        correct: false,
+      },
+    ],
+    explanation:
+      'La jerarquía estricta de bloqueos elimina el ciclo de espera circular (condición de Coffman), haciendo imposible el interbloqueo.',
+  },
+  {
+    id: 'CR02',
+    title: 'Escenario 2: Mutación concurrente de memoria compartida',
+    code: `let mut counter = 0;\nfor _ in 0..10 {\n    std::thread::spawn(move || {\n        counter += 1; // Error: use of moved value / data race\n    });\n}`,
+    problem:
+      'Múltiples hilos intentan escribir en la misma dirección de memoria sin sincronización atómica.',
+    options: [
+      {
+        text: 'Usar `Arc<AtomicUsize>` con `fetch_add(1, Ordering::Relaxed)`',
+        correct: true,
+      },
+      {
+        text: 'Declarar `static mut counter: usize = 0;` sin sincronización',
+        correct: false,
+      },
+      {
+        text: 'Usar `Rc<RefCell<usize>>` entre los diferentes hilos',
+        correct: false,
+      },
+    ],
+    explanation:
+      '`AtomicUsize` provee operaciones atómicas directas a nivel de hardware, y `Arc` permite compartir la propiedad del contador entre los hilos.',
+  },
+  {
+    id: 'CR03',
+    title: 'Escenario 3: Canal MPSC sin backpressure (Desbordamiento de RAM)',
+    code: `let (tx, mut rx) = tokio::sync::mpsc::unbounded_channel();\n// El productor ingresa 50.000 mensajes/segundo\n// El consumidor solo puede procesar 500 mensajes/segundo`,
+    problem:
+      'La cola en memoria crece sin límite hasta que el sistema operativo mata el proceso por Out-of-Memory (OOM).',
+    options: [
+      {
+        text: 'Usar canal acotado `mpsc::channel(1024)` y `tx.send().await` para pausar al productor',
+        correct: true,
+      },
+      {
+        text: 'Configurar 64 GB de swap en el servidor para acumular más mensajes',
+        correct: false,
+      },
+      {
+        text: 'Eliminar el canal y procesar todo de forma síncrona en el hilo principal',
+        correct: false,
+      },
+    ],
+    explanation:
+      'Los canales acotados con `.send().await` suspenden la tarea productora cuando el buffer se satura, aplicando backpressure natural.',
+  },
+  {
+    id: 'CR04',
+    title: 'Escenario 4: Mutex síncrono retenido a través de un punto .await',
+    code: `let mut guard = std_mutex.lock().unwrap();\ndo_slow_network_request().await; // ¡Bloqueo del worker thread de Tokio!\nguard.value += 1;`,
+    problem:
+      'Retener un std::sync::MutexGuard a través de `.await` monopoliza el worker thread de Tokio, impidiendo ejecutar otras tareas cooperativas.',
+    options: [
+      {
+        text: 'Liberar el lock antes de la llamada asíncrona o usar `tokio::sync::Mutex`',
+        correct: true,
+      },
+      {
+        text: 'Convertir la llamada de red en síncrona bloqueante',
+        correct: false,
+      },
+      {
+        text: 'Aumentar la cantidad de threads en el runtime de Tokio a 500',
+        correct: false,
+      },
+    ],
+    explanation:
+      '`std::sync::Mutex` no debe cruzar puntos `.await`. Si se requiere retener un bloqueo durante I/O asíncrono, se debe usar `tokio::sync::Mutex`.',
+  },
+  {
+    id: 'CR05',
+    title: 'Escenario 5: Cancelación de Tokio y consistencia transaccional',
+    code: `tokio::select! {\n    _ = cancel_token.cancelled() => { /* Cancelación inmediata */ }\n    res = process_order(&mut tx) => res,\n}`,
+    problem:
+      'Si la tarea se cancela en un punto `.await` intermedio, la transacción en curso puede quedar en estado inconsistente.',
+    options: [
+      {
+        text: 'Implementar un RAII Drop Guard que ejecute rollback automático al cancelarse la tarea',
+        correct: true,
+      },
+      {
+        text: 'Desactivar la cancelación en todo el servidor de producción',
+        correct: false,
+      },
+      {
+        text: 'Confiar en que la base de datos detectará la desconexión instantáneamente',
+        correct: false,
+      },
+    ],
+    explanation:
+      'El destructor `Drop` en Rust se ejecuta incluso cuando una tarea de Tokio es cancelada en un `.await`, permitiendo rollbacks deterministas.',
+  },
+];
+
+function ConcurrencyRaceGame() {
+  const [index, setIndex] = useState(0);
+  const [selectedOpt, setSelectedOpt] = useState<number>(-1);
+  const [result, setResult] = useState<boolean | null>(null);
+
+  const c = CONCURRENCY_CASES[index];
+
+  function checkConcurrency() {
+    if (selectedOpt < 0) return;
+    const isCorrect = c.options[selectedOpt].correct;
+    setResult(isCorrect);
+    if (isCorrect) {
+      updateProgress({ ...progress.value, xp: progress.value.xp + 15 });
+    }
+  }
+
+  return (
+    <Panel title={`Concurrency Race — ${c.title}`}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 12,
+        }}
+      >
+        <span class="tag">
+          Simulador {index + 1} de {CONCURRENCY_CASES.length}
+        </span>
+        <span class="char-pill valid">+15 XP al mitigar la carrera</span>
+      </div>
+
+      <div class="codebox" style={{ margin: '10px 0' }}>
+        <pre>{c.code}</pre>
+      </div>
+
+      <div
+        class="notice"
+        style={{ margin: '12px 0', borderLeftColor: 'var(--forge)' }}
+      >
+        <strong>Riesgo de concurrencia:</strong> {c.problem}
+      </div>
+
+      <p style={{ fontWeight: 700, margin: '14px 0 10px' }}>
+        ¿Qué estrategia arquitectónica garantiza seguridad de memoria y ausencia
+        de deadlocks?
+      </p>
+
+      <div class="choices">
+        {c.options.map((o, i) => (
+          <button
+            key={o.text}
+            type="button"
+            class="choice"
+            aria-pressed={selectedOpt === i}
+            onClick={() => {
+              setSelectedOpt(i);
+              setResult(null);
+            }}
+          >
+            <span
+              style={{
+                marginRight: 10,
+                fontWeight: 800,
+                color: 'var(--forge)',
+              }}
+            >
+              {String.fromCharCode(65 + i)}.
+            </span>{' '}
+            {o.text}
+          </button>
+        ))}
+      </div>
+
+      <div class="actions" style={{ display: 'flex', gap: 10, marginTop: 18 }}>
+        <button
+          type="button"
+          class="btn btn-primary"
+          disabled={selectedOpt < 0}
+          onClick={checkConcurrency}
+        >
+          <Zap size={16} /> Verificar solución concurrente
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline"
+          onClick={() => {
+            setIndex((index + 1) % CONCURRENCY_CASES.length);
+            setSelectedOpt(-1);
+            setResult(null);
+          }}
+        >
+          Siguiente escenario <ChevronRight size={16} />
+        </button>
+      </div>
+
+      {result !== null && (
+        <div
+          class={`feedback ${result ? 'ok' : 'no'}`}
+          style={{ marginTop: 16 }}
+        >
+          <strong>
+            {result
+              ? '✓ ¡Arquitectura concurrente validada!'
+              : '✗ Riesgo concurrente presente'}
+          </strong>
+          <p style={{ margin: '6px 0 0' }}>{c.explanation}</p>
+        </div>
+      )}
     </Panel>
   );
 }

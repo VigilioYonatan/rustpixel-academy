@@ -21,13 +21,13 @@
     "id": 4,
     "name": "Predict Output",
     "kind": "predict",
-    "availability": "interactive"
+    "availability": "guided"
   },
   {
     "id": 5,
     "name": "Bug Hunter",
     "kind": "debug",
-    "availability": "guided"
+    "availability": "interactive"
   },
   {
     "id": 6,
@@ -61,9 +61,9 @@
   },
   {
     "id": 11,
-    "name": "Async Simulator",
-    "kind": "async",
-    "availability": "guided"
+    "name": "Concurrency Race",
+    "kind": "concurrency",
+    "availability": "interactive"
   },
   {
     "id": 12,

@@ -123,6 +123,42 @@ const SENIOR_DIFFS: Record<
       { type: 'add', text: '+ }' },
     ],
   },
+  S02: {
+    title: 'S02 · Arquitectura Hexagonal y Puertos sin Dependencias Circulares',
+    explanation:
+      'Invierte la dependencia mediante un puerto (trait) en el crate domain. Persistence implementa el puerto y API lo consume sin ciclos.',
+    lines: [
+      {
+        type: 'del',
+        text: '// En persistence/src/lib.rs (acoplamiento directo con API):',
+      },
+      { type: 'del', text: '- use api_crate::dto::OrderResponse;' },
+      {
+        type: 'del',
+        text: '- pub fn save_order(o: &OrderResponse) { /* ... */ }',
+      },
+      {
+        type: 'add',
+        text: '// En domain/src/ports.rs (Inversión de dependencias):',
+      },
+      { type: 'add', text: '+ pub trait OrderRepository: Send + Sync {' },
+      {
+        type: 'add',
+        text: '+     fn save(&self, order: &domain::Order) -> Result<(), domain::RepoError>;',
+      },
+      { type: 'add', text: '+ }' },
+      { type: 'add', text: '// En persistence/src/lib.rs:' },
+      {
+        type: 'add',
+        text: '+ impl domain::OrderRepository for PostgresOrderRepo {',
+      },
+      {
+        type: 'add',
+        text: '+     fn save(&self, order: &domain::Order) -> Result<(), domain::RepoError> { /* ... */ }',
+      },
+      { type: 'add', text: '+ }' },
+    ],
+  },
   S03: {
     title: 'S03 · Manejo de Errores Tipados sin Pánicos (Result & thiserror)',
     explanation:
@@ -193,6 +229,68 @@ const SENIOR_DIFFS: Record<
       { type: 'add', text: '+ }' },
     ],
   },
+  S05: {
+    title: 'S05 · Frontera FFI con Wrapper RAII y Destructor Drop',
+    explanation:
+      'Envuelve recursos opacos de C en un struct con Drop que invoca la función de liberación de C correspondiente, evitando fugas y punteros colgantes.',
+    lines: [
+      { type: 'del', text: '- let raw = unsafe { open_resource() };' },
+      {
+        type: 'del',
+        text: '- // Sin struct envolvente: si ocurre un panic! el recurso de C gotea',
+      },
+      { type: 'del', text: '- unsafe { close_resource(raw) };' },
+      {
+        type: 'add',
+        text: '+ pub struct ManagedResource(*mut core::ffi::c_void);',
+      },
+      { type: 'add', text: '+ impl Drop for ManagedResource {' },
+      { type: 'add', text: '+     fn drop(&mut self) {' },
+      { type: 'add', text: '+         if !self.0.is_null() {' },
+      { type: 'add', text: '+             unsafe { close_resource(self.0) };' },
+      { type: 'add', text: '+         }' },
+      { type: 'add', text: '+     }' },
+      { type: 'add', text: '+ }' },
+    ],
+  },
+  S06: {
+    title: 'S06 · Prevención de Deadlocks con Adquisición Jerárquica',
+    explanation:
+      'Unifica la adquisición de múltiples bloqueos en una función atómica que respeta el orden canónico estricto de mutexes, imposibilitando el interbloqueo.',
+    lines: [
+      {
+        type: 'del',
+        text: '- // Hilo 1 toma (A, B) mientras Hilo 2 toma (B, A):',
+      },
+      { type: 'del', text: '- let _o = orders.lock().unwrap();' },
+      {
+        type: 'del',
+        text: '- let _s = stock.lock().unwrap(); // ¡Riesgo de deadlock!',
+      },
+      {
+        type: 'add',
+        text: '+ // Adquisición canónica y atómica con orden lexicográfico:',
+      },
+      { type: 'add', text: "+ pub struct OrderStockGuard<'a> {" },
+      {
+        type: 'add',
+        text: "+     pub orders: std::sync::MutexGuard<'a, Orders>,",
+      },
+      {
+        type: 'add',
+        text: "+     pub stock: std::sync::MutexGuard<'a, Stock>,",
+      },
+      { type: 'add', text: '+ }' },
+      {
+        type: 'add',
+        text: "+ pub fn lock_both<'a>(o: &'a Mutex<Orders>, s: &'a Mutex<Stock>) -> OrderStockGuard<'a> {",
+      },
+      { type: 'add', text: '+     let orders = o.lock().unwrap();' },
+      { type: 'add', text: '+     let stock = s.lock().unwrap();' },
+      { type: 'add', text: '+     OrderStockGuard { orders, stock }' },
+      { type: 'add', text: '+ }' },
+    ],
+  },
   S07: {
     title: 'S07 · Cierre Limpio de Tokio Tasks con CancellationToken',
     explanation:
@@ -221,6 +319,285 @@ const SENIOR_DIFFS: Record<
       },
       { type: 'add', text: '+         });' },
       { type: 'add', text: '+     }' },
+      { type: 'add', text: '+ }' },
+    ],
+  },
+  S08: {
+    title: 'S08 · Optimización de Microbenchmarks y Pre-asignación en Heap',
+    explanation:
+      'Pre-asigna capacidad en vectores conocidos y utiliza black_box de Criterion para evitar que el compilador optimice la prueba de rendimiento de forma engañosa.',
+    lines: [
+      {
+        type: 'del',
+        text: '- let mut results = Vec::new(); // Múltiples reallocs en caliente',
+      },
+      {
+        type: 'del',
+        text: '- for item in items { results.push(process(item)); }',
+      },
+      {
+        type: 'add',
+        text: '+ let mut results = Vec::with_capacity(items.len());',
+      },
+      { type: 'add', text: '+ for item in items {' },
+      {
+        type: 'add',
+        text: '+     results.push(criterion::black_box(process(item)));',
+      },
+      { type: 'add', text: '+ }' },
+    ],
+  },
+  S09: {
+    title: 'S09 · Deduplicación Transaccional con Idempotency Key',
+    explanation:
+      'Garantiza procesamiento at-most-once de eventos en sistemas distribuidos mediante una inserción condicional atómica en la tabla de idempotencia.',
+    lines: [
+      { type: 'del', text: '- async fn handle_payment(evt: PaymentEvent) {' },
+      {
+        type: 'del',
+        text: '-     gateway.charge(evt.account, evt.amount).await; // ¡Cobro doble en reintentos!',
+      },
+      { type: 'del', text: '- }' },
+      {
+        type: 'add',
+        text: '+ async fn handle_payment(evt: PaymentEvent, db: &PgPool) -> Result<(), ServiceError> {',
+      },
+      {
+        type: 'add',
+        text: '+     let inserted = sqlx::query!("INSERT INTO idempotency (id) VALUES ($1) ON CONFLICT DO NOTHING", evt.id)',
+      },
+      {
+        type: 'add',
+        text: '+         .execute(db).await?.rows_affected() > 0;',
+      },
+      {
+        type: 'add',
+        text: '+     if !inserted { return Ok(()); } // Evento ya procesado',
+      },
+      {
+        type: 'add',
+        text: '+     gateway.charge(evt.account, evt.amount).await',
+      },
+      { type: 'add', text: '+ }' },
+    ],
+  },
+  S10: {
+    title: 'S10 · Consistencia ACID y Bloqueo Optimista (CAS)',
+    explanation:
+      'Elimina ventas perdidas (lost updates) incorporando una columna de versión para Compare-And-Swap en lugar de lecturas ciegas concurrentes.',
+    lines: [
+      {
+        type: 'del',
+        text: '- // Lost update: dos hilos leen stock=1 y ambos descuentan a 0',
+      },
+      {
+        type: 'del',
+        text: '- sqlx::query!("UPDATE stock SET qty = qty - $1 WHERE id = $2", qty, id)',
+      },
+      {
+        type: 'add',
+        text: '+ // Decremento atómico con guarda de stock suficiente:',
+      },
+      { type: 'add', text: '+ let res = sqlx::query!(' },
+      {
+        type: 'add',
+        text: '+     "UPDATE stock SET qty = qty - $1 WHERE id = $2 AND qty >= $1",',
+      },
+      { type: 'add', text: '+     qty, id' },
+      { type: 'add', text: '+ ).execute(db).await?;' },
+      {
+        type: 'add',
+        text: '+ if res.rows_affected() == 0 { return Err(StockError::Insufficient); }',
+      },
+    ],
+  },
+  S11: {
+    title: 'S11 · Tokio Channel Bounded con Backpressure y Load Shedding',
+    explanation:
+      'Reemplaza canales no acotados por colas con capacidad fija. Cuando se llena, rechaza inmediatamente con 429 Too Many Requests para no agotar la RAM.',
+    lines: [
+      {
+        type: 'del',
+        text: '- let (tx, rx) = tokio::sync::mpsc::unbounded_channel(); // OOM bajo picos',
+      },
+      {
+        type: 'add',
+        text: '+ let (tx, rx) = tokio::sync::mpsc::channel(1024); // Capacidad acotada',
+      },
+      { type: 'add', text: '+ match tx.try_send(job) {' },
+      { type: 'add', text: '+     Ok(()) => StatusCode::ACCEPTED,' },
+      {
+        type: 'add',
+        text: '+     Err(TrySendError::Full(_)) => StatusCode::TOO_MANY_REQUESTS, // Load shedding',
+      },
+      {
+        type: 'add',
+        text: '+     Err(TrySendError::Closed(_)) => StatusCode::SERVICE_UNAVAILABLE,',
+      },
+      { type: 'add', text: '+ }' },
+    ],
+  },
+  S12: {
+    title: 'S12 · Mitigación de IDOR mediante Repositorio con Ámbito de Tenant',
+    explanation:
+      'Asegura que cada consulta SQL filtre obligatoriamente por el ID del usuario/inquilino autenticado, imposibilitando acceder a registros de otros clientes.',
+    lines: [
+      { type: 'del', text: '- async fn get_invoice(id: u64) -> Invoice {' },
+      {
+        type: 'del',
+        text: '-     sqlx::query_as!(Invoice, "SELECT * FROM invoices WHERE id = $1", id) // ¡IDOR!',
+      },
+      { type: 'del', text: '- }' },
+      {
+        type: 'add',
+        text: '+ async fn get_invoice(id: u64, auth_user: UserId) -> Result<Invoice, AuthError> {',
+      },
+      { type: 'add', text: '+     sqlx::query_as!(' },
+      {
+        type: 'add',
+        text: '+         Invoice, "SELECT * FROM invoices WHERE id = $1 AND owner_id = $2",',
+      },
+      { type: 'add', text: '+         id, auth_user.0' },
+      {
+        type: 'add',
+        text: '+     ).fetch_optional(db).await?.ok_or(AuthError::Forbidden)',
+      },
+      { type: 'add', text: '+ }' },
+    ],
+  },
+  S13: {
+    title: 'S13 · Pruebas Basadas en Propiedades con proptest',
+    explanation:
+      'Genera miles de entradas aleatorias y casos límite (UTF-8 inválido, desbordamientos, cadenas vacías) verificando invariantes matemáticos del parser.',
+    lines: [
+      { type: 'del', text: '- #[test]' },
+      {
+        type: 'del',
+        text: '- fn test_happy() { assert_eq!(parse("1,2"), vec![1, 2]); } // Frágil',
+      },
+      { type: 'add', text: '+ proptest! {' },
+      { type: 'add', text: '+     #[test]' },
+      { type: 'add', text: '+     fn parser_doesnt_crash(s in "\\\\PC*") {' },
+      {
+        type: 'add',
+        text: '+         let _ = parse(&s); // Invariante: jamás pánico ante entradas arbitrarias',
+      },
+      { type: 'add', text: '+     }' },
+      { type: 'add', text: '+ }' },
+    ],
+  },
+  S14: {
+    title: 'S14 · Observabilidad Estructurada con Spans de Tracing',
+    explanation:
+      'Instrumenta handlers asíncronos con OpenTelemetry y tokio::time::timeout para detectar consultas degradadas sin bloquear el hilo principal.',
+    lines: [
+      {
+        type: 'del',
+        text: '- async fn fetch_data() { db.query().await; } // Sin trazas ni contexto',
+      },
+      {
+        type: 'add',
+        text: '+ #[tracing::instrument(skip(db), fields(tenant = %tenant_id))]',
+      },
+      {
+        type: 'add',
+        text: '+ async fn fetch_data(tenant_id: &str, db: &Db) -> Result<Data, TimeoutError> {',
+      },
+      {
+        type: 'add',
+        text: '+     tokio::time::timeout(Duration::from_millis(250), db.query()).await?',
+      },
+      { type: 'add', text: '+ }' },
+    ],
+  },
+  S15: {
+    title: 'S15 · Patrón Expand-and-Contract para Migraciones sin Downtime',
+    explanation:
+      'Evoluciona esquemas en bases de datos con dual-write en la aplicación antes de eliminar columnas antiguas, permitiendo rollback instantáneo.',
+    lines: [
+      {
+        type: 'del',
+        text: '- // DDL destructivo inmediato (rompe instancias antiguas en despliegue):',
+      },
+      { type: 'del', text: '- ALTER TABLE users DROP COLUMN full_name;' },
+      {
+        type: 'add',
+        text: '+ // Fase 1 (Expand): añadir columnas nuevas sin romper el código antiguo',
+      },
+      {
+        type: 'add',
+        text: '+ ALTER TABLE users ADD COLUMN first_name TEXT, ADD COLUMN last_name TEXT;',
+      },
+      {
+        type: 'add',
+        text: '+ // Fase 2: Aplicación escribe en ambos campos y lee del nuevo',
+      },
+      {
+        type: 'add',
+        text: '+ // Fase 3 (Contract): Borrar campo antiguo tras validar la versión',
+      },
+    ],
+  },
+  S16: {
+    title: 'S16 · Segregación de Interfaces y Desacoplamiento de Monolitos',
+    explanation:
+      'Divide un monolito gigante con 20 métodos en traits específicos y cohesivos, facilitando el mocking, las pruebas unitarias y la separación de crates.',
+    lines: [
+      {
+        type: 'del',
+        text: '- pub struct MonolithService; // Mezcla SQL, Auth, Email y Facturación',
+      },
+      {
+        type: 'add',
+        text: '+ pub trait Authenticator: Send + Sync { fn verify(&self, token: &str) -> bool; }',
+      },
+      {
+        type: 'add',
+        text: '+ pub trait BillingGateway: Send + Sync { fn charge(&self, id: u64, amount: u64) -> Result<(), BillingError>; }',
+      },
+      {
+        type: 'add',
+        text: '+ pub struct OrderService<A, B> { auth: A, billing: B }',
+      },
+    ],
+  },
+  S17: {
+    title: 'S17 · Quality Gates Estrictos de Clippy para Código de Producción',
+    explanation:
+      'Configura reglas estrictas a nivel de crate para prohibir pánicos, unwrap y mutabilidad innecesaria antes de llegar a revisión humana.',
+    lines: [
+      {
+        type: 'del',
+        text: '- // Sin configuración de linter en el crate root',
+      },
+      { type: 'add', text: '+ #![warn(clippy::all, clippy::pedantic)]' },
+      {
+        type: 'add',
+        text: '+ #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic)]',
+      },
+      { type: 'add', text: '+ #![forbid(unsafe_code)]' },
+    ],
+  },
+  S18: {
+    title: 'S18 · Arquitectura Resiliente con Circuit Breaker',
+    explanation:
+      'Protege al sistema ante fallos en dependencias downstream abriendo el circuito tras N fallos consecutivos y sirviendo respuestas degradadas en caché.',
+    lines: [
+      {
+        type: 'del',
+        text: '- // Llamadas directas: si el servicio downstream cae, agota el pool local',
+      },
+      { type: 'del', text: '- client.call_external_service().await;' },
+      {
+        type: 'add',
+        text: '+ match circuit_breaker.call(|| client.call_external_service()).await {',
+      },
+      { type: 'add', text: '+     Ok(resp) => resp,' },
+      {
+        type: 'add',
+        text: '+     Err(CircuitBreakerError::Open) => fallback_cached_response(),',
+      },
+      { type: 'add', text: '+     Err(e) => Err(e.into()),' },
       { type: 'add', text: '+ }' },
     ],
   },
