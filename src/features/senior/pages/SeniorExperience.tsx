@@ -680,18 +680,21 @@ function SeniorCompetenciesRadar({
     return { ...d, count, max, pct: Math.round((count / max) * 100) };
   });
 
-  // Cálculo de polígono SVG
-  const cx = 120;
-  const cy = 120;
-  const maxR = 85;
+  // Cálculo de polígono SVG sin recortes laterales (viewBox 360x268)
+  const cx = 180;
+  const cy = 138;
+  const maxR = 76;
   const points = scores.map((s, i) => {
     const angle = -Math.PI / 2 + (i * 2 * Math.PI) / 5;
-    const r = Math.max(16, (s.pct / 100) * maxR);
+    const r = Math.max(15, (s.pct / 100) * maxR);
+    const anchor = i === 1 ? 'start' : i === 4 ? 'end' : ('middle' as const);
+    const labelDist = i === 1 || i === 4 ? maxR + 12 : maxR + 22;
     return {
       x: cx + r * Math.cos(angle),
       y: cy + r * Math.sin(angle),
-      labelX: cx + (maxR + 22) * Math.cos(angle),
-      labelY: cy + (maxR + 18) * Math.sin(angle),
+      labelX: cx + labelDist * Math.cos(angle),
+      labelY: cy + labelDist * Math.sin(angle) + (i === 0 ? 0 : 4),
+      anchor,
       s,
     };
   });
@@ -710,22 +713,16 @@ function SeniorCompetenciesRadar({
           </span>
           <h3>Matriz de Competencias Senior · 5 Dimensiones Vigilio</h3>
         </div>
-        <span class="tag">90 Criterios distribuidos</span>
+        <span class="tag gold">90 GATES</span>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(260px, 300px) 1fr',
-          gap: 24,
-          alignItems: 'center',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div class="senior-radar-grid">
+        <div class="senior-radar-svg-wrap">
           <svg
-            width="260"
-            height="260"
-            viewBox="0 0 240 240"
+            width="340"
+            height="254"
+            viewBox="0 0 360 268"
+            style={{ width: '100%', maxWidth: 340, height: 'auto' }}
             aria-label="Gráfico de radar de competencias Senior"
           >
             {/* Círculos concéntricos de referencia */}
@@ -787,8 +784,8 @@ function SeniorCompetenciesRadar({
                 <text
                   x={p.labelX}
                   y={p.labelY}
-                  text-anchor="middle"
-                  font-size="10.5"
+                  text-anchor={p.anchor}
+                  font-size="11"
                   font-weight="700"
                   fill="var(--text)"
                 >
@@ -799,28 +796,44 @@ function SeniorCompetenciesRadar({
           </svg>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {scores.map((sc) => (
             <div
               key={sc.id}
-              style={{ display: 'flex', flexDirection: 'column', gap: 4 }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 5 }}
             >
               <div
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
+                  alignItems: 'center',
+                  gap: 8,
                   fontSize: 13,
                   fontWeight: 700,
                 }}
               >
-                <span>{sc.label}</span>
-                <span class="muted">
-                  {sc.count} / {sc.max} gates declarados ({sc.pct}%)
+                <span
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 8,
+                  }}
+                >
+                  {sc.label}
+                  <span class="small muted" style={{ fontWeight: 500 }}>
+                    ({sc.mods.join(' · ')})
+                  </span>
+                </span>
+                <span
+                  class="muted"
+                  style={{ fontFamily: 'var(--font-pixel)', fontSize: 11 }}
+                >
+                  {sc.count}/{sc.max} ({sc.pct}%)
                 </span>
               </div>
               <div
                 style={{
-                  background: 'var(--raised)',
+                  background: 'var(--progress-track)',
                   height: 8,
                   borderRadius: 99,
                   overflow: 'hidden',
@@ -828,19 +841,19 @@ function SeniorCompetenciesRadar({
               >
                 <div
                   style={{
-                    background: sc.pct > 50 ? 'var(--teal)' : 'var(--forge)',
+                    background: sc.pct > 50 ? 'var(--teal)' : 'var(--gold)',
                     height: '100%',
                     width: `${sc.pct}%`,
-                    transition: 'width 0.3s ease',
+                    transition: 'width 0.25s steps(4)',
                   }}
                 />
               </div>
             </div>
           ))}
-          <p class="small muted" style={{ marginTop: 8 }}>
+          <p class="small muted" style={{ marginTop: 4, marginBottom: 0 }}>
             Los porcentajes reflejan evidencia técnica registrada en el
             navegador. La certificación de ingeniería requiere ejecución de
-            `cargo test` y revisión de pares externa.
+            <code> cargo test </code> y revisión de pares externa.
           </p>
         </div>
       </div>
@@ -961,10 +974,12 @@ export function SeniorDashboard() {
             </button>
           </div>
         </div>
-        <img
-          src={`${import.meta.env.BASE_URL}assets/ferris/senior.png`}
-          alt="Ferris Senior, cangrejo naranja con corona"
-        />
+        <div class="ferris-aura-stage">
+          <img
+            src={`${import.meta.env.BASE_URL}assets/ferris/aura-king.png`}
+            alt="Ferris Senior King con corona, martillo de forja y aura dorada"
+          />
+        </div>
         <span class="senior-ghost-num">18</span>
       </section>
 
@@ -1044,16 +1059,8 @@ export function SeniorDashboard() {
       </div>
 
       {/* Filtros de la lista de desafíos */}
-      <div
-        style={{
-          display: 'flex',
-          gap: 12,
-          alignItems: 'center',
-          margin: '16px 0 20px',
-          flexWrap: 'wrap',
-        }}
-      >
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+      <div class="senior-filter-bar">
+        <div class="senior-filter-pills">
           {[
             ['all', `Todos (${seniors.length})`],
             ['reviewed', 'Autoevaluados'],
@@ -1071,11 +1078,10 @@ export function SeniorDashboard() {
             </button>
           ))}
         </div>
-        <div style={{ marginLeft: 'auto', minWidth: 240 }}>
+        <div class="senior-search-box">
           <input
             type="search"
             class="input"
-            style={{ width: '100%' }}
             placeholder="Buscar por ID, título o misión..."
             value={search}
             onInput={(e) => setSearch(e.currentTarget.value)}
@@ -1088,67 +1094,123 @@ export function SeniorDashboard() {
           const c = cases.find((x) => x.moduleId === m.id);
           const a = c ? store.attempts[c.id] : undefined;
           const acc = acceptanceSummary.modules[m.id];
+          const gateCount = acc?.declaredCount ?? 0;
+          const domainTag: Record<string, string> = {
+            S01: 'ZERO-COPY · LIFETIMES',
+            S02: 'WORKSPACE · SEMVER',
+            S03: 'API · TRAIT DESIGN',
+            S04: 'UNSAFE · SOUNDNESS',
+            S05: 'FFI · C ABI · RAII',
+            S06: 'LOCK ORDER · SYNC',
+            S07: 'TOKIO · CANCEL',
+            S08: 'FLAMEGRAPH · P99',
+            S09: 'IDEMPOTENCY · DIST',
+            S10: 'CONSISTENCY · MVCC',
+            S11: 'BACKPRESSURE · SRE',
+            S12: 'AUTHZ · ZERO-TRUST',
+            S13: 'PROPTEST · MOCKS',
+            S14: 'TRACING · OTLP',
+            S15: 'CI/CD · ROLLBACK',
+            S16: 'LEGACY · STRANGLER',
+            S17: 'RFC · TECH LEAD',
+            S18: 'SYSTEM DESIGN · ADR',
+          };
+          const trackKind = ['S01', 'S04', 'S05', 'S08'].includes(m.id)
+            ? 'forge'
+            : ['S06', 'S07', 'S11', 'S12', 'S14'].includes(m.id)
+              ? 'sre'
+              : ['S02', 'S03', 'S09', 'S10', 'S18'].includes(m.id)
+                ? 'arch'
+                : 'lead';
+          const trackMascot =
+            trackKind === 'forge'
+              ? 'forge-smith'
+              : trackKind === 'sre'
+                ? 'sre-guardian'
+                : trackKind === 'arch'
+                  ? 'systems-architect'
+                  : 'aura-king';
+          const hasReview = ['S03', 'S04', 'S07', 'S12', 'S17'].includes(m.id);
+          const hasAdr = ['S02', 'S09', 'S11', 'S15', 'S18'].includes(m.id);
+
           return (
-            <a class="senior-tile" href={href('challenge', c?.id)} key={m.id}>
+            <a
+              class="senior-tile"
+              data-track={trackKind}
+              href={href('challenge', c?.id)}
+              key={m.id}
+            >
+              <div class="senior-tile-head">
+                <div class="senior-tile-badges">
+                  <span class="tag gold">{m.id}</span>
+                  <span class="badge-kicker">
+                    {domainTag[m.id] ?? 'ADR · SRE'}
+                  </span>
+                </div>
+                <span
+                  class={`senior-gate-pill ${gateCount > 0 ? 'has-gates' : ''}`}
+                >
+                  {gateCount}/5 GATES
+                </span>
+              </div>
               <div
-                class="row"
                 style={{
-                  justifyContent: 'space-between',
+                  display: 'flex',
                   alignItems: 'center',
-                  marginBottom: 8,
+                  gap: 10,
+                  marginBottom: 6,
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <span class="tag gold">{m.id}</span>
-                  <span class="badge-kicker">ADR · SRE</span>
-                </div>
-                <span class="small">{acc?.declaredCount ?? 0}/5 gates</span>
-              </div>
-              <h3>{m.title}</h3>
-              <p>{c?.mission}</p>
-              <span class="senior-status">
-                {a?.status === 'self-reviewed' ? (
-                  <>
-                    <Check
-                      size={13}
-                      style={{ display: 'inline', marginRight: 4 }}
-                    />
-                    Autoevaluado
-                  </>
-                ) : a?.status === 'submitted' ? (
-                  <>
-                    <Clock
-                      size={13}
-                      style={{ display: 'inline', marginRight: 4 }}
-                    />
-                    Entregado
-                  </>
-                ) : a ? (
-                  <>
-                    <Edit3
-                      size={13}
-                      style={{ display: 'inline', marginRight: 4 }}
-                    />
-                    Borrador
-                  </>
-                ) : (
-                  <>
-                    <Square
-                      size={13}
-                      style={{
-                        display: 'inline',
-                        marginRight: 4,
-                        opacity: 0.4,
-                      }}
-                    />
-                    No iniciado
-                  </>
-                )}{' '}
-                <ArrowRight
-                  size={13}
-                  style={{ display: 'inline', marginLeft: 4 }}
+                <img
+                  class="senior-mini-mascot"
+                  src={`${import.meta.env.BASE_URL}assets/ferris/${trackMascot}.png`}
+                  alt=""
+                  aria-hidden="true"
                 />
-              </span>
+                <h3 style={{ margin: 0, paddingRight: 36 }}>{m.title}</h3>
+              </div>
+              <p>{c?.mission}</p>
+              <div class="senior-deliverables">
+                <span class="senior-deliv-chip">Diff Senior</span>
+                <span class="senior-deliv-chip">Incidente SRE</span>
+                {hasReview && (
+                  <span class="senior-deliv-chip">Code Review</span>
+                )}
+                {hasAdr && <span class="senior-deliv-chip">ADR Canvas</span>}
+              </div>
+              <div class="senior-tile-foot">
+                <span
+                  class={`senior-status ${a?.status === 'self-reviewed' ? 'done' : ''}`}
+                >
+                  {a?.status === 'self-reviewed' ? (
+                    <>
+                      <Check size={13} /> Autoevaluado
+                    </>
+                  ) : a?.status === 'submitted' ? (
+                    <>
+                      <Clock size={13} /> Entregado
+                    </>
+                  ) : a ? (
+                    <>
+                      <Edit3 size={13} /> Borrador
+                    </>
+                  ) : (
+                    <>
+                      <Square size={13} style={{ opacity: 0.55 }} /> Resolver
+                      reto
+                    </>
+                  )}
+                  <ArrowRight size={13} />
+                </span>
+                <span class="senior-gate-segments" aria-hidden="true">
+                  {[0, 1, 2, 3, 4].map((idx) => (
+                    <span
+                      key={idx}
+                      class={`senior-gate-seg ${idx < gateCount ? 'on' : ''}`}
+                    />
+                  ))}
+                </span>
+              </div>
               <span class="level-ghost-num">{m.id}</span>
             </a>
           );
@@ -1165,49 +1227,79 @@ export function SeniorDashboard() {
         {[
           {
             name: 'Debugging y memoria',
+            desc: 'Ownership cero-copias, contratos unsafe y fronteras FFI seguras.',
             icon: Bug,
+            mascot: 'forge-smith',
             ids: ['S01', 'S04', 'S05'],
           },
           {
             name: 'Concurrencia y Tokio',
+            desc: 'Prevención de deadlocks, cancelación cooperativa y backpressure.',
             icon: Zap,
+            mascot: 'sre-guardian',
             ids: ['S06', 'S07', 'S11'],
           },
           {
             name: 'Performance y observabilidad',
+            desc: 'Perfilado P99, trazabilidad OTLP y property-based testing.',
             icon: BarChart3,
+            mascot: 'forge-smith',
             ids: ['S08', 'S14', 'S13'],
           },
           {
             name: 'Seguridad y resiliencia',
+            desc: 'Idempotencia distribuida, invariantes MVCC y zero-trust.',
             icon: Shield,
+            mascot: 'sre-guardian',
             ids: ['S12', 'S09', 'S10'],
           },
-          { name: 'Arquitectura', icon: Boxes, ids: ['S02', 'S03', 'S18'] },
+          {
+            name: 'Arquitectura',
+            desc: 'Gobernanza de workspaces, diseño de traits públicos y ADRs.',
+            icon: Boxes,
+            mascot: 'systems-architect',
+            ids: ['S02', 'S03', 'S18'],
+          },
           {
             name: 'Operaciones y liderazgo',
+            desc: 'Rollbacks sin downtime, migraciones incrementales y RFCs.',
             icon: Trophy,
+            mascot: 'aura-king',
             ids: ['S15', 'S16', 'S17'],
           },
         ].map((x) => {
           const AreaIcon = x.icon;
           return (
-            <section class="card" key={x.name}>
-              <h3 style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <AreaIcon size={18} style={{ color: 'var(--senior)' }} />{' '}
-                {x.name}
-              </h3>
-              <div
-                class="actions"
-                style={{ display: 'flex', gap: 8, marginTop: 12 }}
-              >
+            <section class="card senior-domain-card" key={x.name}>
+              <div class="senior-domain-top">
+                <div>
+                  <h3
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      marginBottom: 6,
+                    }}
+                  >
+                    <AreaIcon size={18} style={{ color: 'var(--senior)' }} />{' '}
+                    {x.name}
+                  </h3>
+                  <p style={{ fontSize: 13, margin: 0 }}>{x.desc}</p>
+                </div>
+                <img
+                  class="senior-domain-mascot"
+                  src={`${import.meta.env.BASE_URL}assets/ferris/${x.mascot}.png`}
+                  alt={`Ferris ${x.name}`}
+                />
+              </div>
+              <div class="actions" style={{ display: 'flex', gap: 8 }}>
                 {x.ids.map((id) => (
                   <a
                     class="btn btn-outline btn-sm"
                     href={href('challenge', `${id}-C01`)}
                     key={id}
                   >
-                    {id}
+                    {id} <ArrowRight size={12} />
                   </a>
                 ))}
               </div>
@@ -1332,10 +1424,39 @@ export function SeniorChallenge({ id }: { id: string }) {
             {module?.title} · {challenge.mission}
           </p>
         </div>
-        <img
-          src={`${import.meta.env.BASE_URL}assets/ferris/engineer.png`}
-          alt="Ferris ingeniero"
-        />
+        {(() => {
+          const isForge = ['S01', 'S04', 'S05', 'S08'].includes(
+            challenge.moduleId,
+          );
+          const isSre = ['S06', 'S07', 'S11', 'S12', 'S14'].includes(
+            challenge.moduleId,
+          );
+          const isArch = ['S02', 'S03', 'S09', 'S10', 'S18'].includes(
+            challenge.moduleId,
+          );
+          const challengeSprite = isForge
+            ? 'forge-smith'
+            : isSre
+              ? 'sre-guardian'
+              : isArch
+                ? 'systems-architect'
+                : 'aura-king';
+          const auraVariant = isForge
+            ? 'aura-ember'
+            : isSre
+              ? 'aura-cyan'
+              : isArch
+                ? 'aura-violet'
+                : '';
+          return (
+            <div class={`ferris-aura-stage ${auraVariant}`}>
+              <img
+                src={`${import.meta.env.BASE_URL}assets/ferris/${challengeSprite}.png`}
+                alt={`Ferris especialista del módulo ${challenge.moduleId}`}
+              />
+            </div>
+          );
+        })()}
         <span class="senior-ghost-num">{challenge.moduleId}</span>
       </div>
 
@@ -1644,7 +1765,7 @@ export function SeniorChallenge({ id }: { id: string }) {
             )}
           </div>
 
-          <div>
+          <div class="senior-sticky-panel">
             <section class="card">
               <h3 style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <Edit3 size={18} /> Solución y justificación
@@ -2051,23 +2172,35 @@ function IncidentSimulator({ id }: { id: IncidentId }) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: 8,
+          gap: 14,
         }}
       >
-        <h3
-          style={{ display: 'flex', alignItems: 'center', gap: 8, margin: 0 }}
+        <div>
+          <span class="badge-kicker" style={{ marginBottom: 6 }}>
+            SRE INCIDENT ARENA · RPO &amp; RTO
+          </span>
+          <h3
+            style={{ display: 'flex', alignItems: 'center', gap: 8, margin: 0 }}
+          >
+            <Flame size={18} style={{ color: 'var(--forge)' }} /> Simulador
+            interactivo: {def.title}
+          </h3>
+          <p class="small" style={{ marginTop: 6, marginBottom: 0 }}>
+            Fixture educativo de ingeniería en producción: no contacta
+            servidores ni ejecuta compiladores en vivo.
+          </p>
+        </div>
+        <div
+          class={`ferris-aura-stage ${run.status === 'resolved' ? 'aura-cyan' : 'aura-ember'}`}
         >
-          <Flame size={18} style={{ color: 'var(--forge)' }} /> Simulador
-          interactivo: {def.title}
-        </h3>
-        <span class="tag">Simulación didáctica local</span>
+          <img
+            src={`${import.meta.env.BASE_URL}assets/ferris/sre-guardian.png`}
+            alt="Ferris SRE Guardian con escudo holográfico"
+            class="ferris-art"
+            style={{ width: 72, height: 72 }}
+          />
+        </div>
       </div>
-
-      <p class="small" style={{ marginTop: 8 }}>
-        Fixture educativo de ingeniería en producción: no contacta servidores ni
-        ejecuta compiladores en vivo.
-      </p>
 
       {/* Panel de Telemetría Dinámica en Tiempo Real */}
       <div

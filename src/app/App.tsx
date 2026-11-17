@@ -6,7 +6,6 @@ import { signal } from '@preact/signals';
 import { basicSetup, EditorView } from 'codemirror';
 import {
   Award,
-  Boxes,
   Bug,
   Check,
   CheckCircle2,
@@ -24,10 +23,8 @@ import {
   Play,
   RotateCcw,
   ShieldCheck,
-  Sparkles,
   Sun,
   Terminal,
-  Trophy,
   Upload,
   XCircle,
   Zap,
@@ -391,28 +388,31 @@ function Home() {
             level: 'basic',
             name: 'Rust Básico',
             desc: 'Sintaxis, tipos primitivos, ownership, enums y Ferris Tasks.',
-            icon: Sparkles,
+            topics: ['Ownership', 'Borrowing', 'Enums'],
+            mascot: 'explorer',
           },
           {
             level: 'intermediate',
             name: 'Rust Intermedio',
             desc: 'Traits, lifetimes, smart pointers, Serde, I/O y testing.',
-            icon: Boxes,
+            topics: ['Traits', 'Lifetimes', 'Serde'],
+            mascot: 'student',
           },
           {
             level: 'advanced',
             name: 'Rust Avanzado',
             desc: 'Concurrencia, Tokio, Axum, WebAssembly y Unsafe.',
-            icon: Cpu,
+            topics: ['Tokio', 'Axum', 'WASM & FFI'],
+            mascot: 'forge-smith',
           },
           {
             level: 'senior',
             name: 'Senior Mode',
             desc: '18 desafíos, incidentes multietapa y 90 gates de aceptación.',
-            icon: Crown,
+            topics: ['Code Review', 'ADR & SRE', '90 Gates'],
+            mascot: 'aura-king',
           },
         ].map((tr, i) => {
-          const IconComp = tr.icon;
           const completedCount = mods.filter(
             (m) =>
               m.level === tr.level && progress.value.completed.includes(m.id),
@@ -422,20 +422,39 @@ function Home() {
             <a
               key={tr.level}
               class="track-card"
+              data-level={tr.level}
               href={tr.level === 'senior' ? href('senior') : href('learn')}
             >
               <div class="track-top">
-                <div class="track-icon">
-                  <IconComp size={24} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div class="track-mascot-aura">
+                    <img
+                      src={image(tr.mascot)}
+                      alt={`Ferris nivel ${tr.name}`}
+                    />
+                  </div>
+                  <div class="track-badge-stack">
+                    <span class="level-pill">{`LEVEL 0${i + 1}`}</span>
+                    <span class="track-count">{maxCount} módulos</span>
+                  </div>
                 </div>
-                <span class="track-count">{maxCount} MÓDULOS</span>
               </div>
               <h3>{tr.name}</h3>
               <p>{tr.desc}</p>
+              <div class="track-topics">
+                {tr.topics.map((tp) => (
+                  <span class="track-chip" key={tp}>
+                    {tp}
+                  </span>
+                ))}
+              </div>
               <div class="track-bottom">
                 <Bar value={completedCount} max={maxCount} />
-                <span class="small muted">
+                <span class="track-progress-num">
                   {completedCount}/{maxCount}
+                </span>
+                <span class="track-cta">
+                  Explorar <ChevronRight size={14} />
                 </span>
               </div>
               <span class="level-ghost-num">{`0${i + 1}`}</span>
@@ -452,35 +471,83 @@ function Home() {
       </div>
 
       <div class="grid3">
-        <Panel title="Ownership Puzzle">
-          <p>
-            Aprende las transferencias de propiedad y préstamos con el simulador
-            semántico de pasos en memoria.
-          </p>
-          <div style={{ marginTop: 16 }}>
+        <Panel title="Ownership Puzzle" className="featured-card">
+          <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+            <p style={{ margin: 0 }}>
+              Aprende las transferencias de propiedad y préstamos con el
+              simulador semántico de pasos en memoria Stack vs Heap.
+            </p>
+            <img
+              src={image('sre-guardian')}
+              alt="Ferris guardián de memoria"
+              class="ferris-art"
+              style={{ width: 68, height: 68, flexShrink: 0 }}
+            />
+          </div>
+          <div class="track-topics">
+            <span class="track-chip">5 fases</span>
+            <span class="track-chip">Stack & Heap</span>
+            <span class="track-chip">Quiz & Bugs</span>
+          </div>
+          <div class="featured-foot">
             <LinkButton to={href('games')}>
-              <Gamepad2 size={16} /> Explorar juegos
+              <PixelGamepad size={16} /> Explorar juegos
             </LinkButton>
           </div>
         </Panel>
-        <Panel title="The Master Forge">
-          <p>
-            18 escenarios de producción: code review, arquitectura con ADRs,
-            incidentes y evidencias reales.
-          </p>
-          <div style={{ marginTop: 16 }}>
+        <Panel
+          title="The Master Forge"
+          className="featured-card senior-featured"
+        >
+          <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+            <p style={{ margin: 0 }}>
+              18 escenarios de producción: code review, arquitectura con ADRs,
+              incidentes SRE interactivos y 90 gates de calidad.
+            </p>
+            <img
+              src={image('aura-king')}
+              alt="Ferris Senior King con aura dorada"
+              class="ferris-art"
+              style={{ width: 72, height: 72, flexShrink: 0 }}
+            />
+          </div>
+          <div class="track-topics">
+            <span class="badge-kicker">18 DIFFS</span>
+            <span class="badge-kicker">18 INCIDENTS</span>
+            <span class="badge-kicker">90 GATES</span>
+          </div>
+          <div class="featured-foot">
             <LinkButton to={href('senior')} kind="btn-gold">
-              <Crown size={16} /> Entrar a Senior Mode
+              <PixelCrown size={16} /> Entrar a Senior Mode
             </LinkButton>
           </div>
         </Panel>
-        <Panel title="Tu progreso local">
-          <div class="stat">{done} / 54</div>
-          <p>Módulos completados y guardados en tu navegador.</p>
+        <Panel title="Tu progreso local" className="featured-card">
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: 12,
+            }}
+          >
+            <div>
+              <div class="stat">{done} / 54</div>
+              <p style={{ margin: '4px 0 10px' }}>
+                Módulos completados en tu navegador.
+              </p>
+            </div>
+            <img
+              src={image('systems-architect')}
+              alt="Ferris arquitecto de sistemas"
+              class="ferris-art"
+              style={{ width: 66, height: 66, flexShrink: 0 }}
+            />
+          </div>
           <Bar value={done} max={54} />
-          <div style={{ marginTop: 16 }}>
+          <div class="featured-foot">
             <LinkButton to={href('progress')}>
-              <Trophy size={16} /> Ver mis logros
+              <PixelTrophy size={16} /> Ver mis logros
             </LinkButton>
           </div>
         </Panel>
@@ -562,15 +629,8 @@ function Learn() {
           return (
             <a
               key={m.id}
-              class="card clickable"
+              class="card clickable module-card"
               href={href('module', m.id)}
-              style={{
-                textDecoration: 'none',
-                display: 'flex',
-                flexDirection: 'column',
-                position: 'relative',
-                overflow: 'hidden',
-              }}
             >
               <div
                 style={{
@@ -580,7 +640,7 @@ function Learn() {
                   marginBottom: 10,
                 }}
               >
-                <span class="tag">{m.id}</span>
+                <span class="tag gold">{m.id}</span>
                 {isDone ? (
                   <span
                     class="tag"
@@ -592,14 +652,21 @@ function Learn() {
                     <Check size={12} /> Completado
                   </span>
                 ) : (
-                  <span class="tag">{m.lessons.length} lecciones</span>
+                  <span class="tag">
+                    {m.lessons.length} lecciones · +{m.xp} XP
+                  </span>
                 )}
               </div>
-              <h3 style={{ marginTop: 4 }}>{m.title}</h3>
-              <p style={{ fontSize: 13, flex: 1 }}>
+              <h3 style={{ marginTop: 2, paddingRight: 44 }}>{m.title}</h3>
+              <p style={{ fontSize: 13, flex: 1, marginBottom: 14 }}>
                 {m.topics.slice(0, 3).join(' · ')}
               </p>
-              <Bar value={isDone ? 1 : 0} max={1} />
+              <div class="module-card-foot">
+                <Bar value={isDone ? 1 : 0} max={1} />
+                <span class="module-card-cta">
+                  {isDone ? 'Repasar' : 'Estudiar'} <ChevronRight size={14} />
+                </span>
+              </div>
               <span class="level-ghost-num">{m.id}</span>
             </a>
           );
@@ -783,19 +850,36 @@ function Ecosystem() {
 
       <div class="grid2" style={{ marginTop: 24 }}>
         {paths.map((p) => (
-          <Panel key={p.id} title={`${p.id} · ${p.name}`}>
-            <p>{p.description}</p>
-            <ol style={{ paddingLeft: 20, margin: '12px 0' }}>
-              {p.units.map((u) => (
-                <li key={u} style={{ margin: '4px 0', fontSize: 13 }}>
-                  {u}
+          <section class="card eco-card" key={p.id}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: 8,
+                marginBottom: 10,
+              }}
+            >
+              <span class="tag gold">{p.id}</span>
+              <span class="badge-kicker">5 UNIDADES</span>
+            </div>
+            <h3 style={{ marginBottom: 6, paddingRight: 52 }}>{p.name}</h3>
+            <p style={{ fontSize: 13.5, margin: 0 }}>{p.description}</p>
+            <ol class="eco-units">
+              {p.units.map((u, idx) => (
+                <li key={u}>
+                  <span class="eco-step-num">{`0${idx + 1}`}</span>
+                  <span>{u}</span>
                 </li>
               ))}
             </ol>
-            <span class="tag">
-              Temario publicado · laboratorios en desarrollo
-            </span>
-          </Panel>
+            <div style={{ marginTop: 'auto' }}>
+              <span class="tag">
+                Temario publicado · laboratorios locales Cargo
+              </span>
+            </div>
+            <span class="level-ghost-num">{p.id}</span>
+          </section>
         ))}
       </div>
     </>
