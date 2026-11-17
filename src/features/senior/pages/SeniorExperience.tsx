@@ -930,7 +930,8 @@ export function SeniorDashboard() {
             class="eyebrow"
             style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
           >
-            <Crown size={14} /> THE MASTER FORGE · SENIOR MODE
+            <Crown size={14} class="pixel-crown" /> THE MASTER FORGE · SENIOR
+            MODE
           </span>
           <h1>Rust Senior Mode · The Master Forge</h1>
           <p>
@@ -964,6 +965,7 @@ export function SeniorDashboard() {
           src={`${import.meta.env.BASE_URL}assets/ferris/senior.png`}
           alt="Ferris Senior, cangrejo naranja con corona"
         />
+        <span class="senior-ghost-num">18</span>
       </section>
 
       <div class="senior-stats">
@@ -1090,9 +1092,16 @@ export function SeniorDashboard() {
             <a class="senior-tile" href={href('challenge', c?.id)} key={m.id}>
               <div
                 class="row"
-                style={{ justifyContent: 'space-between', marginBottom: 4 }}
+                style={{
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: 8,
+                }}
               >
-                <span class="tag">{m.id}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span class="tag gold">{m.id}</span>
+                  <span class="badge-kicker">ADR · SRE</span>
+                </div>
                 <span class="small">{acc?.declaredCount ?? 0}/5 gates</span>
               </div>
               <h3>{m.title}</h3>
@@ -1140,6 +1149,7 @@ export function SeniorDashboard() {
                   style={{ display: 'inline', marginLeft: 4 }}
                 />
               </span>
+              <span class="level-ghost-num">{m.id}</span>
             </a>
           );
         })}
@@ -1326,6 +1336,7 @@ export function SeniorChallenge({ id }: { id: string }) {
           src={`${import.meta.env.BASE_URL}assets/ferris/engineer.png`}
           alt="Ferris ingeniero"
         />
+        <span class="senior-ghost-num">{challenge.moduleId}</span>
       </div>
 
       <div

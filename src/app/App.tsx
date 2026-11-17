@@ -6,7 +6,6 @@ import { signal } from '@preact/signals';
 import { basicSetup, EditorView } from 'codemirror';
 import {
   Award,
-  BookOpen,
   Boxes,
   Bug,
   Check,
@@ -20,12 +19,10 @@ import {
   ExternalLink,
   Flame,
   Gamepad2,
-  Home as HomeIcon,
   Layers,
   Moon,
   Play,
   RotateCcw,
-  Settings as SettingsIcon,
   ShieldCheck,
   Sparkles,
   Sun,
@@ -37,6 +34,17 @@ import {
 } from 'lucide-preact';
 import type { ComponentChildren } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
+import {
+  PixelBook,
+  PixelCrown,
+  PixelGamepad,
+  PixelGear,
+  PixelHome,
+  PixelLayers,
+  PixelMoon,
+  PixelSun,
+  PixelTrophy,
+} from '../components/pixel-icons/PixelIcons';
 import modulesRaw from '../content/course.json';
 import paths from '../content/ecosystem/paths.json';
 import questions from '../content/games/questions.json';
@@ -403,7 +411,7 @@ function Home() {
             desc: '18 desafíos, incidentes multietapa y 90 gates de aceptación.',
             icon: Crown,
           },
-        ].map((tr) => {
+        ].map((tr, i) => {
           const IconComp = tr.icon;
           const completedCount = mods.filter(
             (m) =>
@@ -430,6 +438,7 @@ function Home() {
                   {completedCount}/{maxCount}
                 </span>
               </div>
+              <span class="level-ghost-num">{`0${i + 1}`}</span>
             </a>
           );
         })}
@@ -559,6 +568,8 @@ function Learn() {
                 textDecoration: 'none',
                 display: 'flex',
                 flexDirection: 'column',
+                position: 'relative',
+                overflow: 'hidden',
               }}
             >
               <div
@@ -589,6 +600,7 @@ function Learn() {
                 {m.topics.slice(0, 3).join(' · ')}
               </p>
               <Bar value={isDone ? 1 : 0} max={1} />
+              <span class="level-ghost-num">{m.id}</span>
             </a>
           );
         })}
@@ -2051,18 +2063,19 @@ export function App() {
     document.documentElement.dataset.theme = pref.theme;
     document.documentElement.dataset.senior = String(pref.seniorEnabled);
     document.documentElement.dataset.reducedMotion = String(!pref.motion);
+    document.documentElement.dataset.motion = pref.motion ? 'full' : 'reduced';
     document.documentElement.lang = pref.locale;
   }, [pref]);
 
   const t = ui[pref.locale];
 
   const nav = [
-    { id: 'home', label: t.home, icon: HomeIcon },
-    { id: 'learn', label: t.learn, icon: BookOpen },
-    { id: 'games', label: t.games, icon: Gamepad2 },
-    { id: 'ecosystem', label: t.ecosystem, icon: Layers },
-    { id: 'senior', label: t.senior, icon: Crown },
-    { id: 'progress', label: t.progress, icon: Trophy },
+    { id: 'home', label: t.home, icon: PixelHome },
+    { id: 'learn', label: t.learn, icon: PixelBook },
+    { id: 'games', label: t.games, icon: PixelGamepad },
+    { id: 'ecosystem', label: t.ecosystem, icon: PixelLayers },
+    { id: 'senior', label: t.senior, icon: PixelCrown },
+    { id: 'progress', label: t.progress, icon: PixelTrophy },
   ];
 
   return (
@@ -2096,7 +2109,7 @@ export function App() {
                   class={isActive ? 'active' : ''}
                   href={href(item.id)}
                 >
-                  <IconItem size={18} />
+                  <IconItem size={16} />
                   <span>{item.label}</span>
                 </a>
               );
@@ -2135,7 +2148,11 @@ export function App() {
               })
             }
           >
-            {pref.theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
+            {pref.theme === 'dark' ? (
+              <PixelSun size={18} />
+            ) : (
+              <PixelMoon size={18} />
+            )}
           </button>
 
           <button
@@ -2144,7 +2161,7 @@ export function App() {
             aria-pressed={pref.seniorEnabled}
             onClick={() => updatePrefs({ seniorEnabled: !pref.seniorEnabled })}
           >
-            <Crown size={16} />
+            <PixelCrown size={16} class="pixel-crown" />
             <span>Senior</span>
             <span class="toggle-knob" />
           </button>
@@ -2155,7 +2172,7 @@ export function App() {
             title={t.settings}
             aria-label={t.settings}
           >
-            <SettingsIcon size={18} />
+            <PixelGear size={18} />
           </a>
         </div>
       </header>

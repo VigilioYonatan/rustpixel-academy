@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
 
+@font-face {
+  font-family: 'Silkscreen';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/silkscreen-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   color-scheme: dark;
@@ -36,6 +45,7 @@
   --panel-radius: 16px;
   --font-ui: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-code: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --font-pixel: 'Silkscreen', monospace;
 }
 
 :root[data-theme='light'] {
@@ -913,103 +923,397 @@ pre {
   border-color: rgba(231, 107, 118, 0.35);
 }
 
-/* Senior Dashboard & Cards */
-.senior-hero {
-  min-height: 280px;
+/* ==========================================================================
+   Pixel Senior UX / UI Design System
+   Silkscreen typography, stepped micro-animations, crisp ghost numerals,
+   16x16 pixel-art iconography and high-contrast responsive layouts
+   ========================================================================== */
+
+/* 1. Micro-etiquetas, kickers, eyebrows, badges de estado */
+.hero-eyebrow,
+.eyebrow,
+.kicker,
+.badge-kicker,
+.senior-badge,
+.gate-id,
+.senior-kind,
+.senior-kicker,
+.tag.gold {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.05em;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+}
+
+.eyebrow {
+  font-size: 10.5px;
+}
+
+.badge-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(242, 190, 88, 0.12);
+  color: var(--gold);
+  border: 1px solid rgba(242, 190, 88, 0.35);
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* 2. Contadores KPI cortos */
+.stats-strip strong,
+.intro-stat strong,
+.sr-score strong,
+.senior-stats strong,
+.senior-stats span strong,
+.senior-stats div strong,
+.hero-metrics b,
+.stat,
+.track-count,
+.stat-val {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.04em;
+}
+
+/* 3. Numerales de fondo / Watermarks */
+.level-ghost-num,
+.senior-ghost-num,
+.watermark-num {
+  font-family: var(--font-pixel);
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  position: absolute;
+  right: 14px;
+  bottom: 8px;
+  opacity: 0.08;
+  color: currentColor;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+  transition: opacity 0.15s steps(2), color 0.15s steps(2);
+}
+
+.senior-card:hover .level-ghost-num,
+.senior-tile:hover .level-ghost-num,
+.track-card:hover .level-ghost-num {
+  opacity: 0.2;
+  color: var(--gold);
+}
+
+/* 4. Prosa, párrafos, formularios, código (LEGIBILIDAD GARANTIZADA) */
+p,
+.prompt,
+.notice,
+.gate-req,
+.senior-workspace p,
+.input,
+select,
+textarea,
+button {
+  font-family: var(--font-ui);
+}
+
+code,
+pre,
+.codebox,
+.cm-editor {
+  font-family: var(--font-code);
+}
+
+/* 5. Senior Hero Banner & Header */
+.senior-hero,
+.senior-banner {
+  min-height: 250px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  padding: 36px 48px;
-  background: linear-gradient(110deg, #1b1424, #2c1d38 60%, #1a1e2f);
-  border: 1px solid rgba(242, 190, 88, 0.4);
-  border-radius: 20px;
+  gap: 28px;
+  padding: 34px 44px;
+  background: linear-gradient(115deg, #181224 0%, #291838 55%, #141a2c 100%);
+  border: 1px solid rgba(242, 190, 88, 0.42);
+  border-radius: 18px;
   position: relative;
   overflow: hidden;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
 }
-.senior-hero:before {
+
+.senior-hero:before,
+.senior-banner:before {
   content: '';
   position: absolute;
   inset: auto 0 0;
-  height: 100px;
+  height: 120px;
   background: url('/assets/backgrounds/landscape-senior.svg') center bottom / cover no-repeat;
-  opacity: 0.3;
+  opacity: 0.28;
+  pointer-events: none;
 }
+
 .senior-hero > div,
-.senior-hero > img {
+.senior-banner > div,
+.senior-hero > img,
+.senior-banner > img {
   position: relative;
   z-index: 1;
 }
-.senior-hero h1 {
+
+.senior-hero h1,
+.senior-banner h1 {
   color: #fff;
-  margin: 12px 0 8px;
+  margin: 10px 0 8px;
+  font-family: 'Space Grotesk', var(--font-ui);
+  font-size: clamp(26px, 3.2vw, 38px);
+  letter-spacing: -0.02em;
 }
-.senior-hero p {
+
+.senior-hero p,
+.senior-banner p {
   color: #dfd4ec;
-  max-width: 600px;
+  max-width: 620px;
+  font-size: 14.5px;
+  line-height: 1.55;
 }
-.senior-stats {
+
+.senior-hero img,
+.senior-banner img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+  animation: pixelFloat 3.2s steps(4) infinite;
+}
+
+/* 6. Senior Stats Strip */
+.senior-stats,
+.stats-strip {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 22px;
+  margin: 20px 0;
 }
+
+.senior-stats > div,
+.senior-stats > span,
+.stats-strip > div {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.senior-stats strong {
+  font-size: 22px;
+  color: var(--gold);
+}
+
 .senior-stats span {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 8px;
-  padding: 8px 12px;
-  font-size: 11px;
-  color: #f7e0b5;
-  letter-spacing: 0.06em;
-  font-weight: 800;
+  font-size: 11.5px;
+  color: var(--muted);
+  font-weight: 600;
 }
+
+/* 7. Senior Cards & Grid */
 .senior-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 18px;
+  margin-top: 16px;
 }
-.senior-card {
+
+.senior-card,
+.senior-tile {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 20px;
-  min-height: 210px;
+  padding: 22px;
+  min-height: 220px;
   display: flex;
   flex-direction: column;
-  transition: all 0.18s;
+  position: relative;
+  overflow: hidden;
   text-decoration: none;
   color: var(--text);
+  transition: transform 0.15s steps(3), border-color 0.15s steps(2), box-shadow 0.15s steps(3);
 }
-.senior-card:hover {
-  transform: translateY(-3px);
+
+.senior-card:hover,
+.senior-tile:hover {
+  transform: translateY(-4px);
   border-color: var(--gold);
-  box-shadow: 0 6px 20px rgba(242, 190, 88, 0.16);
+  box-shadow: 0 4px 0 0 rgba(242, 190, 88, 0.45), 0 10px 26px rgba(242, 190, 88, 0.16);
 }
-.senior-card-top {
+
+.senior-card-top,
+.senior-tile-top {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 14px;
-  color: var(--gold);
-  font-weight: 800;
-  font-size: 12px;
+  margin-bottom: 12px;
 }
+
 .senior-kind {
   margin-left: auto;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 10px;
+  font-size: 9.5px;
   color: var(--muted);
+  text-transform: uppercase;
 }
-.senior-card h3 {
-  margin-bottom: 8px;
+
+.senior-card h3,
+.senior-tile h3 {
   font-size: 17px;
+  margin: 4px 0 8px;
+  color: var(--text);
 }
-.senior-card p {
+
+.senior-card p,
+.senior-tile p {
   font-size: 13px;
-  margin-bottom: 14px;
+  color: var(--subtle);
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.senior-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* 8. Senior Challenge Head & Steps Tabs */
+.senior-challenge-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 32px;
+  background: linear-gradient(115deg, #181224 0%, #251633 60%, #131724 100%);
+  border: 1px solid rgba(242, 190, 88, 0.38);
+  border-radius: 16px;
+  margin: 16px 0 22px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.senior-challenge-head h1 {
+  font-size: clamp(20px, 2.5vw, 28px);
+  color: #fff;
+  margin: 6px 0 8px;
+  font-family: 'Space Grotesk', var(--font-ui);
+}
+
+.senior-challenge-head p {
+  color: #dfd4ec;
+  font-size: 13.5px;
+  margin: 0;
+  max-width: 680px;
+}
+
+.senior-challenge-head img {
+  width: 95px;
+  height: 95px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+  animation: pixelFloat 3.2s steps(4) infinite;
+}
+
+.senior-steps {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.senior-steps button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 9px;
+  padding: 10px 18px;
+  font: 700 13px var(--font-ui);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  transition: all 0.14s steps(2);
+}
+
+.senior-steps button:hover {
+  color: var(--text);
+  border-color: var(--gold);
+}
+
+.senior-steps button.active {
+  background: rgba(242, 190, 88, 0.15);
+  color: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 3px 0 var(--gold);
+}
+
+/* 9. Pixel Micro-Animaciones Stepped */
+@keyframes pixelBlink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pixelPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes pixelFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.senior-toggle.on .pixel-crown,
+.crown-pulse {
+  display: inline-block;
+  animation: pixelPulse 1.8s steps(4) infinite;
+}
+
+.pixel-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: currentColor;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: pixelBlink 1s steps(2, end) infinite;
 }
 
 /* Acceptance Panel & Matrix */
@@ -1334,17 +1638,41 @@ pre {
     transform: translateY(-11px);
   }
 }
-:root[data-reduced-motion='true'] .hero-ferris,
-:root[data-reduced-motion='true'] .ferris-art {
-  animation: none !important;
-  transition: none !important;
+:root[data-reduced-motion='true'] *,
+:root[data-motion='reduced'] * {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-ferris,
-  .ferris-art {
-    animation: none !important;
-    transition: none !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
+}
+
+/* Touch Targets >= 44px for Accessible Mobile UX */
+.primary-nav a,
+.circle-action,
+.senior-toggle,
+.lang-wrap select,
+.senior-steps button,
+.btn {
+  min-height: 44px;
+}
+
+.circle-action {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Responsive Breakpoints */
@@ -1467,10 +1795,13 @@ pre {
     font-size: 42px;
   }
   .lang-wrap select {
-    width: 96px;
+    width: 100px;
+    min-height: 44px;
   }
   .circle-action {
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
 }
